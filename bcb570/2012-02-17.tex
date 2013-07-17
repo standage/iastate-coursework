@@ -1,0 +1,48 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 17 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Singular Value Decomposition}
+Let $A$ be an $m \times n$ matrix. Then there exist orthogonal matrices $U_{m \times n}$ and $V_{n \times n}$ such that \[ A = U \Sigma V^T \] where \[ \Sigma = \begin{bmatrix} \sigma_1 & 0 & \ldots & 0 & 0 & 0\\ 0 & \sigma_2 & \ldots & 0 & 0 & 0\\ 0 & 0 & \ldots & 0 & 0 & 0 \\ 0 & 0 & \ldots & \sigma_r & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 & 0 & 0 \end{bmatrix} \] where \[ \sigma_1 \geq \sigma_2 \geq \ldots \geq \sigma_r > 0 \]
+This implies that you can always write a matrix as \[ A = \sigma_1 u_1 v_1^T + \sigma_2 u_2 v_2^T + ... + \sigma_r u_r v_r^T \]
+
+\section*{Reverse engineering of genetic networks}
+Here we assume that we are at or near steady state, which implies that the dynamics are described by a system of linear ordinary differential equations.
+
+\[ x_t'(t) = -\lambda x_i(t) + \sum_{j=1}^{N}w_{ij}x_j(t) + b_i(t) + \zeta_i(t) \] where \[ 1 \leq i \leq N \]
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 11 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{2D Protein Gels}
+\begin{mitemize}
+  \item separate proteins in one direction by charge, and then the other direction by size
+  \item common approach is to make two protein preparations (for example, presence and absence of some substance), each with a different colored stain (red and blue)
+  \item after separation, most protein bands will be purple, but blue and red bands indicate proteins that are effected by the substance
+\end{mitemize}
+
+\section*{Protein-DNA interactions}
+
+\subsection*{Gel mobility shift assay}
+DNA-bound proteins will move more slowly through the electrophoresis medium, causing a band shift.
+
+\subsection*{DNAseI Footprinting}
+\begin{mitemize}
+  \item brief digestion
+  \item run on a gel with nucleotide resolution
+  \item bands corresponding to protein-bound nucleotides will not show up
+\end{mitemize}
+
+\subsection*{ChIP}
+Detection of \textit{in vivo} interactions
+
+
+\section*{Protein-Protein Interactions}
+
+\subsection*{Yeast 2-hybrid system}
+\begin{mitemize}
+  \item transcription factors can be broken down into two components; when those components bind, transcription of reporter gene occurs
+  \item attach two proteins of interest to the two components of the transcription factor---one protein to one component, one protein to the other
+  \item if the proteins of interest do not interact and bind, no transcription will occur and no reporter will be observed; however, if they do interact, then the transcription factor will be complete and the reporter gene will be transcribed and observed
+\end{mitemize}
+
+\subsection*{GST pull-down}
+\subsection*{Co-IP}
+
+\end{document}

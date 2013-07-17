@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: 1 Sep, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Side chain flexibility}
+In physics, \textbf{degrees of freedom} refers to the number of variables required to describe the system. It is an analog to the same idea in statistics, but used for different things.
+
+\begin{mitemize}
+  \item A single particle in space has 3 degrees of freedom (x,y,z)
+  \item A 3D object in space has 6 degrees of freedom (x,y,z,yaw,pitch,roll)
+\end{mitemize}
+
+In summary...
+\begin{mitemize}
+  \item for each residue we have two torsional degrees of freedom (DOF) in the main chain (phi $\phi$ and psi $\psi$)
+  \item each residue also has 0-4 DOF in its side chain, which affects the local form of this side chain   \item therefore, a residue can have up to 6 DOF
+\end{mitemize}
+
+\section*{Why do proteins fold?}
+
+\begin{mitemize}
+  \item reduce energy levels
+  \item polar side chains want to interact with the water and with each other
+  \item reducing hydrophobic surface area: non-polar side chains want to stay away from the water and polar side chains and interact with each other
+  \item condensed non-polar residues cause protein to compact and assume a globular shape
+\end{mitemize}
+
+\subsection*{Secondary structure}
+Folded proteins form regular structure patterns (secondary structures) to increase hydrogen bonding and reduce steric clashing.
+\begin{mitemize}
+  \item $\alpha$ helices
+  \begin{mitemize}
+    \item most common
+    \item they have \textit{handedness} (or chirality); most are right-handed (left-handed helices have steric constraints)
+    \item can be amphipathic
+    \item has periodicity: residues 3-4 spaces apart may have the same face
+  \end{mitemize}
+  \item $\beta$ strands/sheets
+  \begin{mitemize}
+    \item can be formed from both parallel and antiparallel peptide strands
+    \item parallel sheets are always buried, but antiparallel sheets are more stable
+  \end{mitemize}
+  \item $\beta$ turns: smallest secondary structure, stabilized by hydrogen bonding
+\end{mitemize}
+
+\section*{Calculations}
+\begin{mitemize}
+  \item If we have Cartesian coordinates of each amino acid, can we calculate bond lengths, bond angles, and torsional angles?
+  \item Inversely, if we have bond lengths, bond angles, and torsional angles, can we calculate Cartesian coordinates?
+\end{mitemize}
+
+
+\end{document}

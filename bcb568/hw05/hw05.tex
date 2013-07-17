@@ -1,0 +1,99 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}          % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}                    % Wide paper
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{graphicx}                  % For eps figures
+\usepackage{epsfig}                    % Alternative package
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 568}
+\newcommand{\instructor}{Brendel/Dorman}
+\newcommand{\assignment}{HW 5}
+\newcommand{\duedate}{Feb ?, 2011}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(i)]
+
+  \item One can graphically determine $S$ by looking at the excursion graph ($E_n$ as a function of $n$) and identifying the highest point. Let $l$ be the value of $n$ associated with the highest point, and let $k$ be the largest value of $n$ less than $l$ such that $E_k = 0$. $S$ then is $S_{k} S_{k+1}...S_{l-1} S_{l}$.
+  \item If we set $p$ to a particular value, we can find $x_c$ by solving the following equation.
+        \begin{eqnarray}
+          e^{-ke^{-\lambda x_c}} &=& 1 - p                             \nonumber \\
+          -ke^{-\lambda x_c} &=& ln(1 - p)                             \nonumber \\
+          e^{-\lambda x_c} &=& -\frac{ln(1 - p)}{k}                    \nonumber \\
+          -\lambda x_c &=& ln\left(-\frac{ln(1 - p)}{k}\right)         \nonumber \\
+          x_c &=& -\frac{ln\left(-\frac{ln(1 - p)}{k}\right)}{\lambda} \nonumber
+        \end{eqnarray}
+  \item We can obtain $x_c^{*}$ simply by multiplying $x_c$ by $\rho$. Recall that we defined $\lambda$ as follows. \[ \lambda: \sum_{j = 1}^{r}p_j e^{\lambda s_j} = 1 \] If we now define $t_i = \rho s_i$ then we have the following. \[ \lambda': \sum_{j = 1}^{r}p_j e^{\lambda' t_j} = 1 \] These equations give us the following relationship between $\lambda$ and $\lambda'$. \[ \lambda' = \frac{\lambda}{\rho} \] We can then identify $x_c^{*}$ using the same method as in (ii).
+        \begin{eqnarray}
+          e^{-ke^{-\lambda' x_c^{*}}} &=& 1 - p                                             \nonumber \\
+          -ke^{-\lambda' x_c^{*}} &=& ln(1 - p)                                             \nonumber \\
+          e^{-\lambda' x_c^{*}} &=& -\frac{ln(1 - p)}{k}                                    \nonumber \\
+          -\lambda' x_c^{*} &=& ln\left(-\frac{ln(1 - p)}{k}\right)                         \nonumber \\
+          x_c^{*} &=& -\frac{ln\left(-\frac{ln(1 - p)}{k}\right)}{\lambda'}                 \nonumber \\
+          x_c^{*} &=& -\frac{ln\left(-\frac{ln(1 - p)}{k}\right)}{\frac{\lambda}{\rho}} = \rho\left(-\frac{ln\left(-\frac{ln(1 - p)}{k}\right)}{\lambda}\right)     \nonumber \\
+          x_c^{*} &=& \rho x_c                                                              \nonumber
+        \end{eqnarray}
+  \item The $\lambda$ term can be interpreted as a scale factor since it provides a direct, linear relationship between scoring schemes that are scalar multiples of each other. If the relationship between 2 scoring schemes can be found, then scores and significance levels can be easily transformed from one scheme to the other using the $\lambda$ term.
+  \item By the derivation below, doubling the size of the sequence increases the $p$-level threshold by 2.
+        \begin{eqnarray}
+          S_p' &=& \frac{ln 2N}{\frac{ln 2}{2}} + x_c                              \nonumber \\
+               &=& \frac{ln N}{\frac{ln 2}{2}} + \frac{ln 2}{\frac{ln 2}{2}} + x_c \nonumber \\
+               &=& \frac{ln N}{\frac{ln 2}{2}} + 2 + x_c                           \nonumber \\
+               &=& \left(\frac{ln N}{\frac{ln 2}{2}} + x_c \right) + 2             \nonumber \\
+               &=& S_p + 2                                                         \nonumber
+        \end{eqnarray}
+  \item Consider the following transformation of the originally given inequality.
+        \begin{eqnarray}
+          S &>& \frac{ln N}{\lambda} + x                                         \nonumber \\
+          \lambda S &>& ln N + \lambda x                                         \nonumber \\
+          \lambda S - ln K &>& ln N + \lambda x - ln K                           \nonumber \\
+          \frac{\lambda S - ln K}{ln 2} &>& \frac{ln N + \lambda x - ln K}{ln 2} \nonumber \\
+          S' &>& y                                                               \nonumber
+        \end{eqnarray}
+        The left hand side of the inequality is the normalized score, and the right hand side represents $y$. We can solve the equation for $y$ in terms of $x$.
+        \begin{eqnarray}
+          \frac{ln N + \lambda x - ln K}{ln 2} &=& y              \nonumber \\
+          ln N + \lambda x - ln K &=& y ln 2 = ln 2^y             \nonumber \\
+          \lambda x &=& ln \left( \frac{2^y K}{N} \right)         \nonumber \\
+          x &=& \frac{1}{\lambda}ln\left( \frac{2^y K}{N} \right) \nonumber
+        \end{eqnarray}
+        Now, if we place $x$ in the formula for the Poisson parameter we get the following result.
+        \begin{eqnarray}
+          K e^{-\lambda\left( \frac{1}{\lambda}ln\frac{2^y K}{N} \right)} &=& K e^{-ln\frac{2^y K}{N}}         \nonumber \\
+                                                                          &=& K \left( \frac{N}{2^y K} \right) \nonumber \\
+                                                                          &=& \frac{N}{2^y}                    \nonumber
+        \end{eqnarray}
+\end{enumerate}
+
+\end{document}

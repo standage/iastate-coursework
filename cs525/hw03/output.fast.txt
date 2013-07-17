@@ -1,0 +1,72 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+ To check your AFS disk usage (and quota) use: 
+    /usr/afsws/bin/fs listquota ~
+
+! m=1 n=1 nloops=5000
+!     Part 1 using "mpi_ssend"
+!         Processor i=1
+!             time:      5.817413E-06 seconds
+!             bandwidth: 1.311475E+00 MBps
+!         Processor i=2
+!             time:      5.662503E-05 seconds
+!             bandwidth: 1.347354E-01 MBps
+!         Processor i=3
+!             time:      5.661821E-05 seconds
+!             bandwidth: 1.347516E-01 MBps
+!         Processor i=4
+!             time:      5.567183E-05 seconds
+!             bandwidth: 1.370423E-01 MBps
+!         Processor i=5
+!             time:      5.567141E-05 seconds
+!             bandwidth: 1.370433E-01 MBps
+!         Processor i=6
+!             time:      5.660219E-05 seconds
+!             bandwidth: 1.347897E-01 MBps
+!         Processor i=7
+!             time:      5.672083E-05 seconds
+!             bandwidth: 1.345078E-01 MBps
+!     Part 2 using "mpi_send"
+!         Processor i=1
+!             time:      2.166224E-06 seconds
+!             bandwidth: 3.521979E+00 MBps
+!         Processor i=2
+!             time:      1.561942E-05 seconds
+!             bandwidth: 4.884557E-01 MBps
+!         Processor i=3
+!             time:      1.560221E-05 seconds
+!             bandwidth: 4.889946E-01 MBps
+!         Processor i=4
+!             time:      1.526418E-05 seconds
+!             bandwidth: 4.998235E-01 MBps
+!         Processor i=5
+!             time:      1.529679E-05 seconds
+!             bandwidth: 4.987578E-01 MBps
+!         Processor i=6
+!             time:      1.560040E-05 seconds
+!             bandwidth: 4.890514E-01 MBps
+!         Processor i=7
+!             time:      1.561298E-05 seconds
+!             bandwidth: 4.886570E-01 MBps
+!     Part 3 using "mpi_sendrecv"
+!         Processor i=1
+!             time:      2.114391E-06 seconds
+!             bandwidth: 3.608317E+00 MBps
+!         Processor i=2
+!             time:      1.006818E-05 seconds
+!             bandwidth: 7.577731E-01 MBps
+!         Processor i=3
+!             time:      1.013703E-05 seconds
+!             bandwidth: 7.526260E-01 MBps
+!         Processor i=4
+!             time:      9.900999E-06 seconds
+!             bandwidth: 7.705681E-01 MBps
+!         Processor i=5
+!             time:      9.926176E-06 seconds
+!             bandwidth: 7.686137E-01 MBps
+!         Processor i=6
+!             time:      1.004581E-05 seconds
+!             bandwidth: 7.594600E-01 MBps
+!         Processor i=7
+!             time:      1.007180E-05 seconds
+!             bandwidth: 7.575004E-01 MBps

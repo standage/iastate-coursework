@@ -1,0 +1,13 @@
+#!/usr/bin/perl
+use strict;
+use Bio::SeqIO;
+
+my $instream = Bio::SeqIO->new( -fh => \*STDIN, -format => 'Fasta' );
+my $outstream = Bio::SeqIO->new( -fh => \*STDOUT, -format => 'Fasta' );
+while( my $seq = $instream->next_seq )
+{
+  my $dna = $seq->seq;
+  $dna =~ tr/ACGT/RYRY/;
+  $seq->seq($dna);
+  $outstream->write_seq($seq);
+}

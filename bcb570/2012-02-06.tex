@@ -1,0 +1,63 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 6 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\begin{mitemize}
+  \item $S$: stoichiometric matrix
+  \item \emph{nullspace} of $S$: $v$ such that $S v = 0$
+  \item \emph{left nullspace} of $S$: $y$ such that $y S = 0$
+\end{mitemize}
+
+\[ y = \begin{bmatrix} y_1 \\ y_2 \\ ...\\ y_m \end{bmatrix}, x = \begin{bmatrix} x_1 \\ x_2 \\ ...\\ x_m \end{bmatrix} \] 
+
+If $y^T S = 0$, then \[ y^T \frac{dx}{dt} = (y^T S)v = 0 \rightarrow \frac{d}{dt}(y^T x) = 0 \] which implies that the value $y^T x$ is constant.
+
+\[ S = \begin{bmatrix} -1 & 0 & 0 \\ 1 & -1 & 0 \\ 0 & 1 & -1 \\ 0 & 0 & 1 \\ -1 & 0 & -1 \\ 1 & 0 & 1 \end{bmatrix} \]
+
+If we want to identify all possible conservation relations associated with the ``glycolysis network", we need to find all $y$ for which $y^T S = 0$. If $y^T S = 0$, then $(y^T S)^T = 0^T$, which implies that $S^T y = 0^T$.
+
+\[ V = \begin{bmatrix} v_1 \\ v_2 \\ v_3 \\ v_4 \end{bmatrix}, S = \begin{bmatrix} 1 & -1 & 0 & 0 \\ 0 & 1 & -1 & 0 \\ 0 & -1 & 0 & 1 \\ 0 & 1 & 0 & -1 \end{bmatrix} \]
+
+ \[ \frac{d}{dt}x_1 = v_1 - v_2 \]
+ \[ \frac{d}{dt}x_2 = v_2 - v_3 \]
+ \[ \frac{d}{dt}x_3 = v_4 - v_2 \]
+ \[ \frac{d}{dt}x_4 = v_2 - v_4 \]
+ 
+ \section*{Elementary flux modes, extreme pathways}
+ All $v$ that satisfy $S v = 0$ can be written as \[ v = c_1 v_1 + c_2 v_2 + ... + c_r v_r \]
+
+\end{document}

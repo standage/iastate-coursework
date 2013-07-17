@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw02.aux
+rm hw02.log
+rm hw02.out
+rm hw02.synctex.gz

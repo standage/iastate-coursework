@@ -1,0 +1,78 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 3, 6 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+\newcommand{\textsup}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\textsub}[1]{\ensuremath{_{\textrm{#1}}}}
+
+
+\begin{document}
+
+\textbf{linker scanning}: make a new mutant for each 10 bp stretch (switch out those 10 nucleotides); observe phenotypic effects
+
+\textbf{reading assignment}: Kostrewa et al, Nature 2009
+\begin{mitemize}
+  \item B reader: identify TSS
+  \item B linker: open (melt) promoter
+  \item H: helicase and kinase activity
+  \item F: bind RNAPolII, interact with non-template strand
+  \item H: phosphorylates RNAPolII CTD (C-terminal domain)
+  \item E: stimulates H kinase activity
+  \item S: stimulates proofreading and correction of transcripts
+\end{mitemize}
+
+We will not cover TF classes I and III in detail.
+
+\section*{Function of TFIID}
+
+\subsection*{TBP (TAT box-binding protein)}
+\begin{mitemize}
+  \item binds TAT box at minor groove
+  \item bends DNA to start transcription initiation
+\end{mitemize}
+
+\subsection*{TAF\textsub{II}s (TBP associated factors)}
+\begin{mitemize}
+  \item recruit TBP to TATA-less promoter to start transcription initiation (TAF\textsub{II}250 and TAF\textsub{II}150 bind to initiator and DPE, TAF\textsub{II}250 and TAF\textsub{II}110 interact with Sp1 that binds to GC box)
+  \item different TAF\textsub{II}s are required to respond to various activators
+  \item TAF\textsub{II}250 has histone acetyltransferase (HAT) and kinase activities that modify chromatin and other transcription factors
+\end{mitemize}
+
+\section*{Promoter proximal pausing}
+\begin{mitemize}
+  \item pause sites 20-50bp downstream of TSS
+  \item two proteins help stabilize RNA PolII in paused state: DSIF and NELF
+  \item P-TEFb delivers signal to leave paused state
+\end{mitemize}
+
+\end{document}

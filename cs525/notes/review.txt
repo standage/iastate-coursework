@@ -1,0 +1,50 @@
+====== Review for final exam ======
+
+Important lessons learned
+  - MPI subroutines
+    - point-to-point routines
+      - blocking
+        - proceeds to next statement only after buffer is safe to modify
+
+Parallel programming models
+  - master/slave
+  - SPMD: single program multiple data
+
+
+  call mpi_comm_size: number of processors available
+
+Deadlocks:
+  what is a deadlock: something is waiting for something (usually communication) that will never happen
+  deadlock with collective routine: call bcast, barrier in different order
+
+Be able to write dot product
+  lsum = 0d0
+  do i=1,n
+    lsum = lsum+a(i)*b(i)
+  enddo
+  call mpi_reduce(lsum, answer, 1, dp, MPI_SUM, 0, comm, ierror)
+
+
+Sending non-contiguous data
+  - copy to 1D array
+  - MPI derived types
+
+mpi_type_vector: useful when sending a row of a matrix
+
+Serial optimizations
+  - never use array sections as function arguments
+  - stride 1 accesses for arrays
+  - describe "blocking for cache"
+    - arrange code blocks so that variable reuse is maximized
+    - requires at least 3 nested loops
+    - example: C = A*B
+
+Need to know OpenMP
+  - race conditions
+
+Review homework problems
+
+Amdahl's Law
+  - SIMD vs MIMD
+  - shared memory vs distributed memory
+  

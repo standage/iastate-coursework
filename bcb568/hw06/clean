@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw06.aux
+rm hw06.log
+rm hw06.out
+rm hw06.synctex.gz

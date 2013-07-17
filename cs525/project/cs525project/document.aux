@@ -1,0 +1,18 @@
+\relax 
+\ifx\hyper@anchor\@undefined
+\global \let \oldcontentsline\contentsline
+\gdef \contentsline#1#2#3#4{\oldcontentsline{#1}{#2}{#3}}
+\global \let \oldnewlabel\newlabel
+\gdef \newlabel#1#2{\newlabelxx{#1}#2}
+\gdef \newlabelxx#1#2#3#4#5#6{\oldnewlabel{#1}{{#2}{#3}}}
+\AtEndDocument{\let \contentsline\oldcontentsline
+\let \newlabel\oldnewlabel}
+\else
+\global \let \hyper@last\relax 
+\fi
+
+\newlabel{^_1}{{}{1}{\relax }{}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Here the horizontal axis represents a sequence of genomic DNA, and the two rows of boxes represent annotations derived from two different gene structure prediction algorithms. We defined a \textit  {locus} as a maximal subsequence where at least on of the annotation sets has predicted a gene. The loci are highlighted in green for this example.}}{2}{figure.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces MPI trace visualizations for ParsEvalMPI before (left) and after (right) an improvement in the delegation phase's implementation. Initially, the delegation phase of the ParsEvalMPI program was executed serially on the root processor. As a result, all other processors were idle for approximately half of the program's runtime (the green bars on the left represent idle time spent in the \texttt  {MPI\_Recv} routine). After the delegation phase was re-implemented, the runtime and idle time were significantly reduced, improving the performance and load balancing. Here, 8 processors are shown, but results are similar for 2, 4, 8, 16, and 32 processors.}}{3}{figure.2}}
+\global\@namedef{@lastpage@}{4}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Unfortunately, ParsEvalMPI has very poor scalability, approaching a speedup factor of only 2. The graph on the left shows the runtime of the program with the size of the data set fixed. The graph on the right shows the desired speedup in red and the actual speedup achieved by ParsEvalMPI in blue.}}{4}{figure.3}}

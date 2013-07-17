@@ -1,0 +1,48 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+ To check your AFS disk usage (and quota) use: 
+    /usr/afsws/bin/fs listquota ~
+
+ For rank =            0  time =   2.056121826171875E-003
+ For rank =            1  time =   2.050876617431641E-003
+ For rank =            2  time =   2.050161361694336E-003
+ For rank =            3  time =   2.058029174804688E-003
+  
+  maximum time =   2.058029174804688E-003  seconds
+  minimum time =   2.050161361694336E-003  seconds
+  
+ The value of n used was n =           64
+ For rank =            0  time =   2.055883407592773E-003
+ For rank =            1  time =   2.060890197753906E-003
+ For rank =            2  time =   2.064943313598633E-003
+ For rank =            3  time =   2.054929733276367E-003
+ For rank =            4  time =   2.054929733276367E-003
+ For rank =            5  time =   2.059936523437500E-003
+ For rank =            6  time =   2.072811126708984E-003
+ For rank =            7  time =   2.058029174804688E-003
+  
+  maximum time =   2.072811126708984E-003  seconds
+  minimum time =   2.054929733276367E-003  seconds
+  
+ The value of n used was n =           64
+ For rank =            0  time =   2.059936523437500E-003
+ For rank =            1  time =   2.058029174804688E-003
+ For rank =            2  time =   2.077102661132812E-003
+ For rank =            3  time =   2.053022384643555E-003
+ For rank =            4  time =   2.058029174804688E-003
+ For rank =            5  time =   2.067089080810547E-003
+ For rank =            6  time =   2.053976058959961E-003
+ For rank =            7  time =   2.083063125610352E-003
+ For rank =            8  time =   2.055883407592773E-003
+ For rank =            9  time =   2.063035964965820E-003
+ For rank =           10  time =   2.352952957153320E-003
+ For rank =           11  time =   2.366065979003906E-003
+ For rank =           12  time =   2.058982849121094E-003
+ For rank =           13  time =   2.071142196655273E-003
+ For rank =           14  time =   2.053976058959961E-003
+ For rank =           15  time =   2.060174942016602E-003
+  
+  maximum time =   2.366065979003906E-003  seconds
+  minimum time =   2.053022384643555E-003  seconds
+  
+ The value of n used was n =           64

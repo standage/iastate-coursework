@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw03.aux
+rm hw03.log
+rm hw03.out
+rm hw03.synctex.gz

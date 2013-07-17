@@ -1,0 +1,88 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}		% skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+ 
+\usepackage{fancyhdr} 
+\fancyhead[L]{\assignment }
+\fancyhead[R]{\class \;- \instructor }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{Stat 430}
+\newcommand{\instructor}{Wei-chen Chen}
+\newcommand{\assignment}{R Tutorial}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}\author & \class\;- \instructor\\ \today & \assignment\end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+The \textit{seq(n,k)} function returns a vector of all the integers between $n$ and $k$ (inclusive), while the \textit{rep(n,k)} returns a vector containing $k$ entries of the value $n$. The results are shown below.
+\begin{verbatim}> seq(1,5)
+[1] 1 2 3 4 5
+> rep(1,5)
+[1] 1 1 1 1 1
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item
+  \begin{itemize}
+    \item The $\chi^2$ distribution uses the suffix \textit{chisq} (e.g., \textit{dchisq, qchisq, pchisq, rchisq})
+    \item The $t$ distribution uses the suffix $t$ (e.g., \textit{dt, qt, pt, rt})
+    \item The $F$ distribution uses the suffix $f$ (e.g., \textit{df, qf, pf, rf})
+    \item The \textit{Binomial} distribution uses the suffix \textit{binom} (e.g., \textit{dbinom, qbinom, pbinom, rbinom})
+    \item The \textit{Poisson} distribution uses the suffix \textit{pois} (e.g., \textit{dpois, qpois, ppois, rpois})
+  \end{itemize}
+\item These functions belong to the \textit{stats} library.
+\end{enumerate}
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item These are not the same because the \textit{qnorm} function returns a quantile, not a probability.
+\item These are the same because the \textit{pexp} function returns a probability.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item These functions belong to the \textit{graphics} library.
+\item These functions write plots out to graphics files so that they can be viewed in other programs.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item These functions are for performing Wilcoxon tests, performing analysis of variance, and fitting linear models (respectively).
+\item The \textit{lme} function belongs to the \textit{nlme} library.
+\end{enumerate}
+ 
+\end{document}

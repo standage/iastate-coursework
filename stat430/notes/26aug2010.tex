@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{Stat 430, 9:30am T/Th}
+\rhead{Lecture Notes: August 26, 2010}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Formal Review of Law of Total Probability}
+Defining the Law of Total Probability requires a definition of a partition. The possibly infinite set of events $B_1, B_2, ...$ is a partition of the sample space $\Omega$ if \[ \bigcup_{i=1}^{\infty}B_i = \Omega \] and \[ B_i \cap B_j = \emptyset \] for all $i \neq j$.
+
+Now we are prepared to define the Law of Total Probability. Let $B_1, B_2,...$ be a partition of $\Omega$ and event $A \subset \Omega$. Then \[ P(A) = \sum_{i=1}^{\infty}P(A \cap B_i) = \sum_{1}P(A|B_i)P(B_i) \]
+
+\subsection*{Example: Cup with balls}
+Consider a cup with 4 balls, 3 red and 1 blue. Two draws are made from the cup. Let $R_1$ signify drawing a red ball on the first draw, $R_2$ signify drawing a red ball on the second draw, and so on. What is the probability of drawing a red ball on the second draw? In other words, what is $P(R_2)$?
+
+Consider that $R_1 \cup \overline{R_1}$ forms a partition over the sample space. We can then calculate $P(R_2)$ as follows.
+\[ P(R_2) = P(R_2|R_1)P(R_1) + P(R_2|\overline{R_1})P(\overline{R_1}) = (\frac{2}{3})(\frac{3}{4}) + (1)(\frac{1}{4}) = \frac{3}{4} \]
+
+\section*{Review of Bayes' Rule}
+Given a partition $B_1, B_2,...$ of $\Omega$ and an event $A \subset \Omega$ then \[ P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_jP(A|B_j)P(B_j)} = \frac{P(A|B_i)P(B_i)}{P(A)}  \]
+
+\section*{Independent Events}
+Two events $A, B$ are independent if $P(A \cap B) = P(A)P(B)$. By definition, $P(A \cap B) = P(A|B)P(B)$. Therefore, $P(A \cap B) = P(A)P(B) => P(A|B) = P(A)$, which means $B$ doesn't tell us anything about $A$ (they're independent events). Note that the converse does not necessarily apply.
+
+\subsection*{Example: Drawing from the deck}
+Let $A$ signify drawing an ace from a 52-card deck and let $D$ signify drawing a diamond. We know that these are independent events. $P(A) = \frac{4}{52} = \frac{1}{13}$ and $P(D)=\frac{13}{52} = \frac{1}{4}$. Observe that $\frac{1}{13} \times \frac{1}{4} = \frac{1}{52} = P(A \cap D)$.
+
+\subsection*{Mutual Independence}
+We must be careful because pairwise independence of events does not imply independence of all events. Consider two coin tosses. Let $A$ signify that the first toss is heads, $B$ signify that the second toss is heads, and $C$ signify that exactly one of the tosses is heads. Each of these are independent of each other in a pairwise fashion, but they are not collectively independent.
+
+A set of events $A_1, A_2, ..., A_n$ is mutually independent if \[ P(A_1 \cap A_2 \cap ... \cap A_n) = P(A_1)P(A_2)...P(A_n) \]
+
+\section*{Random Variables, Probability Mass Functions, Cumulative Distribution Functions, and Probability Density Functions}
+\subsection*{Random Variables}
+A random variable is a function $X \colon \omega \in \Omega \rightarrow \mathbb{R}$ mapping every outcome $\omega \in \Omega$ to the real line. An \textit{indicator} random variable is defined as follows: for some $A \subset \Omega$,
+\[
+I_A(\omega) = \left\{
+\begin{array}{c l}
+  1 & \omega \in A \\
+  0 & \omega \notin A
+\end{array}
+\right.
+\]
+
+\subsection*{Probability Mass Function}
+A probability mass function is a function $p(x_i) = P(X = x_i)$ defined for all $x_i \in \Omega_X = \{ X(\omega) : \omega \in \Omega \} $.
+
+\subsection*{Cumulative Distribution Function}
+A cumulative distribution function is a function described as \[ F(x) = P(X < x) \] for all $x \in \mathbb{R}$.
+
+\subsection*{Probability Density Function}
+When it exists, the probability density function $f(x)$ is defined for all $x \in \Omega_X$ as the function satisfying \[ F(x) = \int^x \! f(t) \, dt \] where $F(x)$ is the CDF.
+
+
+
+\end{document}

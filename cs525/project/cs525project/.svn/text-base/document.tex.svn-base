@@ -1,0 +1,203 @@
+\documentclass{bioinfo}
+\copyrightyear{2010}
+\pubyear{2010}
+\raggedend
+\usepackage{hyperref}
+%\usepackage[aboveskip=10pt]{caption}
+\hypersetup
+{ % We don't want the hideous colored borders around the hyperlinks
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+
+\begin{document}
+\firstpage{1}
+
+\title[Distribution of Introns]{Distribution of introns in the coding regions of 8 model plant species}
+\author[Kirkpatrick, Mathur, and Standage]{Jessica Kirkpatrick\,$^{1}$, Divita Mathur\,$^{2}$ and Daniel Standage\,$^{2}$}
+\address{$^{1}$BCBio Undergraduate Program\\
+$^{2}$Bioinformatics and Computational Biology Graduate Program}
+
+\history{Submitted on December 16, 2010}
+
+\maketitle
+
+\begin{abstract}
+\noindent Surprisingly little is known about intron distribution at the genome scale. Motivated by this observation, we collected annotation and chromosomal locus information for all predicted genes in 8 model plant species. With this information we calculated the number of introns per coding sequence (NICS), as well as 5 other predictive values that we hypothesized have an impact on the NICS distribution. We used multiple regression (Poisson regression and negative binomial regression) to investigate the impact of these predictors on intron distribution. Although none of the regression models we fit explained the variation in the data very well, they all suggest that the predictors have a significant impact on NICS distribution. Our study is well-documented and easy to reproduce, and we expect that results will improve dramatically (both in terms of model fit and biological relevance) as we are able to include additional predictors such as GC content and gene function.
+\end{abstract}
+
+\section*{Introduction}
+The discovery of introns over 30 years ago \citep{Gilbert78} has had an immeasurable impact on our current understanding of biological processes. Characterization of introns, the mechanisms by which they are spliced from transcribed RNA to form mature translation substrate, and the conserved traits that enable their prediction from primary sequence data, is still an active and fruitful area of research.
+
+There is a significant amount of literature detailing the evolutionary conservation of introns in certain genes or gene families. Research in this area has identified ancient conserved introns, suggesting that introns are not merely inserted or deleted randomly over evolutionary time \citep{Federov02, Rogozin03, Roy05}. Studies have also shown a relationship between intron distribution and other gene characteristics, such as non-homologous end joining and homologous recombination \citep{Farlow10}, specific base pair sequence \citep{Federov01}, and the position of conserved regions in a gene \citep{Wang03}. These discoveries all suggest that the distribution of introns is non-random, and yet a comprehensive picture of intron distribution remains elusive.
+
+As we progress deeper into the era of genomic science, an understanding of intron distribution at the genome level is becoming increasingly important. Improved understanding of intron distribution and the factors that influence it has the potential to benefit many areas of research within the life sciences, including (but not limited to) gene structure prediction and annotation, statistical simulation and analysis, biochemical characterization of intron splicing mechanisms, comparative genomics, and the study of gene and genome evolution.
+
+We present a comprehensive analysis of the intron distribution in the coding regions of a small set of well-characterized, model plant organisms: \textit{Arabidopsis thaliana} (At), \textit{Oryza sativa} (Os), \textit{Brachypodium distachyon} (Bd), \textit{Glycine max} (Gm), \textit{Vitis vinifera} (Vv), \textit{Sorghum bicolor} (Sb), \textit{Medicago truncatula} (Mt), and \textit{Zea mays} (Zm) (see Table 1). Using all available annotated gene structures for these plant species, found at PlantGDB \citep{Dong04}, we calculated the number of introns in each of the 294,304 coding sequences annotated in these 8 plant genomes. We then gathered additional data for each gene detailing its environment along the chromosome. Our study applies two common multiple regression techniques (Poisson regression and negative binomial regression) and compares their ability to explain the effect of gene characteristics on the number of introns in the coding sequences of the 8 selected plant genomes. The approach we describe here is easily reproducible with other sets of organisms for which similar data are available.
+
+\begin{table} \centering
+  \begin{tabular}{| r | c | l |}
+    \hline
+    \multicolumn{1}{|c|}{\textbf{Species}} & \textbf{Abbr.} & \multicolumn{1}{c|}{\textbf{Common Name}} \\ \hline
+    %\textbf{Species} & \textbf{Abbrev.} & \textbf{Common Name} \\ \hline
+    \textit{Arabidopsis thaliana} & At & Thale cress \\
+    \textit{Oryza sativa} & Os & Rice \\
+    \hspace{12pt} \textit{Brachypodium distachyon} & Bd & Purple false brome \hspace{12pt} \\
+    \textit{Glycine max} & Gm & Soybean \\
+    \textit{Vitis vinifera} & Vv & Grape \\
+    \textit{Sorghum bicolor} & Sb & Sorghum \\
+    \textit{Medicago truncatula} & Mt & Barrel clover \\
+    \textit{Zea mays} & Zm & Maize \\ \hline
+    %\multicolumn{3}{c}{}
+  \end{tabular}
+  \vspace{1px}
+  \caption{This study presents a comprehensive analysis of the intron distribution in these 8 model plant species.}
+\end{table}
+
+\begin{methods}
+\section*{Methods}
+
+\subsection*{Data Collection}
+We collected annotated gene structures for 8 model plant genomes using the PlantGDB resource for plant comparative genomics \citep{Dong04}. Using these gene structures, we calculated the number of introns in each of the 294,304 annotated coding sequences. We then combined this information with chromosome locus information to calculate several other features for each coding sequence, including length, distance from telomere, distance from centromere, and chromosome length (all in base pairs). Our selection of genomes was influenced by the availability of chromosome locus information.
+
+These data, the scripts used to combine them, and other supplemental data are available for download at \url{http://gremlin4.gdcb.iastate.edu/~standage/stat430project/}.
+
+\subsection*{Multiple Regression Model}
+The goal of this study is a characterization of intron distribution in the genomes of 8 model plant species. To formalize this goal, we treated the number of introns per coding sequence (NICS) as a random variable $Y$ whose distribution is unknown. The data collected from the 8 plant genomes provide 294,304 realizations of this random variable. Our initial hypothesis was that the entire set $Y = \{ Y_1, ..., Y_{294,304} \}$ is not identically, independently distributed (\textit{iid}), but that certain characteristics of the coding sequence (specifically, the ones we calculated) have a significant effect on the distribution of $Y_i$. In this way, we are treating the number of introns $Y_i$ in a coding sequence as a response variable and the other characteristics of the coding sequence we calculated as predictor variables (see Table 2).
+
+\begin{table} \centering
+  \begin{tabular}{| c | c |}
+    \hline
+    \textbf{Response} & \textbf{Data type} \\ \hline
+    Number of introns & Count\\
+    \hline
+    \textbf{Predictors} &  \textbf{Data type}\\ \hline
+    Organism & Categorical\\
+    CDS length & Integer\\
+    Length of chromosome & Integer \\
+    Distance from telomere & Integer \\
+    \hspace{40pt} Distance from centromere \hspace{40pt} & Integer \\ \hline
+  \end{tabular}
+  \vspace{2px}
+  \caption{We used multiple regression techniques to test the impact of several predictor variables on the response variable, the number of introns in a coding sequence.}
+\end{table}
+
+We employed multiple regression techniques to test the impact of each predictor on the response $Y_i$. The multiple linear regression function has the form \[ E( Y | X ) = X\beta \] where $X$ is the random matrix of predictor values and $\beta$ is the random vector of coefficients representing the impact of each predictor on the response. However, since the predictor values $Y$ are count data (discrete and non-negative), we cannot use simple multiple linear regression to estimate $\beta$. We instead apply a generalized linear model that uses an invertible, monotonic function to link the domain of the response ($\mathbb{R}^{+}$) to the domain of $X\beta$ ($\mathbb{R}$). Accordingly, we used $\log$ as the link function (with $e$ as the inverse link function).
+
+If we suppose that $Y_i \sim Poisson(\lambda)$, then testing the impact of predictors on the response means that we want to allow $\lambda$ to vary depending on predictor values. We therefore define $\lambda$ as the following function of the predictor values, given by our inverse link function. \[ E( Y_i | x_i ) = \lambda_i = \lambda(x^T\beta) = e^{x^T\beta} \] However, the Poisson distribution comes with the assumption that the data's variance is roughly equal to its mean. If this is not the case (and indeed with our data it appears not), then the negative binomial distribution can be used as an alternative for multiple regression. Our study considers both models and compares their respective abilities to explain the variation seen in the data.
+
+\begin{figure} \centering
+  \includegraphics[width=250px]{introns.png}
+  \caption{This histogram shows the distribution of the number of introns per coding sequence (NICS) for the 8 plant genomes included in this study. Our initial hypothesis was that the NICS follows a Poisson distribution whose mean $\lambda$ depends on a variety of predictors. The blue curve shows the approximating Poisson distribution whose mean is equal to the observed mean. Fearing that overdispersion might be an issue, we later explored the hypothesis that the NICS follows a negative binomial distribution, whose mean $\mu$ and variance $\sigma^2$ also rely on the same predictors. The red curve shows the approximating negative binomial distribution whose mean and variance equal those of the data. The negative binomial clearly provides a better estimate of the true distribution of the data. }
+\end{figure}
+
+\subsection*{Implementation and Evaluation}
+We used the R package for statistical computing (\url{http://www.r-project.org/}) for all model fitting. Poisson regression was done using the \texttt{glm} function available in the \texttt{stats} package, while negative binomial regression was done using the \texttt{glm.nb} function available in the \texttt{MASS} package. In both cases, we first fit a model in which we assumed each of the predictors impacts the response individually. We then fit an additional model to include interaction effects between pairs of predictors. We opted against using backward elimination for variable selection and decided not test for interactions involving more than 2 predictors, both because of resource constraints (RAM, time) and the inherent difficulty of interpreting such interactions\footnote{We actually tried a few models in which we eliminated a subset of possibly colinear predictors and the fit was substantially worse. Since variable selection was not feasible for a data set of our size, we felt obligated to use all predictors despite the possibility of multicolinearity.}. After fitting, we evaluated the models using 3 criteria: the Akaike information criterion (AIC), a lack-of-fit test, and a (somewhat subjective) biological interpretation of the relevance of the model coefficients. The AIC, a standard goodness-of-fit measure, is easily extracted from the fit models in R. The lack-of-fit test was performed by comparing the residual deviance (likelihood ratio statistic) to a $\chi^2_{df}$ distribution where $df$ is the residual degrees of freedom from the fitted model (both of these values are easily extracted from the fitted model). A significant departure of the residual deviance from this distribution is indicative that the model does not adequately fit the data.
+
+Interpreting model coefficients, however, required a significant amount of model post-processing. The coefficients reported by the models fit by R represent the factor by which the response (NICS) increases per unit increase in the predictor. For the categorical predictor (organism), it is difficult to interpret these values in a direct, absolute sense. However, the coefficients are informative as a relative measure. We simply used ratios of these coefficients to compare how the NICS changes with organism. For example, if a fitted model assigns a coefficient of 1.295 to organism A and a coefficient of 1.046 to organism B, then the NICS ratio for these two organisms is \[ \frac{e^{1.295}}{e^{1.046}} = 1.283 \] leading us to conclude that we would expect to see more introns per gene in A than in B.
+
+For the numerical predictors, however, the interpretation is direct and absolute. For example, if a predictor has a coefficient of .000103, then according to the model we would expect the number of introns per coding sequence to increase by a multiplicative factor of $e^{.000103}$. Unfortunately this interpretation of the coefficients is not very intuitive. A more interesting and intuitive interpretation would be to determine how much of an increase (or decrease) in the predictor corresponds to a unit increase in the response. In more formal terms, our model gives us
+\[ \bar{\lambda} = e^{x_j\beta_j} \]
+which we can use to solve for $x_j$;
+\[ x_j = \frac{\log(\bar{\lambda})}{\beta_j} \]
+We are searching for a $\Delta_j$ that satisfies the following (equivalent) equations.
+\[ \bar{\lambda}+1 = e^{(x_j+\Delta_j)\beta_j} \]
+\[ e^{x_j\beta_j}+1 = e^{(x_j+\Delta_j)\beta_j} \]
+Substituting for $x_j$ and solving for $\Delta_j$ gives us the following closed form solution.
+\[ \Delta_j = \frac{\log(\bar{\lambda}+1) - \log(\bar{\lambda})}{\beta_j}  \]
+We used this equation to determine, according to a given fitted model, how much change in the predictor corresponds to an increase in the response from 4 to 5 (the observed mean NICS was 3.84).
+
+Estimating coefficients for multiple predictors simultaneously makes it more difficult to select an appropriate threshold that will maintain the desired confidence level. However, in our fitted models we observed very few ``borderline" cases--most $p$-values were either extremely small or larger than any realistic confidence level. Additionally, due to the lack of biological relevance all of our models had, we did not define a rigorous threshold for filtering statistically significant coefficients from those that are not.
+\end{methods}
+
+\section*{Results}
+To determine the effect of the 5 predictors on the response, we fit 4 different multiple regression models to the data. Using Poisson regression, we fit a model using just the predictors, and then another model including interactions between pairs of predictors. Likewise with negative binomial regression, we fit a model using just the predictors, and then another including interactions between pairs of predictors. We then compared these models using three criteria: the AIC, the lack-of-fit test, and an interpretation of the model coefficients.
+
+The AIC values of the 4 models follows a simple observable trend. The models fit by negative binomial regression had a lower AIC than those fit by Poisson regression, and the models that included interactions between pairs of predictors had a lower AIC than those that did not (see Table 3).
+
+Alternatively, the lack-of-fit test had no power to differentiate the quality of fit for the 4 models. In each case, the residual deviance (LRT statistic) $\Lambda$ was in the extreme right tail of the expected $\chi^2$ distribution. This result is indicative of the inability of the chosen predictors to explain much of the observed variance in the data, regardless of the probability model used.
+
+While the lack-of-fit test rendered an identical result for each of the 4 models, the difference between $\Lambda$ and the mean of the expected $\chi^2$ distribution followed a similar trend to that observed in the AIC values of the respective models. This difference was decreased in the models that included interactions between pairs of predictors, and (an order of magnitude) more so for the models fit with negative binomial regression (see Table 3). Although it is interesting to note this substantial decrease in the models fit by negative binomial versus Poisson regression, it nevertheless does not constitute a statistical test.
+
+\begin{table} \centering
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+     & \textbf{Pois} & \textbf{Pois (inter.)} & \textbf{NB} & \textbf{NB (inter.)} \\ \hline
+    AIC & 1900787 & 1574028 & 1351140 & 1259604 \\
+    $ \mid \Lambda - \text{res. df} \mid$ & 886262 & 559469 & 29912 & 19109 \\ \hline
+  \end{tabular}
+  \vspace{2px}
+  \caption{ Both the AIC and the distance of the residual deviance $\Lambda$ from the residual degrees of freedom are indicative of model fit (smaller value corresponds to better fit), although neither consistitutes a statistical test. }
+\end{table}
+
+Each of the 4 models concluded with a high level of confidence that each predictor impacts the response. While there is not a direct, intuitive biological interpretation of the categorical predictor (organism), this predictor was the most consistent across the 4 models. \textit{Vitis vinifera} (grape), \textit{Glycine max} (soybean), and \textit{Arabidopsis thaliana} (thale cress) were consistently predicted to have the highest number of introns per coding sequence, while \textit{Medicago trunculata} (barrel clover) and \textit{Sorghum bicolor} (sorghum) were consistently predicted to have the fewest.
+
+\begin{table} \centering
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    \textbf{Organism} & \textbf{Pois} & \textbf{Pois (inter.)} & \textbf{NB} & \textbf{NB (inter.)} \\ \hline
+    At & 1 & 1 & 1 & 1 \\
+    Bd & 1.017145 & 1.198655 & 1.047808 & 0.92367 \\
+    Gm & 0.915761 & 0.572868 & 0.858301 & 0.609998 \\
+    Mt & 1.69469 & 1.900468 & 1.378781 & 1.364243 \\
+    Os & 1.340443 & 1.877047 & 1.396962 & 1.279283 \\
+    Sb & 1.282742 & 1.997907 & 1.17586 & 1.296671 \\
+    Vv & 0.823658 & 0.713124 & 0.816278 & 0.555548 \\
+    Zm & 1.212883 & 1.325249 & 1.216162 & 1.069563 \\ \hline
+  \end{tabular}
+  \vspace{2px}
+  \caption{This table describes the impact of the organism predictor on the expected number of introns per coding sequence (NICS) predicted by each regression model. Each value in the table is a ratio of the form $exp\{\beta_{Aj}\}/exp\{\beta_{ij}\}$ where $\beta_{Aj}$ is the coefficient estimated for $Arabidopsis$ in the $j^{th}$ model and $\beta_{ij}$ is the coefficient estimated for the $i^{th}$ organism in the $j^{th}$ model. A value greater than 1 indicates that the $i^{th}$ organism has a lower NICS on average than \textit{Arabidopsis} in the $j^{th}$ model.}
+\end{table}
+
+Distance from centromere, distance from telomere, and chromosome length were the least consistent predictors. While the signs of their additive effects were consistent across the 4 models, the absolute values of their additive effects spanned 5 orders of magnitude (the additive effects of the predictors indicate how much of a change in the predictor corresponds to a unit increase in the expected mean response). Specifically, the change in predictor value associated with a unit increase in the expected mean response ranged from tens of mega base pairs to hundreds of base pairs.
+
+Transcript length was the most consistent numeric predictor in terms of the absolute value of its additive effect. However, the sign of this predictor’s additive effect became negative for the models that included interactions between predictors, a surprising result that goes against biological intuition and common sense. This is just one example of a trend we were surprised to observe--that the relevance of the biological interpretation of predictor coefficients did not necessarily improve with the AIC or other measures of fit.
+
+\begin{table} \centering
+  \begin{tabular}{| c | c | c | c | c |}
+    \hline
+    \textbf{Predictor} & \textbf{Pois} & \textbf{Pois (inter.)} & \textbf{NB} & \textbf{NB (inter.)} \\ \hline
+    Trans. Len. & 217kbp & -2kbp & 393bp & -272bp \\
+    Chrm. Len. & 47Mbp & 1 7kbp & 66Mbp & 449bp \\
+    Cntrmr Dist. & -28Mbp & -863bp & -37Mbp & -224bp \\
+    Tlmr Dist. & -21Mbp & -863bp & -32Mbp & -224bp \\ \hline
+  \end{tabular}
+  \vspace{2px}
+  \caption{The impact of the numeric predictors (transcript length, chromosome length, distance from centromere, and distance from telomere) on the response was significant in each model, but the additive effects of these predictors varied immensely from model to model.}
+\end{table}
+
+We note that for the models that included interactions, most of the interactions were found to have a significant impact on the response at a very high confidence level. Even so, we do not pursue an interpretation of these interactions’ effects due to the large number of such interactions and the difficulty of presenting interpretations that are intuitive. Please see the supplemental materials for more information.
+
+We also note that the negative binomial regression model that included predictor interactions did not converge on an optimal solution. The fitting algorithm sets initial predictions for both parameters, estimates the maximum likelihood estimate for one parameter, alternates and does the same for the other parameter, and repeats the process until the algorithm converges on optimal values. Unfortunately, the software we used to perform the negative binomial regression did not converge by a certain amount of iterations, likely due to the complexity of the model. Alternative packages for performing the model fit were unusable due to resource constraints.
+
+\section*{Discussion}
+While the AIC and lack-of-fit test  results are somewhat unfortunate, they are not completely unexpected given the fact that we were unable to include some (perhaps) more informative predictors such as gene function, GC content, etc. We were forced to calculate as many predictors as we could that might reasonably have an effect on intron distribution, and by doing so we probably introduced some multicolinearity that we ultimately did not address. Variable selection approaches might have helped us determine which predictors (and interactions) to include, but the size of our data set made it difficult to use these approaches effectively. Consequently, we felt obligated to use all predictors available to us and to restrict the complexity of our models by including only the simplest of predictor interactions.
+
+Despite the unquestionable lack of fit demonstrated by all 4 regression models, there are still some encouraging results. While the 5 predictors included in the models leave a lot of variation to be explained, each of the models suggest (with a high level of confidence) that all predictors have a significant impact on the number of introns per coding sequence (NICS). It is also encouraging to see the consistent improvement in fit when using negative binomial regression as an alternative to Poisson regression, our initial hypothesis for the distribution of the NICS. A negative binomial distribution that does not even rely on the predictors does a surprisingly good job estimating the true distribution of the data (see Fig. 1). In this way, we have demonstrated that the Poisson distribution is not suitable to model intron distribution and that, given the right predictors, a negative binomial regression model should do a satisfactory job explaining the variation observed in the NICS.
+
+Although this study leaves much to be explored with negative binomial regression, we would likely investigate zero-inflated distributions as a possibility for modeling our data if we were given more time. Zero-inflated Poisson and negative binomial distributions are beyond the scope of this course, but they came up frequently in they final stages of our study. The motivation for these distributions is the need to model count data that follows a Poisson (or negative binomial) distribution generally, except for the fact that there are more observations with a 0 value than would otherwise be expected. A zero-inflated negative binomial distribution seems particularly well-suited for the problem at hand, and it would be interesting to see if implementations of zero-inflated negative binomial regression can handle the volume of data we used in this study.
+
+\section*{Acknowledgements}
+We would like to thank Volker Brendel, Hong Lu, and Jon Duvick for motivating this study and pointing us in the right direction as far as available data.
+
+\begin{thebibliography}{}
+\begin{raggedright}
+\bibitem[Dong \textit{et~al}, 2004]{Dong04} Dong Q., Schlueter S.D., and Brendel, V. (2004) PlantGDB, plant genome database and analysis tools. \textit{Nucleic Acids Research}, \textbf{32}, D354-D359.
+
+\bibitem[Farlow \textit{et~al}, 2010]{Farlow10} Farlow A., Meduri E., and Schlotterer C. (2010) DNA double-strand break repair and the evolution of intron density. \textit{Trends in Genetics}, In Press, Corrected Proof, Available online at \url{http://www.sciencedirect.com/science/article/B6TCY-51J095Y-1/2/e315164099aa37405e3ca29d32f06fbf}.
+
+\bibitem[Fedorov \textit{et~al}, 2001]{Federov01} Fedorov A., Cao X., Saxonov S., de Souza S.J., Roy S.W., and Gilbert W. (2001) Intron distribution difference for 276 ancient and 131 modern genes suggests the existence of ancient introns. \textit{Proceedings of the National Academy of Sciences of the United States of America}, \textbf{98}, pp. 13177-13182.
+
+\bibitem[Fedorov \textit{et~al}, 2002]{Federov02} Fedorov A., Merican A.F., and Gilbert W. (2002) Large-scale comparison of intron positions among animal, plant, and fungal genes. \textit{Proceedings of the National Academy of Sciences of the United States of America}, \textbf{99 (25)}, pp. 16128-16133.
+
+\bibitem[Gilbert, 1978]{Gilbert78} Gilbert W. (1978). Why genes in pieces? \textit{Nature}, \textbf{271(5645)}, p. 501.
+
+\bibitem[Rogozin \textit{et~al}, 2003]{Rogozin03} Rogozin I.B., Wolf Y.I., Sorokin A.V., Mirkin B.G., Koonin E.V. (2003) Remarkable interkingdom conservation of intron positions and massive, lineage-specific intron loss and gain in eukaryotic evolution. \textit{Current Biology}, \textbf{13 (17)}, pp. 1512-1517.
+
+\bibitem[Roy and Gilbert, 2005]{Roy05} Roy S.W., Gilbert W. (2005) Complex early genes. \textit{Proceedings of the National Academy of Sciences of the United States of America}, \textbf{102 (6)}, pp. 1986-1991.
+
+\bibitem[Wang \textit{et~al}, 2003]{Wang03} Wang C., Li Z., Typas M.A., Butt T.M. (2003) Nuclear large subunit rDNA group I intron distribution in a population of Beauveria bassiana strains: phylogenetic implications. \textit{Mycological Research}, \textbf{107(10)}, pp. 1189-1200.
+\end{raggedright}
+\end{thebibliography}
+
+\end{document}

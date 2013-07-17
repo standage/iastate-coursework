@@ -1,0 +1,92 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Mar 22, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Homework 5 review}
+
+\subsection*{Alltoall barrier}
+\begin{verbatim}
+integer :: p, rank, comm, ierror, sendbuff(0:p-1)
+integer :: recvbuff(0:p-1)
+sendbuff = 0
+recvbuff = 0
+call mpi_alltoall(sendbuff, 1, mpi_integer, recvbuf, mpi_integer, comm, ierror)
+return
+\end{verbatim}
+
+\subsection*{Non-blocking}
+\begin{verbatim}
+integer :: req_array(1:2+(p-1)), count, flag
+flag = 0
+do i = 1, p-1
+  call mpi_irecv(flag, 1, mpi_integer, mpi_any_source, 0, comm, req_array(i), ierror)
+enddo
+count = p
+do i = 0,p-1
+  if(i /= rank) then
+    call mpi_isend(flag, mpi_integer, i, 0, comm, req_array(count), ierror)
+    count = count+1
+  endif
+enddo
+\end{verbatim}
+
+\subsection*{Central manager}
+\begin{verbatim}
+if(rank == 0) then
+  do i = 1, p-1
+    call mpi_recv(flag, 1, mpi_integer, mpi_any_source, mpi_status_ignore, ierror)
+  enddo
+else
+  call mpi_send(flag, 1, mpi_integer, i, 0, comm, ierror)
+endif
+
+call mpi_bcast(flag, ...)
+\end{verbatim}
+
+\section*{Homework 6 Review}
+\begin{verbatim}
+t1 = mpi_wtime()
+call mpi_isend(A(1,1), n+n, dp, 0, request(1), ierror)
+call mpi_irecv(....., request(2), ...)
+call mpi_waitall(2, request, mpi_statuses_ignore, ierror)
+t2 = wtime()
+time = t2-t1
+\end{verbatim}
+
+\section*{Domain decomposition}
+Standard procedure for solving PDEs in parallel
+
+\end{document}

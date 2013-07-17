@@ -1,0 +1,83 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 23 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Stochastic chemical kinetics}
+
+The general Master Equation is given as follows. \[ \frac{d}{dt}p(x, t) = \sum_y\left[ W_{yx}p(x,t) - W_{x,y}p(x,t) \right] \]
+
+We represented the state of the chemical system with the vector $X(t) = [X_1(t), X_2(t), ..., X_n(t)]^T$ where $X_i(t)$ represents the number of molecules of substance $i$.
+We can do a random walk over a lattice, where each point is represented by an $n$-dimensional vector.
+
+\subsection*{Michaelis-Menton}
+We can revisit Michaelis-Menton now with the Master Equation notation. \[ \ce{S_1 + S_2 <=> S_3 \rightarrow S_4 + S_2} \]
+Here, $S_1$ is substrate, $S_2$ is enzyme, $S_3$ is substrate/enzyme complex, and $S_4$ is product.
+
+\begin{menumerate}
+  \item $S_1 + S_2 \xrightarrow{C_1} S_3$
+  \item $S_3 \rightarrow{C_2} S_1 + S_2$
+  \item $S_3 \rightarrow{C_3} S_4 + S_2$
+\end{menumerate}
+
+State vector:  $S(t) = [S_1(t), S_2(t), S_3(t), S_4(t)]^t$.
+
+With every part of the reaction (listed 1-3 above), we associate a stochiometric vector.
+
+\begin{menumerate}
+ \item $V_1 = [-1, -1, 1, 0]^T$
+ \item $V_2 = [1, 1, -1, 0]^T$
+ \item $V_3 = [0, 1, -1, 1]^T$
+\end{menumerate}
+
+Every time reaction $j$ occurs, the state of the system changes from state $S(t)$ to $S(t)+V_j$
+
+What are the transition probabilities? The probability for a $V_j$ transition is given by $a_j(S(t))\Delta t$. How are the $a_j$'s computed? \[ a_1 = c_1 s_1 s_2 \] \[ a_3 = c_3 s_3 \]
+
+\[ p(S, t + \Delta t) = p(s,t)\left[ 1 - \sum_{j=1}^{M} a_j(S(t))\Delta t \right] + \sum_{j=1}^{M}p(S-V_j,t)a_j(S(t))\Delta t \]
+\[ \frac{d}{dt}p(s,t) = \sum_{j=1}^{M}p(S-V_j, t)a_j(S(t))-\sum_{j=1}^{M}p(s,t)a_j(S(t)) \]
+
+Question: how are kinetic rates related to the propensities $a_j$?
+
+\[ \frac{d}{dt}[S_3] = k_1[A][B]M\text{sec}^{-1} \]
+
+Units: $k: M^{-1}\text{sec}^{-1}$, $a_j: \text{sec}^{-1}$, $c_j:$ (\# molecules)$^{-2}\text{sec}^{-1}$
+
+\[ k_1 \sim M^{-1}\text{sec}^{-1} \sim \frac{L}{mole}\cdot \frac{1}{\text{sec}} \sim \frac{L}{N_A}\cdot\frac{1}{\text{sec}}\left( \frac{1}{L}\cdot\frac{1}{N_A} \right) \]
+
+In general, $c_1 = \frac{k_1}{N_A \cdot \text{volume}}$
+
+\end{document}

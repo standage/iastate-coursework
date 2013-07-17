@@ -1,0 +1,24 @@
+\frametitle {Gene prediction (annotation)}
+  Example output
+  \hrule
+
+{ \scriptsize
+\begin{verbatim}
+##gff-version  3
+chr8  CpGAT  gene  76876  81153  .  -  .  ID=chr8.g15
+chr8  CpGAT  mRNA  76876  81153  .  -  .  ID=chr8.g15.t1;Parent=chr8.g15;Note=Ev
+chr8  CpGAT  exon  81043  81153  .  -  .  ID=chr8.g15.t1.e1;Parent=chr8.g15.t1;N
+chr8  CpGAT  exon  77987  78245  .  -  .  ID=chr8.g15.t1.e2;Parent=chr8.g15.t1;N
+chr8  CpGAT  exon  77755  77895  .  -  .  ID=chr8.g15.t1.e3;Parent=chr8.g15.t1;N
+chr8  CpGAT  exon  77365  77659  .  -  .  ID=chr8.g15.t1.e4;Parent=chr8.g15.t1;N
+chr8  CpGAT  exon  77081  77127  .  -  .  ID=chr8.g15.t1.e5;Parent=chr8.g15.t1;N
+chr8  CpGAT  exon  76876  76928  .  -  .  ID=chr8.g15.t1.e6;Parent=chr8.g15.t1;N
+chr8  CpGAT  CDS   81043  81153  .  -  0  ID=chr8.g15.t1.cds1;Parent=chr8.g15.t1
+chr8  CpGAT  CDS   77987  78245  .  -  0  ID=chr8.g15.t1.cds2;Parent=chr8.g15.t1
+chr8  CpGAT  CDS   77755  77895  .  -  2  ID=chr8.g15.t1.cds3;Parent=chr8.g15.t1
+chr8  CpGAT  CDS   77365  77659  .  -  2  ID=chr8.g15.t1.cds4;Parent=chr8.g15.t1
+chr8  CpGAT  CDS   77081  77127  .  -  1  ID=chr8.g15.t1.cds5;Parent=chr8.g15.t1
+chr8  CpGAT  CDS   76876  76928  .  -  2  ID=chr8.g15.t1.cds6;Parent=chr8.g15.t1
+\end{verbatim}
+}
+

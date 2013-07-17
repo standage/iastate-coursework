@@ -1,0 +1,248 @@
+standage@localhost:hw01$ make
+gcc -Wall -O3 -g -lm -o hw01 hw01.c Array.c AminoAcid.c Atom.c Geometry.c Vector.c
+./hw01 2GB1.pdb 2GB1-new.pdb
+
+Found n = 56 residues
+Calculating the following in a single pass:
+    3n-1 = 167 bond lengths
+    3n-2 = 166 bond angles
+     n-1 = 55 alpha carbon distances
+
+Results:                         mean          std. dev.
+    Bond lengths:
+        N_i - CA_i:              1.492Å        0.004Å
+        CA_i - C_i:              1.532Å        0.003Å
+        C_i - N_i+1:             1.282Å        0.023Å
+    Bond angles:
+        N_i - CA_i - C_i:        110.075º      0.575º
+        CA_i - C_i - N_i+1:      113.999º      2.077º
+        C_i - N_i+1 - CA_i+1:    117.342º      2.149º
+    Alpha carbon distances:
+        CA_i - CA_i+1:           3.810Å        0.008Å
+
+Residue 30: PHE (20 atoms)
+    φ: 64.627º
+    ψ: 44.653º
+    ω: 179.511º
+
+Steric clashing
+    Minimum atom distance: 0.15784Å (between HG22 of VAL 29 and HB3 of LYS 31)
+
+Extra credit--side chain torsion angles:
+    Residue 1 (MET):
+        X_1:   59.450
+        X_1,2: 83.221
+        X_2:   98.217
+        X_3:   175.165
+        X_3,1: 177.764
+        X_3,2: 151.358
+    Residue 2 (THR):
+        X_1,1: 51.666
+        X_1,2: 165.131
+    Residue 3 (TYR):
+        X_1:   44.138
+        X_2,1: 77.738
+        X_2,2: 102.236
+    Residue 4 (LYS):
+        X_1:   150.245
+        X_1,2: 163.784
+        X_2:   149.300
+        X_2,2: 169.666
+        X_3:   167.922
+        X_3,2: 161.878
+        X_4:   134.036
+    Residue 5 (LEU):
+        X_1:   165.449
+        X_2,1: 66.341
+        X_2,2: 174.992
+    Residue 6 (ILE):
+        X_1,1: 70.817
+        X_1,2: 169.815
+    Residue 7 (LEU):
+        X_1:   72.868
+        X_2,1: 142.913
+        X_2,2: 97.685
+    Residue 8 (ASN):
+        X_1:   108.183
+        X_2,1: 46.910
+        X_2,2: 133.160
+    Residue 9 (GLY):
+    Residue 10 (LYS):
+        X_1:   116.549
+        X_1,2: 142.803
+        X_2:   171.705
+        X_2,2: 143.183
+        X_3:   159.672
+        X_3,2: 119.445
+        X_4:   158.621
+    Residue 11 (THR):
+        X_1,1: 38.374
+        X_1,2: 75.055
+    Residue 12 (LEU):
+        X_1:   161.932
+        X_2,1: 87.881
+        X_2,2: 152.824
+    Residue 13 (LYS):
+        X_1:   68.138
+        X_1,2: 96.737
+        X_2:   159.645
+        X_2,2: 134.602
+        X_3:   176.933
+        X_3,2: 137.510
+        X_4:   169.492
+    Residue 14 (GLY):
+    Residue 15 (GLU):
+        X_1:   52.481
+        X_1,2: 30.998
+        X_2:   170.901
+        X_3,1: 46.185
+        X_3,2: 133.872
+    Residue 16 (THR):
+        X_1,1: 170.908
+        X_1,2: 57.504
+    Residue 17 (THR):
+        X_1,1: 80.248
+        X_1,2: 33.172
+    Residue 18 (THR):
+        X_1,1: 159.619
+        X_1,2: 87.115
+    Residue 19 (GLU):
+        X_1:   128.236
+        X_1,2: 151.677
+        X_2:   177.188
+        X_3,1: 70.838
+        X_3,2: 109.186
+    Residue 20 (ALA):
+    Residue 21 (VAL):
+        X_1,1: 63.346
+        X_1,2: 176.772
+    Residue 22 (ASP):
+        X_1:   55.460
+        X_2,1: 47.091
+        X_2,2: 132.960
+    Residue 23 (ALA):
+    Residue 24 (ALA):
+    Residue 25 (THR):
+        X_1,1: 167.244
+        X_1,2: 79.249
+    Residue 26 (ALA):
+    Residue 27 (GLU):
+        X_1:   77.781
+        X_1,2: 101.159
+        X_2:   176.890
+        X_3,1: 57.208
+        X_3,2: 122.754
+    Residue 28 (LYS):
+        X_1:   3.593
+        X_1,2: 26.461
+        X_2:   174.906
+        X_2,2: 170.135
+        X_3:   110.254
+        X_3,2: 138.961
+        X_4:   159.655
+    Residue 29 (VAL):
+        X_1,1: 167.429
+        X_1,2: 73.172
+    Residue 30 (PHE):
+        X_1:   85.437
+        X_2,1: 34.970
+        X_2,2: 168.875
+    Residue 31 (LYS):
+        X_1:   171.051
+        X_1,2: 171.897
+        X_2:   155.538
+        X_2,2: 151.582
+        X_3:   174.236
+        X_3,2: 128.316
+        X_4:   176.615
+    Residue 32 (GLN):
+        X_1:   74.629
+        X_1,2: 113.309
+        X_2:   109.016
+        X_3,1: 8.308
+        X_3,2: 159.751
+    Residue 33 (TYR):
+        X_1:   166.711
+        X_2,1: 84.764
+        X_2,2: 109.058
+    Residue 34 (ALA):
+    Residue 35 (ASN):
+        X_1:   179.707
+        X_2,1: 27.970
+        X_2,2: 162.980
+    Residue 36 (ASP):
+        X_1:   10.823
+        X_2,1: 22.200
+        X_2,2: 136.080
+    Residue 37 (ASN):
+        X_1:   75.736
+        X_2,1: 51.661
+        X_2,2: 130.907
+    Residue 38 (GLY):
+    Residue 39 (VAL):
+        X_1,1: 128.052
+        X_1,2: 52.508
+    Residue 40 (ASP):
+        X_1:   152.663
+        X_2,1: 1.291
+        X_2,2: 168.868
+    Residue 41 (GLY):
+    Residue 42 (GLU):
+        X_1:   41.962
+        X_1,2: 63.752
+        X_2:   174.937
+        X_3,1: 46.133
+        X_3,2: 124.558
+    Residue 43 (TRP):
+        X_1:   59.666
+        X_2,1: 108.197
+        X_2,2: 110.546
+    Residue 44 (THR):
+        X_1,1: 59.489
+        X_1,2: 43.508
+    Residue 45 (TYR):
+        X_1:   26.436
+        X_2,1: 176.335
+        X_2,2: 32.904
+    Residue 46 (ASP):
+        X_1:   161.236
+        X_2,1: 5.259
+        X_2,2: 174.178
+    Residue 47 (ASP):
+        X_1:   82.184
+        X_2,1: 67.925
+        X_2,2: 84.903
+    Residue 48 (ALA):
+    Residue 49 (THR):
+        X_1,1: 17.092
+        X_1,2: 32.193
+    Residue 50 (LYS):
+        X_1:   5.402
+        X_1,2: 8.161
+        X_2:   41.743
+        X_2,2: 168.783
+        X_3:   23.041
+        X_3,2: 3.511
+        X_4:   169.810
+    Residue 51 (THR):
+        X_1,1: 134.040
+        X_1,2: 41.561
+    Residue 52 (PHE):
+        X_1:   90.694
+        X_2,1: 36.873
+        X_2,2: 68.052
+    Residue 53 (THR):
+        X_1,1: 61.395
+        X_1,2: 170.673
+    Residue 54 (VAL):
+        X_1,1: 72.445
+        X_1,2: 148.871
+    Residue 55 (THR):
+        X_1,1: 56.342
+        X_1,2: 160.412
+    Residue 56 (GLU):
+        X_1:   10.471
+        X_1,2: 36.284
+        X_2:   97.607
+        X_3,1: 15.260
+        X_3,2: 179.188

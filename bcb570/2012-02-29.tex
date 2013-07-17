@@ -1,0 +1,72 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 29 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Probabilistic boolean networks}
+
+How does uncertainty propagate through a boolean network?
+
+Consider a boolean network $G(V,F)$ containing $n$ genes $x_1, x_2, ..., x_n$, and an initial joint probability distribution \[ p(x), x = (x_1 ... x_n \in \{ 0,1 \}^n \]
+
+\[ Pr[ f_1(x) = i_1, f_2(x) = i_2, ..., f_n(x) = i_n ] \]
+
+\[ f_1(x) = i_1, f_2(x) = i_2, ..., f_n(x) = i_n ] \]
+\[ = \bigcup_{k \leq n} O \times O ... x\{ f_k(x) = i_k \} \times O .. \times O \]
+
+\[ \sum_{x \in A} Pr(x) \]
+\[ A = \{ x \in {0,1}^n | f_k(x) = i_k \} \]
+
+The sum implicitly defines an iterative map \[ p^{(t + 1)} = \psi(p^{(t)}) \]
+One can show that if you write $p^{(t)} = (p_1^{(t)} p_2^{(t)} ... p_n^{(t)})$ then
+\[ p^{(t+1)} = p^{(t)} P \] (What is $P$ equal to?)
+
+
+\section*{The k-means algorithm}
+
+We assume that we have $n$ data points $\{ a_j \}_{j=1}^{n} \in R^{m}$. Let \[ \Pi = \{\pi_i\}{i=1}^{k} \] denote a partition of $A$.
+\[ \pi_j = \{ v | a_v \text{belongs to the jth cluster} \} \]
+
+Let the "mean" (centroid) of the $j^{\text{th}}$ cluster be \[ m_j = \frac{1}{n_j}\{ \sum_{v \in \pi_j} a_v \} \]
+where $n_j$ is the number of elements of $\pi_j$.
+
+The "tightness" (coherence) of the cluster $\pi_j$ is defined as \[ q_j = \sum_{v \in \pi_j} || a_v - m_j ||^2 \]
+
+The quality of clustering can be measured as the overall coherence of all clusters. \[ Q(\Pi) = \sum_{j=1}^{k} q_j \]
+
+
+
+\end{document}

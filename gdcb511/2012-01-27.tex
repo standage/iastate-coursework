@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 27 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Exam I review}
+
+\begin{mitemize}
+  \item 5-6 questions for exam
+  \item need to understand experiments, how results are interpreted
+\end{mitemize}
+
+\subsection*{Assays for protein-DNA interactions, protein-protein interactions}
+\begin{mitemize}
+  \item strengths and weaknesses
+  \item which are \textit{in vitro} vs \textit{in vivo}
+  \item throughput
+\end{mitemize}
+
+\subsection*{Blots}
+\begin{mitemize}
+  \item southern
+  \item northern
+  \item western
+\end{mitemize}
+
+\subsection*{ChIP}
+\begin{mitemize}
+  \item PCR to confirm
+  \item ChIP-chip
+  \item ChIP-seq
+  \item CoIP, pulldown
+\end{mitemize}
+
+\subsection*{$\lambda$ phage infection}
+lysis vs lysogeny
+
+\subsection*{$\sigma$ factor interactions with DNA}
+\begin{mitemize}
+  \item $T_{-12}$ interacts with W dyad (no specificity); R237, K241
+  \item $A_{-11}$ interacts with hydrophobic pocket in $\sigma$ factor
+  \item $T_{-10}A_{-9}A_{-8}$ stack interacts with $\sigma$ factor through backbone interactions
+  \item $T_{-7}$ interacts with hydrophilic pocket in $\sigma$ factor
+\end{mitemize}
+
+
+\end{document}

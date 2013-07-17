@@ -1,0 +1,5 @@
+#!/bin/sh
+rm notes/*.aux
+rm notes/*.log
+rm notes/*.out
+rm notes/*.synctex.gz

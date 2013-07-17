@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 9 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{GDCB 511}
+\subsection*{Course notes}
+\begin{mitemize}
+  \item TA: Rebecca Weeks (rlmauton@iastate.edu)
+  \item Purpose of textbook: learn how to draw conclusions from experimental results
+\end{mitemize}
+
+\subsection*{Central dogma}
+Our course will focus on the central dogma of molecular biology; specifically, we will look at:
+\begin{mitemize}
+  \item the imporant processes in molecular detail
+  \item the related regulatory mechanisms
+\end{mitemize}
+
+
+\section*{Biomolecular structures}
+\subsection*{DNA structure}
+\begin{mitemize}
+  \item phosphodiester bonds between 5' phosphate and 3' carbon
+  \item double helical structure
+  \begin{mitemize}
+    \item most binding on major groove
+    \item .34 nm (3.4 \AA) between nucleotides
+    \item 3.4 nm (34 \AA) period in the helix (10 bp = 1 turn of the helix)
+  \end{mitemize}
+\end{mitemize}
+
+\subsection*{Protein structure}
+\begin{mitemize}
+  \item I need to memorize the peptide bond
+  \item reactivity at the peptide bond (especially the double-bonded oxygen and the hydrogen) is responsible for protein secondary structure
+  \item secondary structure elements: $\alpha$ helix, $\beta$ sheet, loops (especially near prolines)
+\end{mitemize}
+
+
+\section*{Molecular cloning}
+\begin{mitemize}
+  \item molecular recombination using restriction enzymes, DNA ligase
+  \item alkaline phosphatase method can be used for screening out vectors that have re-ligated to themselves (vs vectors successfully transformed with recombinant DNA)
+\end{mitemize}
+
+\end{document}

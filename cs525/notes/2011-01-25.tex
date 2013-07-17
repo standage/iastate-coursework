@@ -1,0 +1,63 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: January 25, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+Postpone Intro to HPC for now
+
+\section{History of MPI}
+\begin{mitemize}
+  \item 1980 - 1995
+  \begin{menumerate}
+    \item every vendor had their own message passing libraries
+    \item ORNL created PVM (parallel virtual machine); it was free; used master/slave programming model
+    \item Europe message passing library standard PAMACS; wanted a world standard, in 1995 led to MPI; MPI uses the SPMD programming paradigm, i.e., a single program runs on all processors
+  \end{menumerate}
+  \item 1988 - 1992: intense research effort to automatically parallelize serial programs
+\end{mitemize}
+
+\section{Overview of MPI}
+
+A MPI communicator defines a group of processes to be used when running an MPI program. MPI has a predefined communicator named \texttt{mpi\_comm\_world} which consists of a single group of processes: $1,2,...,p-1$. Each process is assigned a rank. MPI groups can be restricted to subgroups and one can define \textit{intercommunicators} and \textit{intracommunicators} between subgroups. Most of the class, we will only use \texttt{mpi\_comm\_world}.
+
+All MPI programs must contain the following.
+\begin{menumerate}
+  \item Call \texttt{mpi\_init(ierror)}: initializes the MPI environment (\texttt{ierror} is an int)
+  \item Call \texttt{mpi\_comm\_size(comm, p, ierror)}: $p$ then is the number of MPI processes
+  \item Call \texttt{mpi\_comm\_rank(comm, rank, ierror)}: rank of the executing processor
+  \item Call \texttt{mpi\_finalize(ierror)}: clean up environment
+\end{menumerate}
+
+\end{document}

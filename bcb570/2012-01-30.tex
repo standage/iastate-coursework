@@ -1,0 +1,100 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 30 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Matlab tutorial}
+\begin{verbatim}
+A = [0 1 2; 4 5 6; 7 8 9]
+% optional ; at the end to supress output
+
+A = [1 0; 1 1];
+b = [1;12];
+
+A*b
+
+C = [12 12; 2.2 0.1]
+A*C
+A.*C % not matrix multiplication, entry-wise multiplication
+A./C
+
+A' % transpose
+
+% enumerate 1-10 by 1s
+[1:1:10]
+
+for i=1:1:10
+i
+end
+
+% plot sin function from -¹ to ¹
+x=[-pi:0.2:pi];
+x=[x, 3.14]
+plot(x, sin(x))
+plot(x, sin(x), 'LineWidth', 2)
+
+y=x
+who
+
+for i=1:1:size(x,2)
+  for j=1:1:size(y,2)
+    z(i,j)=sin(x(i)*y(i));
+  end
+end
+
+surf(x,y,z)
+hold on
+contour(x,y,z)
+
+% generate 100x100 random matrix
+A=rand(100,100);
+hold off
+surf(A)
+size(A)
+A(90:100, 90:100) = zeros(11,11)
+surf(A)
+
+help svd % singular value decomposition
+
+for 1=1:1:10
+  i
+end
+
+% downloadable from http://www.maths.strath.ac.uk/~aas96106/algfiles.html
+edit ssa_plot.m
+\end{verbatim}
+
+\end{document}

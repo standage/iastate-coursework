@@ -1,0 +1,26 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+ To check your AFS disk usage (and quota) use: 
+    /usr/afsws/bin/fs listquota ~
+
+! p=8, n=32
+!    User packing: 1.409054E-04 seconds
+!    User packing: 1.020432E-04 seconds
+!    User packing: 9.012222E-05 seconds
+!   Derived types: 1.578331E-04 seconds
+!   Derived types: 1.020432E-04 seconds
+!   Derived types: 1.010895E-04 seconds
+! p=16, n=32
+!    User packing: 1.819134E-04 seconds
+!    User packing: 1.468658E-04 seconds
+!    User packing: 1.418591E-04 seconds
+!   Derived types: 1.888275E-04 seconds
+!   Derived types: 1.530647E-04 seconds
+!   Derived types: 1.552105E-04 seconds
+! p=32, n=32
+!    User packing: 2.231598E-04 seconds
+!    User packing: 2.119541E-04 seconds
+!    User packing: 1.947880E-04 seconds
+!   Derived types: 2.520084E-04 seconds
+!   Derived types: 2.059937E-04 seconds
+!   Derived types: 2.450943E-04 seconds

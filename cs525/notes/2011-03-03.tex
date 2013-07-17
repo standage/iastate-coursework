@@ -1,0 +1,86 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Mar 3, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Recently covered}
+\begin{mitemize}
+  \item Blocking point-to-point routines (send, ssend, recv, sendrecv, sendrecv\_replace)
+  \item Collective routines (barrier, bcast, gather/scatter, alltoall, reduce, allreduce)
+  \item Non-blocking point-to-point routines (isend, irecv, issend)
+  \item Persistent comm (special non-blocking)
+\end{mitemize}
+
+\section*{Sending non-contiguous data}
+The routines \texttt{mpi\_pack, mpi\_unpack} are available but not recommended. MPI derived types provide an elegant way to send/recv noncontiguous data.
+
+\subsection*{Derived data type}
+MPI derived types are constructed from primitive MPI data types (\texttt{mpi\_integer, mpi\_real, mpi\_double\_precision, ...})
+
+\textbf{Definition}: a derived data type is an opaque object that specifies a sequence of primitive types $t\_0, t\_1, ..., t\_{n-1}$ and a sequence of displacements for each primitive type $d\_0, d\_1, ..., d\_{n-1}$
+\begin{mitemize}
+  \item The \textit{type map} of the derived data type is defined as follows. \[ \text{typemap} = \{ (t\_0, d\_0), (t\_1, d\_1), ..., (t\_{n-1}, d\_{n-1}) \} \]
+  \item The \textit{type signature} of the derived data type is defined as follows. \[ \text{typesig} = \{ t\_0, t\_1, ..., t\_{n-1} \} \]
+\end{mitemize}
+
+Observe that the type map together with the address of the message buffer specifies a communication buffer that consists of $n$ entries where the $i^{\text{th}}$ entry is at address $buff + d\_i$ and has type $t\_i$.
+  
+Here are the type signatures of some common mpi types.
+\begin{verbatim}
+mpi_integer:           {integer, 0}
+mpi_real:              {real, 0}
+mpi_double_precision: {real8, 0}
+\end{verbatim}
+  
+\subsection*{Applications to scientific computing}
+
+\subsubsection*{Sending a row of a matrix}
+\begin{verbatim}
+integer, parameters :: n=128
+double precision    :: A(n,n)
+\end{verbatim}
+We want to create a type map for a row in A; \[ \text{typemap} = \{ (real8, 0), (real8, n), (real8, 2n), ..., (real, (n-1)n \} \]
+
+\subsubsection*{Relevant routines}
+\begin{mitemize}
+  \item \texttt{mpi\_type\_size(datatype, size, ierror)}; 'size' returns the size of the data type in bytes
+  \item \texttt{mpi\_type\_extent(datatype, extent, ierror)}; deprecated feature
+  \item \texttt{mpi\_get\_extent(datatype, lb, extent, ierror)}; returns the lower bound and extent of datatype; the upper bound = lb + extent
+\end{mitemize}
+  
+\subsubsection*{Constructors}
+There are 8 constructors of MPI data types. Each one becomes more and more general. Most general is mpi\_type\_create\_struct(). You can acutally use this one to create all the others, but you should use the simplest available since the are typically optimized
+
+\end{document}

@@ -1,0 +1,75 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: August 23, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Introduction}
+
+\begin{mitemize}
+  \item structural informatics is about structures of life's basic elements: proteins, DNA, RNA
+  \item by structure, we mean shapes, geometry, motion
+\end{mitemize}
+
+\subsection*{Scale concept}
+
+\begin{mitemize}
+  \item atom: about 1\AA
+  \item amino acid: $< 1 nm$
+  \item protein: $< 10 nm$
+  \item cell: $10 \mu m$
+\end{mitemize}
+
+\section*{Protein functions}
+\begin{mitemize}
+  \item AcrB trimer, Seeger et al, Science, 313:1295-8, 2006
+  \item Aquaporin water channel, Peter Agre, Nobel laureate chemistry, 2003
+  \item Myoglobin
+\end{mitemize}
+
+\section*{Intracellular signaling pathways}
+\begin{mitemize}
+  \item protein-protein interaction and a kinase activation cascade
+  \item regulation by phosphorylation
+  \item the last kinase phosphorylates a number of gene regulatory proteins
+\end{mitemize}
+
+\section*{The grand challenge question: what is life?}
+\begin{mitemize}
+  \item In 1944, physicist Erwin Schršdinger published a short book that changed course of modern biology
+  \item Asked whether the events inside a living organism be explained solely by physics and chemistry.
+  \item How does life function? This is a very significant question.
+\end{mitemize}
+
+\end{document}

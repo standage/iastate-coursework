@@ -1,0 +1,102 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: 25 Aug, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Paradigm shift in protein science}
+  \subsection*{Central paradigm}
+    \begin{mitemize}
+      \item old idea: sequence determines structure, which determines function
+      \item new idea: sequence determines structure \textit{which determines dynamics} which determines function
+    \end{mitemize}
+  
+  \subsection*{Native state(s) of a protein}
+    \begin{mitemize}
+      \item old idea: a single, static structure (native state)
+      \item new idea: a structural ensemble
+      \item ubiquitin example: induced fit (different states caused by binding) vs conformational selection (protein exists in multiple forms, substrate binds the correct state)
+    \end{mitemize}
+
+\section*{Flow of genetic information}
+  \begin{mitemize}
+    \item DNA is a chain of 4 nucleotides
+    \item proteins are chains of 20 amino acids
+    \item dogma of molecular biology: DNA $\rightarrow$ RNA $\rightarrow$ protein
+    \item genetic code: possible codons (triplets) of 4 nucleotides: $4^3 = 64$; single base changes usually result in same amino acid or an amino acid with similar physical properties
+  \end{mitemize}
+  
+\section*{Protein structure}
+  \begin{mitemize}
+    \item protein is a change of amino acids
+    \item amino acids share a backbone, distinguished by the side chains
+    \item classified as hydrophobic, hydrophilic, amphipathic
+    \item hydrophobic
+    \begin{mitemize}
+      \item engage in van der Waals interactions only; cannot form hydrogen bonds with water
+      \item normally on interior of protein, packing against each other
+      \item basis of \textbf{hydrophobic effect}
+    \end{mitemize}
+    \item hydrophilic: form hydrogen bonds with water
+    \item amphipathic: can form hydrogen bonds, but have a large hydrophobic component
+  \end{mitemize}
+
+\section*{Protein flexibility}
+  \begin{mitemize}
+    \item bond length and bond angles are (nearly) fixed
+    \item peptide group is planar
+    \item flexibility comes from the torsional angles phi ($\phi$) and psi ($\psi$) (two degrees of freedom on the backbone per residue)
+  \end{mitemize}
+  \subsection*{Side chain flexibility}
+    \begin{mitemize}
+      \item backbone flexibility comes from $\phi$ and $\psi$
+      \item do torsional rotations exist in side chains? how many degrees of freedom are there for each side chain?
+      \item what is the effect of chain torsional rotation?
+      \item effects of side chain rotation are local, so it is less constrained
+    \end{mitemize}
+
+\section*{Protein conformations}
+  \begin{mitemize}
+    \item a conformation is a 3D form that a protein can adapt without covalent bond breakage
+    \item the set of all possible confirmations are is called the conformational space; this space is high-dimensional
+    \item Ramachandan plot and steric constraints: brighter areas show preferred combinations of $\phi$ and $\psi$
+  \end{mitemize}
+  \subsection*{Folding and the native structure}
+    \begin{mitemize}
+      \item native state is 3D, compact, and lowest energy
+      \item folding is the process by which a protein finds a single native state within a large conformational space
+      \item Levinthal paradox; conformational space is huge, but protein folds almost instantaneously
+    \end{mitemize}
+
+\end{document}

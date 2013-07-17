@@ -1,0 +1,138 @@
+=== Run information ===
+
+Scheme:weka.classifiers.lazy.KStar -B 96 -M a
+Relation:     ProteinFoldsDicotsFeatSelect
+Instances:    311
+Attributes:   44
+              pcvA
+              pcvR
+              pcvN
+              pcvD
+              pcvC
+              pcvQ
+              pcvE
+              pcvG
+              pcvH
+              pcvI
+              pcvL
+              pcvK
+              pcvM
+              pcvF
+              pcvP
+              pcvS
+              pcvT
+              pcvW
+              pcvY
+              pcvV
+              sscC
+              sscE
+              sscH
+              dssC
+              dssE
+              dssH
+              adssCCC
+              adssCCE
+              adssCCH
+              adssCEE
+              adssCHH
+              adssECE
+              adssECH
+              adssEEC
+              adssEEE
+              adssHCH
+              phyCsativus
+              phyGmax
+              phyLjaponicus
+              phyPpersica
+              phyRcommunis
+              phySlycoparsicum
+              length
+              class
+Test mode:user supplied test set: size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+KStar Beta Verion (0.1b).
+Copyright (c) 1995-97 by Len Trigg (trigg@cs.waikato.ac.nz).
+Java port to Weka by Abdelaziz Mahoui (am14@cs.waikato.ac.nz).
+
+KStar options : -B 96 -M a  
+
+Time taken to build model: 0 seconds
+
+=== Evaluation on test set ===
+=== Summary ===
+
+Correctly Classified Instances         219               57.1802 %
+Incorrectly Classified Instances       164               42.8198 %
+Kappa statistic                          0.541 
+Mean absolute error                      0.047 
+Root mean squared error                  0.1471
+Relative absolute error                 66.6862 %
+Root relative squared error             78.5264 %
+Total Number of Instances              383     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.04       0.286     1         0.444      1        a
+                 0.889     0.003      0.889     0.889     0.889      0.999    b
+                 0.45      0.017      0.6       0.45      0.514      0.958    c
+                 0.75      0          1         0.75      0.857      0.983    d
+                 0.889     0.005      0.8       0.889     0.842      0.999    e
+                 0.111     0          1         0.111     0.2        0.917    f
+                 0.841     0.097      0.529     0.841     0.649      0.95     g
+                 0.167     0.003      0.667     0.167     0.267      0.947    h
+                 0.692     0.008      0.75      0.692     0.72       0.992    i
+                 0.333     0          1         0.333     0.5        0.986    j
+                 0.75      0.016      0.5       0.75      0.6        0.931    k
+                 0.526     0.041      0.4       0.526     0.455      0.896    l
+                 0.5       0          1         0.5       0.667      1        m
+                 0.25      0.003      0.5       0.25      0.333      0.946    n
+                 1         0          1         1         1          1        o
+                 0.583     0.09       0.483     0.583     0.528      0.847    p
+                 0.833     0.011      0.714     0.833     0.769      0.961    q
+                 0.231     0.016      0.333     0.231     0.273      0.841    r
+                 0.593     0.028      0.615     0.593     0.604      0.933    s
+                 0.333     0.003      0.8       0.333     0.471      0.883    t
+                 0.125     0.005      0.333     0.125     0.182      0.855    u
+                 0.417     0.016      0.455     0.417     0.435      0.881    v
+                 0.429     0.005      0.6       0.429     0.5        0.898    w
+                 0.25      0.011      0.2       0.25      0.222      0.97     x
+                 0.25      0.011      0.333     0.25      0.286      0.828    y
+                 0.259     0.025      0.438     0.259     0.326      0.814    z
+                 0.926     0.008      0.893     0.926     0.909      0.971    -
+Weighted Avg.    0.572     0.033      0.604     0.572     0.555      0.918
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z aa   <-- classified as
+  6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  a = a
+  0  8  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  b = b
+  5  0  9  0  0  0  0  0  0  0  0  3  0  0  0  1  0  0  1  0  1  0  0  0  0  0  0 |  c = c
+  1  0  1  6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  d = d
+  1  0  0  0  8  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  e = e
+  1  0  0  0  1  1  1  0  0  0  0  1  0  0  0  4  0  0  0  0  0  0  0  0  0  0  0 |  f = f
+  0  0  0  0  0  0 37  0  1  0  0  2  0  0  0  3  1  0  0  0  0  0  0  0  0  0  0 |  g = g
+  0  0  1  0  0  0  6  2  0  0  1  0  0  0  0  0  0  0  1  0  0  0  0  0  0  1  0 |  h = h
+  0  0  0  0  0  0  4  0  9  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  i = i
+  0  0  0  0  0  0  1  1  1  2  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  j = j
+  0  0  0  0  0  0  1  0  0  0  6  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0 |  k = k
+  1  0  0  0  0  0  4  0  0  0  0 10  0  1  0  1  0  0  0  0  1  0  0  0  0  0  1 |  l = l
+  0  0  0  0  0  0  2  0  0  0  0  0  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  m = m
+  0  0  0  0  0  0  2  0  1  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0 |  n = n
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  7  0  0  0  0  0  0  0  0  0  0  0  0 |  o = o
+  0  0  0  0  0  0  7  0  0  0  1  2  0  0  0 28  0  1  2  0  0  1  1  2  0  3  0 |  p = p
+  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0 10  0  0  1  0  0  0  0  0  0  0 |  q = q
+  0  0  2  0  0  0  0  0  0  0  0  1  0  0  0  1  0  3  2  0  0  1  1  0  0  2  0 |  r = r
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  6  2  2 16  0  0  0  0  0  0  1  0 |  s = s
+  2  0  0  0  0  0  0  0  0  0  0  1  0  0  0  2  0  1  0  4  0  0  0  1  1  0  0 |  t = t
+  3  0  1  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  1  0  1  0  0  0  0  1  0 |  u = u
+  1  0  0  0  1  0  1  0  0  0  1  0  0  0  0  0  1  0  1  0  0  5  0  1  0  0  0 |  v = v
+  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  2  0  0  0  0  0  1  3  0  0  0  0 |  w = w
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  0  1  0  0  0  1  0  1  0  0  0 |  x = x
+  0  1  0  0  0  0  2  0  0  0  0  1  0  0  0  1  0  0  0  0  0  0  0  0  2  1  0 |  y = y
+  0  0  0  0  0  0  1  0  0  0  2  2  0  0  0  5  0  1  2  0  0  2  0  0  3  7  2 |  z = z
+  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0 25 | aa = -
+
+

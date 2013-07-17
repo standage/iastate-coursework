@@ -1,0 +1,80 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}		% skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+ 
+\usepackage{fancyhdr} 
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 567}
+\newcommand{\instructor}{Oliver Eulenstein}
+\newcommand{\assignment}{HW 1}
+\newcommand{\duedate}{September 23, 2010}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{center}
+\renewcommand*\arraystretch{1.75}
+\begin{tabular}{| c | c | c | c | c | c |}
+  \hline
+  A & B & $O$ & $\Omega$ & $\Theta$ & \textbf{Justification}           \\  \hline
+  $lg^k(n)$ & $n^j$         & yes & no  & no  & Evaluated with L'hospital's rule, $\frac{A}{B}$ goes to $0$\\  \hline
+  $n^{\sin n}$ & $\sqrt{n}$ & no  & no  & no  & Because of the growing, periodic nature of $A$, $B$ can never bound $A$\\  \hline
+  $2^n$ & $2^{\frac{n}{2}}$ & no  & yes & no  & Consider $2^{\frac{n}{2}}=\sqrt{2^n}$. It's clear that $f(n) = \Omega(\sqrt{f(n)})$.\\  \hline
+  $n^{lg(c)}$ & $c^{lg(n)}$ & yes & yes & yes & By the algebraic identity $n^{\log c} = c^{\log n}$.\\  \hline
+  $lg(n!)$ & $lg(n^n)$      & yes & no  & no  & By the algebraic identity $n! < n^n$ for $n > 1$.\\  \hline
+  $n^k$ & $c^n$             & yes & no  & no  & Polynomial is always upper bound by any exponential. \\  \hline
+\end{tabular}
+\end{center}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[\hspace{24pt}(i)]
+\item Let $c = \sum_{i=0}^{d}a_i$ and $n > 0$. Thus we have $\sum_{i=0}^{d}a_in^i \leq cn^k$. By the definition of $O(f(n))$, we have the following result. \[ p(n) = O(n^k) \] 
+\item Let $0 < c < a_d$ and $n > 0$. Thus we have $\sum_{i=0}^{d}a_in^i \geq cn^k$. By the definition of $\Omega(f(n))$, we have the following result. \[ p(n) = \Omega(n^k) \]
+\item Let $0 < c_1 < a_d, c_2 = \sum_{i=0}^{d}a_i,$ and $n > 0$. Thus we have $c_1n^k \leq \sum_{i=0}^{d}a_in^i \leq c_2n^k$. By the definition of $\Theta(f(n))$, we have the following result. \[ p(n) = \Theta(n^k) \]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+All of the following recurrences are of the form $T(n) = aT\left(\frac{n}{b}\right)+f(n)$.
+\begin{enumerate}[\hspace{24pt}(i)]
+\item For the recurrence $T(n) = 4T\left(\frac{n}{2}\right)+n$, we have $a=4, b=2,$ and $f(n)=n$. In this case, $f(n) = n \in O\left(n^{\log_24 - \epsilon}\right) = O\left(n^{2-\epsilon}\right)$ for some $\epsilon > 0$. Thus, by the Master Theorem, \[ T(n) = \Theta\left(n^2\right) \]
+\item For the recurrence $T(n) = 4T\left(\frac{n}{2}\right)+n^2$, we have $a=4, b=2,$ and $f(n)=n^2$. In this case, $f(n) = n^2 \in \Theta\left(n^{\log_24}\right) = \Theta\left(n^2\right)$. Thus, by the Master Theorem, \[ T(n) = \Theta\left(n^2\log n\right) \]
+\item For the recurrence $T(n) = 4T\left(\frac{n}{2}\right)+n^3$, we have $a=4, b=2,$ and $f(n)=n^3$. In this case, $f(n) = n^3 \in \Omega\left(n^{\log_24 + \epsilon}\right) = \Omega\left(n^{2+\epsilon}\right)$ for some $\epsilon > 0$. Thus, by the Master Theorem, \[ T(n) = \Theta\left(n^3\right) \]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+We must solve the following recurrence. \[ T(n) = 2T\left(\sqrt{n}\right)+1 \] If we let $m = \log_2 n$, then $n = 2^m$ and $\sqrt{n} = 2^{\frac{m}{2}}$. Therefore our problem now has the following form. \[ T\left(2^{m}\right) = 2T\left(2^{\frac{m}{2}}\right)+1 \] To simplify notation, let $S(m) = T\left(2^{m}\right)$. Therefore the problem now has the following form. \[ S(m) = 2S\left(\frac{m}{2}\right)+1 \] By the Master Theorem, we have $S(m) = \Theta(m)$, so our recurrence has the following solution. \[ T(n) = \Theta(m) = \Theta(\log n) \]
+
+\end{document}

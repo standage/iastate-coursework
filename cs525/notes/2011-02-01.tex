@@ -1,0 +1,90 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 1, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+Notes on homework 0
+\begin{mitemize}
+  \item Use exact notation from homework (dp, rank, comm, etc)
+  \item Must run correctly for any $n$ and $p \geq 2$ 
+\end{mitemize}
+
+\section{MPI Overview}
+\begin{menumerate}
+  \item Point-to-point routines
+  \begin{mitemize}
+    \item blocking: \texttt{mpi\_send}, \texttt{mpi\_ssend}, \texttt{mpi\_recv}
+    \item non-blocking: \texttt{mpi\_isend}, \texttt{mpi\_issend}, \texttt{mpi\_irecv}
+  \end{mitemize}
+  \item Collective routines: involves all processors in the \texttt{comm} (i.e. \texttt{mpi\_barrier}, \texttt{mpi\_bcast})
+  \item MPI 1-sided routines (vs Cray's shmem (shared memory) routines; complicated but very fast)
+  \item MPI I/O; quite useful, but complicated ($\approx$ 100 pages); Parallel I/O
+  \item MPI process creation (not really useful to most people)
+\end{menumerate}
+
+\section{Point-to-Point Communication}
+\begin{menumerate}
+  \item blocking
+  \begin{mitemize}
+    \item \texttt{mpi\_ssend}
+    \item \texttt{mpi\_rsend}
+    \item \texttt{mpi\_bsend}
+    \item \texttt{mpi\_send}
+    \item \texttt{mpi\_recv}
+    \item \texttt{mpi\_sendrecv}
+    \item \texttt{mpi\_sendrecv\_replace}
+  \end{mitemize}
+  \item non-blocking
+  \begin{mitemize}
+    \item \texttt{mpi\_issend}
+    \item \texttt{mpi\_irsend}
+    \item \texttt{mpi\_ibsend}
+    \item \texttt{mpi\_isend}
+    \item \texttt{mpi\_irecv}
+  \end{mitemize}
+\end{menumerate}
+
+\subsection{Difference between blocking and non-blocking routines}
+When is the statement following the \texttt{send} call executed? For blocking routines, it waits until it is safe to modify the variable containing the data to be passed. Non-blocking routines do not offer this safety?
+
+Why have non-blocking routines? It can hep avoid deadlocks and allow communication and execution to occur at the same time.
+
+\subsection{Blocking sends}
+\begin{mitemize}
+  \item \texttt{mpi\_ssend}: synchronize send; slow for small messages, but performs fine with large messages; great for debugging
+  \item \texttt{mpi\_rsend}: ready send; supposed to provide a very fast send; sends message immediately and the corresponding \texttt{recv} must be ``posted" (waiting for the message); if the \texttt{recv} is not posted the results are undefined
+\end{mitemize}
+
+\end{document}

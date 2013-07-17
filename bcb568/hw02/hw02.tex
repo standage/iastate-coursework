@@ -1,0 +1,166 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}          % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}                    % Wide paper
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{graphicx}                  % For eps figures
+\usepackage{epsfig}                    % Alternative package
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 568}
+\newcommand{\instructor}{Brendel/Dorman}
+\newcommand{\assignment}{HW 2}
+\newcommand{\duedate}{Feb 3, 2011}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+\section*{Examples}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\subsection*{Poisson distribution}
+Using the $pmf$ of the Poisson distribution, we obtain the following probability generating function.
+\begin{eqnarray}
+  A(s) &=& \sum_{k=0}^{\infty}\frac{\lambda^k}{k!}e^{-\lambda}s^k \nonumber \\
+       &=& e^{-\lambda}\left( 1 + \frac{\lambda^1 s^1}{1!} + \frac{\lambda^2 s^2}{2!} + ... \right) \nonumber \\
+       &=& e^{-\lambda}\left( 1 + \frac{(\lambda s)^1}{1!} + \frac{(\lambda s)^2}{2!} + ... \right) \nonumber \\
+       &=& e^{-\lambda}\left( e^{\lambda s} \right) = e^{\lambda s - \lambda} \nonumber \\
+       &=& e^{\lambda(s - 1)}
+\end{eqnarray}
+
+Taking the first and second derivatives of this $pgf$ we obtain the following functions.
+\begin{eqnarray}
+  A'(s) &=& \lambda s e^{\lambda(s - 1)}
+\end{eqnarray}
+\begin{eqnarray}
+  A''(s) &=& (\lambda s)' e^{\lambda(s - )} + \lambda s (e^{\lambda(s - 1)})' \nonumber \\
+         &=& \lambda e^{\lambda(s - 1)} + \lambda^2 s^2 e^{\lambda(s -1)}     \nonumber \\
+         &=& e^{\lambda(s -1)} \left( \lambda^2 s^2 + \lambda \right)
+\end{eqnarray}
+
+Using functions (2) and (3) we can calculate the mean and variance for the Poisson distribution.
+\begin{eqnarray}
+  E &=& A'(1) = \lambda \cdot 1 \cdot 1 = \lambda
+\end{eqnarray}
+\begin{eqnarray}
+  Var &=& A''(1) + A'(1) - A'(1)^2 \nonumber \\
+      &=& (\lambda^2 + \lambda) + (\lambda) - (\lambda)^2 \nonumber \\
+      &=& 2\lambda
+\end{eqnarray}
+
+\subsection*{Binomial distribution}
+Using the $pmf$ of the binomial distribution, we obtain the following probability generating function.
+\begin{eqnarray}
+  A(s) &=& \sum_{k=0}^{\infty}\binom{n}{k}p^{k}q^{n-k}s^k \nonumber \\
+       &=& \sum_{k=0}^{\infty}\binom{n}{k}(ps)^{k}q^{n-k} \nonumber \\
+       &=& q^n + \binom{n}{1}(ps)^1 q^{n-1} + \binom{n}{2}(ps)^2 q^{n-2} + ... \nonumber \\
+       &=& (ps + q)^n
+\end{eqnarray}
+
+Taking the first and second derivatives of this $pgf$ we obtain the following functions.
+\begin{eqnarray}
+A'(s) &=& np(ps + q)^{n-1}
+\end{eqnarray}
+\begin{eqnarray}
+A''(s) &=& n p^2(n-1)(ps + q)^{n-2}
+\end{eqnarray}
+
+Using functions 7 and 8 we can calculate the mean and variance for the binomial distribution.
+\begin{eqnarray}
+E &=& A'(1) = pn (p + q)^{n-1} \nonumber \\
+  &=& np (1)^{n-1} \nonumber \\
+  &=& np
+\end{eqnarray}
+\begin{eqnarray}
+Var &=& A''(1) + A'(1) - A'(1)^2 \nonumber \\
+    &=& n p^2 (n-1) + np - n^2 p^2 \nonumber \\
+    &=& np( p(n-1) + 1 - np ) \nonumber \\
+    &=& np( 1-p )
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{eqnarray}
+  \sum_{k=0}^{\infty} k p_k &=& 1p_1 + 2p_2 + 3p_3 +... \nonumber \\
+                            &=& p_1 + p_2 + p_3 + ... + p_2 + p_3 + p_4 + ... + p_3 + p_4 + p_5 + ... \nonumber \\
+                            &=& \sum_{k=0}^{\infty}(p_{k+1} + p_{k+2} + p_{k+3} + ...) \nonumber \\
+                            &=& \sum_{k=0}^{\infty}t_k = E[X] = T(1) = P'(1)
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Each $X_i$ is an independent Bernoulli random variable. If we let $a_k = (a_0, a_1)$, then we can obtain the $pgf$ of the Bernoulli distribution.
+
+\begin{eqnarray}
+  A(s) &=& \sum_{k=0}^{\infty} a_k s^k \nonumber \\
+       &=& a_0 + a_1 s \nonumber \\
+       &=& q + ps
+\end{eqnarray}
+
+If $S$ is the sum of $n$ such random variables, then we can get the $pgf$ of $S$ using equation 1.7.
+\begin{eqnarray}
+  A_{X_1 + ... + X_n}(s) &=& \prod_{i=1}^{n}A_{X_i}(s) \nonumber \\
+                         &=& \prod_{i=1}^{n}(q + ps) \nonumber \\
+                         &=& (q + ps)^n
+\end{eqnarray}
+
+So the $pgf$ for $S$ is the $pgf$ for the binomial distribution.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+asdf
+
+\section*{Problems}
+\setcounter{prob_num}{1}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Because $D(s) = (s - s_1)D^{*}(s)$, we can write $D'(s)$ as follows. \[ D'(s) = (s - s_1)'D^{*}(s) + (s-s_1)D^{*'}(s) \] If we assume that $s_1$ is the shared root, then we have the following \[ \rho_1 = \frac{(s_1 - s_1)N^{*}(s_1)}{D^{*}(s_1) + (s_1 - s_1)D^{*'}(s_1)} = \frac{0}{D^{*}(s_1)} = 0 \] The remainder of the $\rho_i$ values are unchanged. Consider, without loss of generality, $\rho_2$. \[ \rho_2 = \frac{N(s_2)}{D'(s_2)} = \frac{(s_2 - s_1)N^{*}(s_2)}{D^{*}(s_2) + (s_2 - s_1)D^{*'}(s_2)} = \frac{(s_2 - s_1)N^{*}(s_2)}{(s_2 - s_1)D^{*'}(s_2)} = \frac{N^{*}(s_2)}{D^{*'}(s_2)} \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Let us assume $m = 1$. Therefore $D(s)$ is a $0^{\text{th}}$-order polynomial (constant) with 1 root. If $D(s)$ is a constant and has a root, then that constant must be 0, so $D(s)$ is the null polynomial.
+
+Now let us assume that conditions hold for $m = k$ (that is, a $(k-1)^{\text{th}}$-order polynomial with $k$ distinct roots must be the null polynomial). Let us then consider when $m = k+1$ (that is, a $k^{\text{th}}$-order polynomial with $k+1$ distinct roots). Let $r$ be one of these roots. We can write $D(s)$ like so. \[ D(r) - D(s) = (r - s)\left[ a_1 + a_2(r + s)+ ... +a_k(r^{k-1} + r^{k-2}s + ... + s^{k-1}) \right]  \] The bracketed component is a $(k-1)^{\text{th}}$-order polynomial with $k$ distinct roots, so by the induction hypothesis it is the null polynomial. Therefore $D(s)$ is also the null polynomial.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Asdf.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+
+\end{document}

@@ -1,0 +1,52 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 15, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Collective routines}
+\begin{mitemize}
+  \item mpi\_barrier
+  \item mpi\_bcast (called identically on all processors)
+  \item mpi\_gather (gathers data from all procs in comm and stores it into the recv buffer on the root proc)
+  \item mpi\_all\_gather (use instead of mpi\_gather -> mpi\_bcast)
+  \item mpi\_all\_gatherV (no root)
+  \item mpi\_scatter (send columns of matrix to processors, inverse of gather)
+  \item mpi\_scatterV (inverse of gatherV)
+  \item mpi\_alltoall (sendbuf, sendcount, datatype, recvbuf recvcount, recvtype, comm, error)
+  \item mpi\_alltoallV
+  \item mpi\_reduce
+\end{mitemize}
+
+\end{document}

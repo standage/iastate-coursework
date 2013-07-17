@@ -1,0 +1,20 @@
+Warning: no access to tty (Bad file descriptor).
+Thus no job control in this shell.
+ To check your AFS disk usage (and quota) use: 
+    /usr/afsws/bin/fs listquota ~
+
+!-------------------
+! n=3500
+!-------------------
+! [n=3500, p= 4]    Test 1) 7.957239E-01    Test 2) 6.021209E-01    Test 3) 7.569580E-01
+! [n=3500, p= 4]    Test 1) 7.952299E-01    Test 2) 5.985160E-01    Test 3) 7.606289E-01
+! [n=3500, p= 4]    Test 1) 7.836478E-01    Test 2) 5.932260E-01    Test 3) 7.528610E-01
+! [n=3500, p= 8]    Test 1) 2.396737E+00    Test 2) 9.270079E-01    Test 3) 1.058917E+00
+! [n=3500, p= 8]    Test 1) 2.314695E+00    Test 2) 9.275730E-01    Test 3) 1.050240E+00
+! [n=3500, p= 8]    Test 1) 2.299999E+00    Test 2) 9.280930E-01    Test 3) 1.056798E+00
+! [n=3500, p=16]    Test 1) 5.087708E+00    Test 2) 1.213626E+00    Test 3) 1.049239E+00
+! [n=3500, p=16]    Test 1) 5.079564E+00    Test 2) 1.209199E+00    Test 3) 1.048371E+00
+! [n=3500, p=16]    Test 1) 5.103053E+00    Test 2) 1.205890E+00    Test 3) 1.044103E+00
+! [n=3500, p=32]    Test 1) 1.046298E+01    Test 2) 1.781815E+00    Test 3) 1.046560E+00
+! [n=3500, p=32]    Test 1) 1.042169E+01    Test 2) 1.781001E+00    Test 3) 1.048451E+00
+! [n=3500, p=32]    Test 1) 1.045141E+01    Test 2) 1.766217E+00    Test 3) 1.049237E+00

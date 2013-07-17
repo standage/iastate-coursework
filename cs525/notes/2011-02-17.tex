@@ -1,0 +1,56 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 17, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Measuring performance of a communication network}
+\begin{mitemize}
+  \item bandwidth: capacity of communication medium (Mb/s)
+  \item latency: time to send message with no payload (or trivial payload)
+  \item ping pong
+\end{mitemize}
+
+\section*{mpi\_all\_reduce}
+Same as \texttt{mpi\_reduce} but the answer will be on all processors, not just 1
+
+Rules for using collective routines
+\begin{mitemize}
+  \item A correct, portable MPI program must invoke collective and point-to-point
+        subroutines so that no deadlock will occur even if the collective routines are
+        syncronized. This implies that collective and point-to-point routines must be
+        executed in the same order on each processor in the communicator.
+\end{mitemize}
+
+\end{document}

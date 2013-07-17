@@ -1,0 +1,70 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 3, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\subsection{\texttt{mpi\_recv}}
+\begin{mitemize}
+  \item Can use \texttt{mpi\_any\_source} and \texttt{mpi\_any\_tag} for the source and tag arguments (respectively); should use them when possible, but only when needed
+  \item \texttt{status(mpi\_source) =} source of the message just received
+  \item \texttt{status(mpi\_tag) =} tag of the message just received
+  \item \texttt{status(mpi\_error) =} not useful
+  \item \texttt{status(mpi\_status\_ignore)}; reduces overhead related to status tracking
+\end{mitemize}
+
+
+\section{Sending routines}
+
+\subsection{Blocking sends}
+\begin{mitemize}
+  \item \texttt{mpi\_ssend}: synchronous send; hand-shake between sending and receiving processes, must complete before the processes proceed with execution;
+  \item \texttt{mpi\_rsend}: send results immediately, requires a receive to be waiting; if receive is not waiting, then behavior is undefined; shouldn't use
+  \item \texttt{mpi\_bsend}: buffered send; copies message to a buffer and execution continues; can help with load balancing; caveat is that the user must manage the buffer space; (see \texttt{mpi\_buffer\_attach} and \texttt{mpi\_buffer\_detach})
+  \item \texttt{mpi\_send}: IBM made their implementation public a few years ago (if message was small enough and the number of MPI processes was not too large, message would be sent to a buffer on the receiving process; otherwise, used \texttt{mpi\_ssend}); notice that issues may not appear until large problems are run; debugging with \texttt{mpi\_ssend} is critical to avoiding such mistakes
+\end{mitemize}
+
+\subsection{Non-blocking routines}
+The intent of non-blocking routines is to enable communication and computation to overlap and to avoid deadlocking
+
+\subsubsection{Deadlocks (deadly embrace)}
+Basically, you're waiting for something to happen that is never going to happen. You can avoid them by
+\begin{mitemize}
+  \item be careful how sends and receives are ordered
+  \item use \texttt{mpi\_sendrecv} or \texttt{mpi\_sendrecv\_replace}
+  \item use nonblocking routines (if you can)
+  \item use buffered sends
+\end{mitemize}
+
+\end{document}

@@ -1,0 +1,23 @@
+#!/usr/bin/perl
+use strict;
+
+#my @chr = (0,2,4,7,10);
+my @chr = split(/,/, $ARGV[0]);
+my $multi = {};
+
+for(my $i = 0; $i < scalar(@chr); $i++)
+{
+  for(my $j = ($i+1); $j < scalar(@chr); $j++)
+  {
+    my $val = ($chr[$j] - $chr[$i]);
+    $multi->{$val} = 0 unless($multi->{$val});
+    $multi->{$val} += 1 ;
+  }
+}
+
+my @list = ();
+foreach my $value(sort{$a <=> $b}(keys(%$multi)))
+{
+  push(@list, $value) for(1..$multi->{$value});
+}
+print join(", ", @list), "\n";

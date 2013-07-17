@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 27 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Boolean networks}
+
+A boolean network is a graph $G(V, F)$ consisting of a set of vertices $V$ (genes) and a list of boolean functions $F = {f_1, f_2, ..., f_n}$ where $f_i = {v_k1, v_k2, ..., v_kn}$.
+
+An expression pattern is a function $\psi : V --> {0,1}$
+
+One can define dynamics on a boolean network by the following scheme. \[ \psi_{t+1}(v_i) = f_i(\psi_t(v_i1), \psi_t(v_i2), ..., \psi_t(v_ik)) \]
+
+Consider a dataset of the form \[ D = {(I_1, O_1), (I_2, O_2), ..., (I_m, O_m)} \] where $I_k$ and $O_k$ are expression profiles.
+
+\subsection*{Definitions}
+\begin{menumerate}
+  \item We say that a node $v_i$ in a boolean network is consistent with $(I_j, O_j)$ if \[ O_j(v_i) = f_i(I_j(v_i1), ..., I_j(V_ik)) \]
+  \item We say $G(V, F)$ is consistent with $(I_j, O_j)$ if all nodes are consistent
+\end{menumerate}
+
+Given $n$ (the number of genes) and data $D$, decide whether or not there exists a boolean network $G(F,V)$ consistent with $D$, and output one if it exists
+
+\end{document}

@@ -1,0 +1,178 @@
+#!/usr/bin/env perl
+
+# Pragmas
+use strict;
+use warnings;
+
+# Libraries
+use Bio::SeqIO;
+use Getopt::Long;
+
+# Command line usage
+my $usage = "
+[SequenceSpacer568 Usage]: ./ss568 [options] model_file
+  --help               Print this usage statement and exit
+  --length=INT         The length of the random sequences to be
+                       generated (default=1000)
+  --n=INT              The number of random sequences to generate
+                       (default=1000)
+  --verbose            Print verbose output to terminal (STDERR)
+
+Note: Use the SpaceModelTrainer568 script included in this distribution to
+      generate a model file to be used with SequenceSpacer568. Enter
+      './smt568 --help' on the command line for SequenceSpacer568 instructions.
+
+";
+
+# Specify option defaults
+my $help    = '';
+my $length  = 1000;
+my $n       = 1000;
+my $verbose = '';
+
+# Parse options from command line
+GetOptions
+(
+  'help'     => \$help,
+  'length=i' => \$length,
+  'n=i'      => \$n,
+  'verbose'  => \$verbose,
+);
+if($help)
+{
+  printf(STDERR $usage);
+  exit();
+}
+elsif(scalar(@ARGV) == 0)
+{
+  printf(STDERR "\n[SequenceSpacer568] Error: must provide model file %s", $usage);
+  die();
+}
+
+# Parse model file
+my $model_file = shift(@ARGV);
+my $transition_probabilities = {};
+my $initial_state_probabilities = {};
+my $markov_order = -1;
+my $nucleotides = [qw(A C G T)];
+open(my $MODEL, "<", $model_file) or die("[SequenceSpacer568] Error: unable to open model file '$model_file' $!");
+printf(STDERR "[SequenceSpacer568] Loading model file '%s'\n", $model_file);
+while(my $line = <$MODEL>)
+{
+  next if($line =~ m/^$/);
+  if($line =~ m/^##(.+)=(\d+)$/)
+  {
+     if($1 eq "markov_order")
+     {
+       $markov_order = $2;
+     }
+     else
+     {
+       printf(STDERR "[SequenceSpacer568] Warning: ignoring unknown declaration '%s'\n", $line);
+     }
+  }
+  elsif($line =~ m/^#/)
+  {
+    # Do nothing with comments
+  }
+  else
+  {
+    if($markov_order < 0)
+    {
+      printf(STDERR "  [SequenceSpacer568] Error: model file does not include a positive Markov order declaration\n");
+      die();
+    }
+    chomp($line);
+    my @values = split(/\t/, $line);
+    if( scalar(@values) == 2)
+    {
+      my( $k_initial_nucleotides, $probability ) = @values;
+      if( length($k_initial_nucleotides) != $markov_order )
+      {
+        printf(STDERR "  [SequenceSpacer568] Warning: Markov model is declared as order %d, but '%s' contains only %d nucleotides\n", $markov_order, length($k_initial_nucleotides));
+      }
+      $initial_state_probabilities->{ $k_initial_nucleotides } = $probability;
+    }
+    elsif( scalar(@values) == 3 )
+    {
+      my( $k_predecessors, $nucleotide, $probability ) = @values;
+      if( length($k_predecessors) != $markov_order )
+      {
+        printf(STDERR "  [SequenceSpacer568] Warning: Markov model is declared as order %d, but '%s' contains only %d nucleotides\n", $markov_order, length($k_predecessors));
+      }
+      $transition_probabilities->{ $k_predecessors }->{ $nucleotide } = $probability;
+    }
+    else
+    {
+      printf(STDERR "  [SequenceSpacer568] Error: cannot interpret '%s' from model file '%s'\n", $line, $model_file);
+      die();
+    }
+  }
+}
+printf(STDERR "[SequenceSpacer568] Done loading model file '%s' (Markov model of order %d)\n", $model_file, $markov_order);
+close($MODEL);
+
+# Use Bio::SeqIO object to handle sequence output
+my $output_stream = Bio::SeqIO->new( -fh => \*STDOUT, -format => 'Fasta' );
+
+# Generate random sequences and write them to the terminal (STDOUT)
+for(my $i = 1; $i <= $n; $i++)
+{
+  my $random_sequence = generate_random_sequence($length, $markov_order, $transition_probabilities, $initial_state_probabilities, $nucleotides);
+  my $sequence_object = Bio::PrimarySeq->new( -id => "ss568.$i", -seq => $random_sequence );
+  $output_stream->write_seq( $sequence_object );
+}
+
+# Generate a random sequence given the length, initial state probabilities, and
+# transition probabilities
+sub generate_random_sequence
+{
+  my($length, $markov_order, $transition_probabilities, $initial_state_probabilities, $nucleotides) = @_;
+
+  # If the model is order 0, we don't need to track the previous nucleotides
+  if($markov_order == 0)
+  {    
+    my $sequence = "";
+    while(length($sequence) < $length)
+    {
+      $sequence .= draw($nucleotides, $transition_probabilities->{''});
+    }
+    return $sequence;
+  }
+  # If the model is order k, we need to keep track of the previous k nucleotides
+  else
+  {
+    my @initial_states = sort( keys( %$initial_state_probabilities ) );
+    my $initial_state = draw( \@initial_states, $initial_state_probabilities );
+    my $sequence = $initial_state;
+    my $previous_state = $initial_state;
+    
+    while( length($sequence) < $length )
+    {
+      my $next_nucleotide .= draw( $nucleotides, $transition_probabilities->{ $previous_state } );
+      $sequence .= $next_nucleotide;
+      $previous_state .= $next_nucleotide;
+      $previous_state = substr($previous_state, 1);
+    }
+    return $sequence;
+  }
+}
+
+# Given a set of keys and the probability with which each is drawn, randomly
+# draw one of the keys
+sub draw
+{
+  my($keys, $probabilities) = @_;
+  my $rand = rand();
+  my $test = 0;
+  foreach my $key( @$keys )
+  {
+    $test += $probabilities->{ $key };
+    if( $rand < $test )
+    {
+      return $key;
+    }
+  }
+
+  printf(STDERR "[SequenceSpacer568] Warning: reached the end of the 'draw' subroutine unexpectedly");
+}

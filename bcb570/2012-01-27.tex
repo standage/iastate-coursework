@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 27 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{The Gillespie Method}
+
+\[ p(\tau,j|x,t) = \frac{a_j(x)}{a_{sum}(x)}a_{sum}(x)exp(-a_{sum}(\tau)) \]
+
+\begin{menumerate}
+  \item Evaluate all propensities $a_j(x)$
+  \item Draw two independent uniform random numbers $R_1$ and $R_2$ from (0, 1)
+  \item Set $j$ to be the smallest integer satisfying \[ \sum_{k=1}^{j} a_k(X(t)) > R_1 a_{sum}(X(t)) \]
+  \item Set $\tau = \frac{ln(\frac{1}{R_2}}{a_{sum}}(X(t)))$
+  \item $X(t + \tau) = X(t) + V_j$
+  \item Return to step \#1
+\end{menumerate}
+
+\subsection*{Tau-leaping scheme}
+Why? \[ X(t + \tau) = X(t) + \sum_{k=1}^{k}P(a_j, \tau)V_j \]
+$P(a_j, \tau)$ is a Poisson distributino with parameter $\lambda = a_j \tau$
+
+\subsection*{Chemical Langevin Equation}
+
+
+\end{document}

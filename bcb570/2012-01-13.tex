@@ -1,0 +1,81 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 13 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Enzyme kinetics}
+In our previous discussions, we determined that (under the Law of Mass Action) the model \[ E + S \rightarrow P + E \] does not fit empirical data very well. 
+Michaelis and Menton developed the model \[ \ce{E + S <=>[\ce{k_1^{+}}][k_1^{-}] C \xrightarrow{k_2} P + E} \] which fits experimental results much better.
+By performing equilibrium analysis, we concluded that the rate of the reaction is \[ V = \frac{dp}{dt} = \frac{V_{max}\cdot [S]}{K_D + [S]} \]
+
+However, this still assumed that $ \frac{d}{dt}[S] \approx 0 $...which is a problem.
+If we assume that enzymes are primarily occupied with binding substrate, then instead we can set $ \frac{d}{dt}[C] \approx 0 $...that is, the concentration of the substrate/enzyme complex remains more or less consistent.
+From this, we can derive the following.
+\[ \frac{dc}{dt} = k_1^{+}[S][E] - (k_1^{-} + k_2)[C] \]
+Since $\frac{dc}{dt} \approx 0$, we have
+\[ k_1^{+}[S][E] = (k_1^{-} + k_2)[C] \]
+\[ [C] = \frac{k_1^{+}}{k_1^{-} + k_2}[S][E] \]
+
+We are interested in \[ V = \frac{dp}{dt} = k_2 [C] \] in terms of $[S]$.
+\[ [C] = \frac{k_1^{+}}{k_1^{-} + k_2}[S](e_0 - [C]) = \frac{e_0[S]}{\frac{k_1^{+}}{k_1^{-} + k_2} + [S]} = \frac{e_0[S]}{K_M + [S]} \]
+
+Therefore, \[ V = \frac{dp}{dt} = k_2\frac{e_0[S]}{K_M + [S]} = \frac{V_{max} \cdot [S]}{K_M + [S]} \]
+
+\section*{Inhibition}
+\begin{mitemize}
+  \item competitive
+  \item allosteric
+\end{mitemize}
+You can distinguish these two by changing the substrate concentration and observing the maximum reaction velocity (rate).
+
+\subsection*{Competitive inhibition}
+\[ \ce{E + S <=>[\ce{k_1^{+}}][k_1^{-}] C_1 \xrightarrow{k_2} P + E} \]
+\[ \ce{E + I <=>[\ce{k_3^{+}}][k_3^{-}] C_2} \]
+
+Let's assume $\frac{dc_1}{dt} \approx 0$ and $\frac{dc_2}{dt} \approx 0$.
+\[ [C_1] = \frac{k_i e_0 [S]}{K_M [I] + k_i [S] + K_m k_i} \]
+\[ [C_2] = \frac{K_m e_0 [I]}{K_M [I] + k_i [S] + K_m k_i} \]
+\[ k_i = \frac{k_3^{-}}{k_3^{+}} \text{\hspace{25px}(dissociation constant of inhibitor)} \]
+\[ k_m = \frac{k_2 + k_1^{-}}{k_1^{+}} \]
+\[ V = \frac{dp}{dt} = k_2 [C_1]\frac{k_2 e_0 [S] k_i}{k_m [I] + k_i [S] + k_m k_i} = \frac{[S] V_{max}}{[S] + k_m\left(1 + \frac{[I]}{k_i}\right)} \]
+\[ V = \frac{V_{max} \cdot [S]}{[S] + k_m\left(1 + \frac{[I]}{k_i}\right)} \]
+If we saturate with substrate, we will still get maximum velocity eventually.
+
+\subsection*{Allosteric inhibition}
+\[ V = \frac{V_{max}}{1 + \frac{i}{k_i}}\cdot\frac{[S]}{k_m + [S]} \]
+In allosteric inhibition, the maximum velocity is reduced.
+
+\end{document}

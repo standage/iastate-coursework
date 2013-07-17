@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw04.aux
+rm hw04.log
+rm hw04.out
+rm hw04.synctex.gz

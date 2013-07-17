@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 18 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Enzyme inhibition}
+
+The Michaelis-Menton rate of a reaction was given by \[ V = \frac{V_{max} \cdot s}{K_m + s} \]
+
+We can rewrite this as \[ \frac{1}{V} = \frac{K_m + s}{V_{max} \cdot s} = \frac{K_m}{V_{max}}\cdot\frac{1}{s} + \frac{s}{s}\cdot\frac{1}{V_{max}} \]
+
+The first term (of the last bit) goes to 0 close to the origin of the 1/V x 1/s plot, enabling the estimation of $K_m$.
+
+
+\section*{Cooperativity}
+
+%[ \ce{E + S <=>[\ce{k_1^{+}}][k_1^{-}] C \xrightarrow{k_2} P + E} \]
+
+\[ \ce{E + S <=> C_1 \rightarrow E + P} \]
+\[ \ce{C_1 + S <=> C_2 \rightarrow C_1 + P} \]
+\[ \ce{C_2 + S <=> C_3 \rightarrow C_2 + P} \]
+
+model
+
+\[ \ce{C_{n-1} + S <=> C_n \rightarrow C_{n-1} + P} \]
+
+By using the quasi-steady-state assumption, we get \[ V = \frac{dp}{dt} = \frac{V_{max} \cdot S^{n}}{K^{n}_{m} + S^{n}} \]
+
+Hill's rate equation
+
+For $n$ large enough, $V$ in Hill's equation becomes a sigmoidal curve
+
+\section*{xpp}
+
+\[ \frac{dc}{dt} = k_1(a_0 - c - 2d) - k_2 c - 2(k_3 c^2  k_4 d) \]
+\[ d' = k_3 c^2 - k_4 d \]
+
+\begin{verbatim}
+#kinetics.ode
+#simple enzyme model to fit some data
+c'=k1*(a0-c-2d)*(b0-c-2*d)-k2*c-2*(k3*c*c-k4*d)
+d'=k3*c*c-k4*d
+init c=0, d=0
+\end{verbatim}
+
+\end{document}

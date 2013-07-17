@@ -1,0 +1,201 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 570}
+\newcommand{\instructor}{Matzavinos}
+\newcommand{\assignment}{Homework 3}
+\newcommand{\duedate}{Mar 30, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\setcounter{MaxMatrixCols}{24}
+\begin{document}
+
+\subsection*{II.11}
+\begin{enumerate}[a)]
+  \item The stoichiometric matrix $S$ for this system will have 3 columns
+  \item $S$ will have 5 rows
+  \item \[ S =
+\begin{bmatrix}
+-1 &  0 &  0 \\
+-1 &  0 & -1 \\
+ 1 & -2 &  0 \\
+ 0 &  1 & -1 \\
+ 0 &  0 &  3 \\
+\end{bmatrix} \]
+\end{enumerate}
+
+
+\subsection*{II.12}
+\begin{enumerate}[a)]
+  \item The reversible reaction $v_4$ was split into 2 irreversible reactions $v_{4f}$ and $v_{4r}$. There are therefore a total of 6 compounds (ignoring $A$ and $AP$) and 11 reactions, but the matrix below is $6 \times 10$ since the last reaction ($v_7$) only involves the compounds we are ignoring. \[ S =
+\begin{bmatrix}
+% 0 & 0  & 0  & 1  & -1 & 0  & 0  & -1 & -1 & 0  & 1  \\
+% 0 & 0  & 0  & -1 & 1  & 0  & 0  & 1  & 1  & 0  & -1 \\
+1 & 0  & 0  & -1 & 0  & 0  & 0  & 0  & 0  & 0  \\
+0 & 0  & 0  & 1  & -1 & -1 & 0  & 0  & 0  & 0  \\
+0 & -1 & 0  & 0  & 1  & 0  & -1 & 1  & 0  & 0  \\
+0 & 0  & 0  & 0  & 0  & 1  & 1  & -1 & -1 & 0  \\
+0 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & -1 \\
+0 & 0  & -1 & 0  & 0  & 0  & 0  & 0  & 0  & 1  \\
+\end{bmatrix}
+\]
+  \item In the following equations, let $x_i := [x_i]$ for simplicity.
+\begin{eqnarray}
+\frac{dx_1}{dt} &=& b_1 - v_1 x_1                               \nonumber \\
+\frac{dx_2}{dt} &=& v_1 x_1 - v_2 x_2 - v_3 x_4                 \nonumber \\
+\frac{dx_3}{dt} &=& v_2 x_2 + v_{4r} x_4 - b_2 x_3 - v_{4f} x_3 \nonumber \\
+\frac{dx_4}{dt} &=& v_3 x_2 + v_{4f} x_3 - v_{4r} x_4 - v_5 x_4 \nonumber \\
+\frac{dx_5}{dt} &=& v_5 x_4 - v_6 x_5                           \nonumber \\
+\frac{dx_6}{dt} &=& v_6 x_5 - b_3                               \nonumber
+\end{eqnarray}
+\end{enumerate}
+
+
+\subsection*{II.26}
+\begin{enumerate}[a)]
+  \item \begin{itemize}
+          \item \[ S =
+            \begin{bmatrix}
+            1 & -1 & -1 & 1  & 0  & 0 \\
+            0 & 0  & 1  & -1 & -1 & 1 \\
+            \end{bmatrix} \]
+          \item \[ null(S) = 
+            \begin{bmatrix}
+            0.5682 & -0.5682 & -0.1023 &  0.1023 \\
+            0.1955 & -0.1955 & -0.5432 &  0.5432 \\
+            0.6864 &  0.3136 &  0.2205 & -0.2205 \\
+            0.3136 &  0.6864 & -0.2205 &  0.2205 \\
+            0.1864 & -0.1864 &  0.7205 &  0.2795 \\
+           -0.1864 &  0.1864 &  0.2795 &  0.7205 \\
+          \end{bmatrix} \]
+          \item \[ patmat(S) =
+            \begin{bmatrix}
+            1 & 0 & 0 & 1 & 0 \\
+            1 & 0 & 0 & 0 & 1 \\
+            0 & 1 & 0 & 1 & 0 \\
+            0 & 1 & 0 & 0 & 1 \\
+            0 & 0 & 1 & 1 & 0 \\
+            0 & 0 & 1 & 0 & 1 \\
+            \end{bmatrix} \]
+        \end{itemize}
+  \item \begin{itemize}
+          \item \[ S =
+          \begin{bmatrix}
+          1 & -1 & -1 & 0  & 0 \\
+          0 & 0  & 1  & -1 & 1 \\
+          \end{bmatrix} \]
+          \item \[ null(S) = 
+            \begin{bmatrix}
+              0.7370 & -0.2024 &  0.2024 \\
+              0.2132 & -0.5383 &  0.5383 \\
+              0.5237 &  0.3359 & -0.3359 \\
+              0.2619 &  0.6680 &  0.3320 \\
+             -0.2619 &  0.3320 &  0.6680 \\
+            \end{bmatrix} \]
+          \item \[ patmat(S) =
+            \begin{bmatrix}
+            1 & 0 & 1 \\
+            1 & 0 & 0 \\
+            0 & 0 & 1 \\
+            0 & 1 & 1 \\
+            0 & 1 & 0 \\
+            \end{bmatrix} \]
+        \end{itemize}
+  \item \begin{itemize}
+          \item \[ S =
+            \begin{bmatrix}
+            -1 & 0  & 0  & 0  & 0  & 0  & 1 & -1 & 0  & 0 & 0  & 0 \\
+            1  & -1 & -1 & 1  & 0  & 0  & 0 & 0  & 0  & 0 & 0  & 0 \\
+            0  & 1  & 0  & 0  & 0  & 0  & 0 & 0  & -1 & 1 & 0  & 0 \\
+            0  & 0  & 1  & -1 & -1 & 1  & 0 & 0  & 0  & 0 & 0  & 0 \\
+            0  & 0  & 0  & 0  & 1  & -1 & 0 & 0  & 0  & 0 & -1 & 1 \\
+            \end{bmatrix} \]
+          \item \[ null(S) = 
+            \begin{bmatrix}
+            -0.0979 &  0.4174 & -0.4174 &  0.1164 & -0.1164 &  0.1721 & -0.1721 \\
+             0.1638 &  0.2968 & -0.2968 &  0.2742 & -0.2742 & -0.2133 &  0.2133 \\
+             0.1046 &  0.2603 & -0.2603 & -0.4798 &  0.4798 &  0.0459 & -0.0459 \\
+             0.3663 &  0.1397 & -0.1397 & -0.3220 &  0.3220 & -0.3395 &  0.3395 \\
+             0.4741 &  0.0120 & -0.0120 & -0.0156 &  0.0156 &  0.4391 & -0.4391 \\
+             0.7357 & -0.1086 &  0.1086 &  0.1422 & -0.1422 &  0.0537 & -0.0537 \\
+            -0.0489 &  0.7087 &  0.2913 &  0.0582 & -0.0582 &  0.0861 & -0.0861 \\
+             0.0489 &  0.2913 &  0.7087 & -0.0582 &  0.0582 & -0.0861 &  0.0861 \\
+             0.0819 &  0.1484 & -0.1484 &  0.6371 &  0.3629 & -0.1066 &  0.1066 \\
+            -0.0819 & -0.1484 &  0.1484 &  0.3629 &  0.6371 &  0.1066 & -0.1066 \\
+            -0.1308 &  0.0603 & -0.0603 & -0.0789 &  0.0789 &  0.6927 &  0.3073 \\
+             0.1308 & -0.0603 &  0.0603 &  0.0789 & -0.0789 &  0.3073 &  0.6927 \\
+            \end{bmatrix} \]
+          \item \[ patmat(S) =
+            \begin{bmatrix}
+            0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+            0 & 0 & 1 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 1 & 0 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 \\
+            0 & 0 & 0 & 0 & 1 & 0 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 1 & 0 & 0 & 1 \\
+            1 & 0 & 1 & 0 & 0 & 0 & 1 & 0 \\
+            1 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 1 & 0 & 0 & 0 & 0 & 0 & 1 \\
+            0 & 1 & 1 & 0 & 0 & 0 & 0 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 1 & 1 & 0 \\
+            0 & 0 & 0 & 0 & 0 & 1 & 0 & 1 \\
+            \end{bmatrix} \]
+        \end{itemize}
+  \item .\newline \vspace{125px}
+\end{enumerate}
+
+
+\subsection*{II.27}
+\begin{enumerate}[a)]
+  \item The following network has 3 extreme pathways. \[ S =
+\begin{bmatrix}
+1 & -1 & -1 & -1 & 0  & 0  & 0  & 0  \\
+0 & 1  & 0  & 0  & -1 & 0  & 0  & 0  \\
+0 & 0  & 1  & 0  & 0  & -1 & 0  & 0  \\
+0 & 0  & 0  & 1  & 0  & 0  & -1 & 0  \\
+0 & 0  & 0  & 0  & 1  & 1  & 1  & -1 \\
+\end{bmatrix} \]\newline \vspace{100px}
+  \item The following network has 9 extreme pathways. \[ S =
+\begin{bmatrix}
+1  & -1 & -1 & -1 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
+0  & 1  & 0  & 0  & -1 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
+0  & 0  & 1  & 0  & 0  & -1 & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
+0  & 0  & 0  & 1  & 0  & 0  & -1 & 0  & 0  & 0  & 0  & 0  & 0  & 0  \\
+0  & 0  & 0  & 0  & 1  & 1  & 1  & -1 & -1 & -1 & 0  & 0  & 0  & 0  \\
+0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & 0  & 0  & -1 & 0  & 0  & 0  \\
+0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & 0  & 0  & -1 & 0  & 0  \\
+0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & 0  & 0  & -1 & 0  \\
+0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 0  & 1  & 1  & 1  & -1 \\
+\end{bmatrix} \]\newline \vspace{100px}
+  \item For $n = 3$ there are 27 extreme pathways. In general, the number of extreme pathways in a network based on this model is $3^n$. In general, you expect the number of extreme pathways to grow more subtly as the number of reactions increases.
+\end{enumerate}
+
+\end{document}

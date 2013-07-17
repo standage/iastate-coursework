@@ -1,0 +1,56 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{GDCB 511}
+\newcommand{\instructor}{Yin/Yang}
+\newcommand{\assignment}{Problem Set 3}
+\newcommand{\duedate}{Feb 27, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+\hspace{15px}
+\vspace{450px}
+
+\begin{enumerate}[a)]
+
+  \item Acetylation of H4K8, H3K9, and H3K14 enable IFN-$\beta$ expression by recruiting SWI/SNF (BRG1) and TFIID (TAF1 or TAF250) via bromodomain interactions.
+  \item Phosphorylation of H3S10 enhances acetylation at H3K14.
+  \item Methylation of H3K4 (by Set1) leads to recruitment of TFIID (TAF3 or TAF110) via the PHD domain, which activates gene expression.
+  \item Biochemically, one could perform a pull-down experiment. If a GST/CHAT complex could pull down an H3 methylated at R2, this would confirm the recruitment \textit{in vitro}. Genetically, one could mutate the H3R2 and compare gene expression with this mutant to gene expression with the wild type. If gene expression with the mutant H3 were significantly reduced, this would confirm the recruitment \textit{in vivo}.
+  \item \begin{enumerate}[i.]
+    \item Deacetylation of H4K8, H3K9, and H3K14 would prevent recruitment of SWI/SNF and TFIID, and therefore prevent subsequent IFN-$\beta$ expression.
+    \item Blocking of transcription factor binding would prevent the recruitment of the transcription holoenzyme and effectively shut down expression.
+    \item Methylation of H3K9 leads to recruitment of HP1 and SUV39H1, which induces heterochromatin formation and shuts down expression.
+  \end{enumerate}
+
+\end{enumerate}
+
+\end{document}

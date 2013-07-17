@@ -1,0 +1,78 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 567, 11:00am T/Th}
+\rhead{Lecture Notes: August 26, 2010}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Pseudocode}
+\begin{mitemize}
+\item Assignment: $a \leftarrow b$
+\item Arithmetic: $+ - \cdot /$
+\item Conditionals: if (maybe case as well)
+\item For: for $i \leftarrow a$ to $b$
+\item While: while
+\item Array access: $F_1, F_{i,j}$
+\end{mitemize}
+
+\subsection*{Example: Change Problem}
+\noindent \underline{US Change($M$)} \\
+\noindent INPUT: an amount of money $M$, given in cents \\
+\noindent OUTPUT: the smallest amount of
+\begin{mitemize}
+\item quarters $q$
+\item dimes $d$
+\item nickels $n$
+\item pennies $p$
+\end{mitemize}
+such that $M = .25q + .1d + .05n + .01p$ and $q+d+n+p$ is minimized.
+\begin{menumerate}
+\item while $M > 0$
+\item \hspace{24pt} $c \leftarrow$ largest coin such that val$(c) \leq M$ 
+\item \hspace{24pt} $M \leftarrow M - $val$(c)$
+\item \hspace{24pt} GiveCoin(c)
+\end{menumerate}
+
+\section*{Towers of Hanoi}
+\noindent \underline{Hanoi($n$, fromPeg, toPeg)}
+\begin{menumerate}
+\item if $n = 1$
+\item \hspace{24pt} output "Move disk from \$fromPeg to \$toPeg"
+\item \hspace{24pt} return
+\item else
+\item \hspace{24pt} unusedPeg = 6 - toPeg - FromPeg
+\item \hspace{24pt} Hanoi($n - 1$, fromPeg, unusedPeg)
+\item \hspace{24pt} Move(fromPeg, toPeg)
+\item \hspace{24pt} Hanoi($n - 1$, unusedPeg, toPeg)
+\end{menumerate}
+
+\end{document}

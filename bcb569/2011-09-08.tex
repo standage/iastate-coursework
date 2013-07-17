@@ -1,0 +1,64 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: 8 Sep, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Conversion between Cartesian and internal coordinates}
+
+\subsection*{Cartesian}
+\begin{mitemize}
+  \item $(x_1, y_1, z_1) \rightarrow$ atom 1
+  \item ...
+  \item ...
+  \item $(x_n, y_n, z_n) \rightarrow$ atom n
+  \item $n$ residues, $3n$ backbone atoms $\Rightarrow 3n \times 3 = 9n$ variables required to represent the structure
+  \item finding a trajectory between two structures, linear interpolation (in Cartesian space) does not guarantee backbone structure is chemically sane
+\end{mitemize}
+
+\subsection*{Internal}
+$(l_i, \theta_i, \phi_i)$
+
+\begin{mitemize}
+  \item \textit{cis}-configuration $\Rightarrow \phi = 0$
+  \item \textit{trans}-configuration $\Rightarrow \phi = 180$
+  \item $\phi = 180^{o} \Rightarrow \phi = -180^{o}$
+  \item $3n - 1$ bond lenghts, $3n - 2$ bond angles ($\theta$), $3n-3$ torsional angles ($\phi$) $\Rightarrow 3n - 1 + 3n - 2 + 3n - 3 = 9n - 6$ variables required to represent the structure; however, this is an upper limit; often bond lengths and bond angles can be treated as constant
+  \item finding trajectory between two structures, interpolation over internal coordinates guarantees backbone structure is chemically sane (does not guarantee that side chains won't collide though---this is still an open research problem)
+\end{mitemize}
+
+\section*{Empirical models and force fields}
+Modeling behavior of a protein requires 1: a model of the atoms and 2: the interactions between them. Atoms are complex, but we can ignore most of this complexity and treat an atom as a point or a ball. However, there are some properties we want to model explicitly: the mass, the charge, and the radius. Parameters required to model an atom: $(m, q, r, x, y, z, V_x, V_y, V_z)$.
+
+\end{document}

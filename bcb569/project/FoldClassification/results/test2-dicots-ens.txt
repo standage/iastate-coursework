@@ -1,0 +1,139 @@
+=== Run information ===
+
+Scheme:weka.classifiers.meta.Vote -S 1 -B "weka.classifiers.functions.LibSVM -S 0 -K 2 -D 3 -G 0.8 -R 0.0 -N 0.5 -M 40.0 -C 5.0 -E 0.001 -P 0.1 -Z" -B "weka.classifiers.lazy.KStar -B 96 -M a" -B "weka.classifiers.trees.RandomForest -I 250 -K 0 -S 1" -R MAJ
+Relation:     ProteinFoldsDicotsFeatSelect
+Instances:    311
+Attributes:   44
+              pcvA
+              pcvR
+              pcvN
+              pcvD
+              pcvC
+              pcvQ
+              pcvE
+              pcvG
+              pcvH
+              pcvI
+              pcvL
+              pcvK
+              pcvM
+              pcvF
+              pcvP
+              pcvS
+              pcvT
+              pcvW
+              pcvY
+              pcvV
+              sscC
+              sscE
+              sscH
+              dssC
+              dssE
+              dssH
+              adssCCC
+              adssCCE
+              adssCCH
+              adssCEE
+              adssCHH
+              adssECE
+              adssECH
+              adssEEC
+              adssEEE
+              adssHCH
+              phyCsativus
+              phyGmax
+              phyLjaponicus
+              phyPpersica
+              phyRcommunis
+              phySlycoparsicum
+              length
+              class
+Test mode:user supplied test set: size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Vote combines the probability distributions of these base learners:
+	weka.classifiers.functions.LibSVM -S 0 -K 2 -D 3 -G 0.8 -R 0.0 -N 0.5 -M 40.0 -C 5.0 -E 0.001 -P 0.1 -Z
+	weka.classifiers.lazy.KStar -B 96 -M a
+	weka.classifiers.trees.RandomForest -I 250 -K 0 -S 1
+using the 'Majority Voting' combination rule 
+
+
+Time taken to build model: 3.99 seconds
+
+=== Evaluation on test set ===
+=== Summary ===
+
+Correctly Classified Instances         513               56.4978 %
+Incorrectly Classified Instances       395               43.5022 %
+Kappa statistic                          0.5274
+Mean absolute error                      0.0322
+Root mean squared error                  0.1795
+Relative absolute error                 45.8067 %
+Root relative squared error             96.0089 %
+Total Number of Instances              908     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.833     0.028      0.286     0.833     0.426      0.903    a
+                 0.3       0          1         0.3       0.462      0.65     b
+                 0.593     0.019      0.686     0.593     0.636      0.787    c
+                 0.115     0.007      0.333     0.115     0.171      0.554    d
+                 1         0.008      0.417     1         0.588      0.996    e
+                 0.389     0.004      0.636     0.389     0.483      0.692    f
+                 0.917     0.085      0.621     0.917     0.741      0.916    g
+                 0.238     0.007      0.455     0.238     0.312      0.616    h
+                 0.583     0.01       0.438     0.583     0.5        0.787    i
+                 0.1       0          1         0.1       0.182      0.55     j
+                 0.44      0.006      0.688     0.44      0.537      0.717    k
+                 0.375     0.028      0.385     0.375     0.38       0.674    l
+                 0.389     0.001      0.875     0.389     0.538      0.694    m
+                 0         0.007      0         0         0          0.497    n
+                 0.4       0.002      0.5       0.4       0.444      0.699    o
+                 0.846     0.087      0.632     0.846     0.723      0.879    p
+                 0.32      0.007      0.571     0.32      0.41       0.657    q
+                 0.333     0.017      0.464     0.333     0.388      0.658    r
+                 0.529     0.029      0.519     0.529     0.524      0.75     s
+                 0.231     0.006      0.706     0.231     0.348      0.612    t
+                 0.333     0.011      0.524     0.333     0.407      0.661    u
+                 0.357     0.019      0.227     0.357     0.278      0.669    v
+                 0.44      0.019      0.393     0.44      0.415      0.71     w
+                 1         0.02       0.1       1         0.182      0.99     x
+                 0.45      0.012      0.45      0.45      0.45       0.719    y
+                 0.452     0.027      0.549     0.452     0.496      0.712    z
+                 1         0.003      0.943     1         0.971      0.998    -
+Weighted Avg.    0.565     0.034      0.593     0.565     0.544      0.765
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o   p   q   r   s   t   u   v   w   x   y   z  aa   <-- classified as
+  10   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   a = a
+   0   3   4   0   1   0   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   1   0   0   0   0   0 |   b = b
+   8   0  35   5   1   2   0   0   1   0   0   0   0   0   0   1   0   0   0   0   4   0   0   0   0   2   0 |   c = c
+  13   0   5   3   2   2   0   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0 |   d = d
+   0   0   0   0   5   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   e = e
+   2   0   1   0   2   7   0   0   0   0   0   0   0   0   0   6   0   0   0   0   0   0   0   0   0   0   0 |   f = f
+   0   0   0   0   0   0 110   1   3   0   0   2   0   2   0   0   0   0   0   0   0   0   0   0   2   0   0 |   g = g
+   0   0   0   0   0   0  12   5   0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0   3   0 |   h = h
+   0   0   0   0   0   0   5   0   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   i = i
+   0   0   0   0   0   0  12   2   2   2   0   0   1   1   0   0   0   0   0   0   0   0   0   0   0   0   0 |   j = j
+   0   0   1   0   0   0   2   1   0   0  11   1   0   2   0   1   0   1   0   0   0   1   0   0   1   3   0 |   k = k
+   0   0   0   0   0   0  12   1   0   0   2  15   0   1   1   0   0   0   1   0   0   1   0   0   3   3   0 |   l = l
+   0   0   0   0   0   0  11   0   0   0   0   0   7   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   m = m
+   0   0   0   0   0   0   6   0   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   n = n
+   0   0   0   0   0   0   2   0   0   0   0   1   0   0   2   0   0   0   0   0   0   0   0   0   0   0   0 |   o = o
+   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0 115   0   0   1   0   0   1  11   7   0   0   0 |   p = p
+   0   0   1   0   0   0   0   0   0   0   0   3   0   0   1   4   8   0   2   0   0   5   1   0   0   0   0 |   q = q
+   0   0   0   0   1   0   2   0   0   0   0   1   0   0   0   9   0  13   6   1   2   1   0   2   0   1   0 |   r = r
+   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0  11   0   4  27   4   0   1   1   0   0   2   0 |   s = s
+   2   0   1   0   0   0   0   0   0   0   0   0   0   0   0  18   0   1   9  12   0   2   3   4   0   0   0 |   t = t
+   0   0   2   0   0   0   0   1   0   0   0   4   0   0   0   1   1   5   1   0  11   2   0   0   0   4   1 |   u = u
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   2   2   0   1   5   0   2   0   1   0 |   v = v
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  12   0   0   0   0   0   0  11   2   0   0   0 |   w = w
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   2   0   0   0 |   x = x
+   0   0   0   0   0   0   3   0   0   0   0   2   0   0   0   0   0   0   1   0   0   0   0   1   9   4   0 |   y = y
+   0   0   0   0   0   0   0   0   1   0   3   8   0   0   0   3   3   1   2   0   3   2   1   0   5  28   2 |   z = z
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  50 |  aa = -
+
+

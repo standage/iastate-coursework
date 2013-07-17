@@ -1,0 +1,123 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}        % skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\assignment }
+\fancyhead[R]{\class \;- \instructor }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{Stat 430}
+\newcommand{\instructor}{Karin Dorman}
+\newcommand{\assignment}{HW 2: Sep 9, 2010}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}\author & \class\;- \instructor\\ \today & \assignment\end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+ 
+\begin{enumerate}[(a)]
+\item The marginal distributions for $X$ and $Y$ are given below.
+\[ f_X(x) = \int_0^\infty xe^{-x(y+1)}dy \]
+\[ f_Y(y) = \int_0^\infty xe^{-x(y+1)}dx \]
+\item The conditional distributions are given below.
+\[ p_{XY}(x|y) = \frac{f(x,y)}{f_Y(y)} = \frac{xe^{-x(y+1)}}{\int_0^\infty xe^{-x(y+1)}dx} \]
+\[ p_{XY}(y|x) = \frac{f(x,y)}{f_X(x)} = \frac{xe^{-x(y+1)}}{\int_0^\infty xe^{-x(y+1)}dy} \]
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+ 
+\begin{enumerate}[(a)]
+\item The probability $P(T_1 > T_2)$ is given below.
+\begin{eqnarray}
+P(T_1 > T_2) &=& \int_0^\infty P(T_1 > t_2, T_2 = t_2)dt_2                                  \nonumber \\
+             &=& \int_0^\infty P(T_1 > t_2 | T_2 = t_2)\cdot P(T_2=t_2)dt_2                 \nonumber \\
+             &=& \int_0^\infty P(T_1 > t_2 | T_2 = t_2)\cdot (\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \int_0^\infty \left( \int_{t_2}^\infty \alpha e^{-\alpha t_1}dt_1 \right)\cdot (\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \int_0^\infty (e^{-\alpha t_2})(\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \beta \int_0^\infty e^{-t_2(\alpha + \beta)}dt_2     \nonumber \\
+             &=& \beta \left[ e^{-t_2(\alpha + \beta)}\cdot -\frac{1}{\alpha + \beta}\right]_0^\infty     \nonumber \\
+             &=& -\frac{\beta}{\alpha + \beta}e^{-t_2(\alpha + \beta)}\bigg|_0^\infty     \nonumber \\
+             &=& 0 + \frac{\beta}{\alpha + \beta}\cdot 1 \nonumber \\
+             &=& \frac{\beta}{\alpha + \beta} \nonumber
+\end{eqnarray}
+\item The probability $P(T_1 > 2T_2)$ is given below.
+\begin{eqnarray}
+P(T_1 > 2T_2) &=& \int_0^\infty P(T_1 > 2t_2, T_2 = t_2)dt_2                                  \nonumber \\
+             &=& \int_0^\infty P(T_1 > 2t_2 | T_2 = t_2)\cdot P(T_2=t_2)dt_2                 \nonumber \\
+             &=& \int_0^\infty P(T_1 > 2t_2 | T_2 = t_2)\cdot (\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \int_0^\infty \left( \int_{2t_2}^\infty \alpha e^{-\alpha t_1}dt_1 \right)\cdot (\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \int_0^\infty \left(e^{-\alpha 2 t_2}\right)(\beta e^{-\beta t_2})dt_2     \nonumber \\
+             &=& \beta \int_0^\infty e^{-t_2(2\alpha + \beta)}dt_2     \nonumber \\
+             &=& \beta \left[ e^{-t_2(2\alpha + \beta)}\cdot -\frac{1}{2\alpha + \beta}\right]_0^\infty     \nonumber \\
+             &=& -\frac{\beta}{2\alpha + \beta}e^{-t_2(2\alpha + \beta)}\bigg|_0^\infty     \nonumber \\
+             &=& 0 + \frac{\beta}{2\alpha + \beta}\cdot 1 \nonumber \\
+             &=& \frac{\beta}{2\alpha + \beta} \nonumber
+\end{eqnarray}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+To find the joint distribution, we can use the formula $f_{X_1X_2}(x_1, x_2) = f(x_2|x_1)f_{X_1}(x_1)$. From the problem statement, we have
+\[ f_{X_1}(x_1) = 1\]\[ f(x_2|x_1) = \frac{1}{x_1} \]
+so the joint distribution $f_{X_1X_2}(x_1, x_2)$ is defined as follows. \[ f_{X_1X_2}(x_1, x_2) = \frac{1}{x_1}\cdot 1 = \frac{1}{x_1} \]
+With this joint distribution, we can easily obtain the marginal distributions for $X_1$ and $X_2$, as shown below.
+\[ f_{X_1} = \int_0^{x_1}\frac{1}{x_1}dx_2 = \frac{x_2}{x_1}\bigg|_{x_2=0}^{x_2=x_1} = \frac{x_1}{x_1} - 0 = 1 \]
+\[ f_{X_2} = \int_{x_2}^1\frac{1}{x_1}dx_1 = ln(x_1)\bigg|_{x_2}^{1} = 0 - ln(x_2) = -ln(x_2) \]
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Since $X$ and $Y$ are iid, the joint distribution $f_{XY}(x,y)$ can be defined as follows.
+\[ f_{XY}(x,y) = \frac{1}{2\pi}e^{-\frac{1}{2}(x^2+y^2)}  \]
+
+\noindent We can then determine the distribution of $Z = X + Y$ as follows.
+\begin{eqnarray}
+f_Z(z) &=& \int_{-\infty}^{\infty}f_{XY}(x, y=z-x)dx                                                                                                                \nonumber \\
+       &=& \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}e^{-\frac{1}{2}\left(x^2+(z-x)^2\right)}\right)dx                                                             \nonumber \\
+       &=& \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}e^{-\frac{x^2}{2}}e^{-\frac{(z-x)^2}{2}}\right)dx                                                             \nonumber \\
+       &=& \int_{-\infty}^{\infty}\left(\frac{1}{2\pi}e^{-\frac{x^2}{2}}e^{-\frac{(z^2-2xz-x^2)}{2}}\right)dx                                                       \nonumber \\
+       &=& \frac{1}{2\pi}\int_{-\infty}^{\infty}\left(e^{-\frac{z^2}{4}}e^{\left(-x-\frac{z}{x}\right)^2}\right)dx                                                  \nonumber \\
+       &=& \frac{1}{2\pi}\cdot e^{-\frac{z^2}{4}}\cdot \sqrt{\pi}\int_{-\infty}^{\infty}\left(\frac{1}{\sqrt{\pi}}\cdot e^{\left(-x-\frac{z}{x}\right)^2}\right)dx  \nonumber \\
+       &=& \frac{1}{2\sqrt{\pi}}e^{-\frac{z^2}{4}}                                                                                                                  \nonumber
+\end{eqnarray}
+
+Thus we can see that $Z \sim $\textsc{Norm}$(0,2)$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+If $X$ and $Y$ follow standard uniform densities, the joint distribution of $X$ and $Y$ is simply $f_{XY}(x,y) = 1$.
+
+\noindent We can then find the density of $Z = \frac{X}{Y}$ as follows. If $0 \leq z \leq 1$, then we have the following.
+\begin{eqnarray}
+f_{Z}(z) &=& \int_x^1 f_{XY}(zy,y)|J| \nonumber \\
+         &=& \int_x^1 2y dy           \nonumber
+\end{eqnarray}
+
+\end{document}  

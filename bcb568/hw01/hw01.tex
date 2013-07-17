@@ -1,0 +1,89 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}          % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}                    % Wide paper
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{graphicx}                  % For eps figures
+\usepackage{epsfig}                    % Alternative package
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 568}
+\newcommand{\instructor}{Brendel/Dorman}
+\newcommand{\assignment}{HW 1}
+\newcommand{\duedate}{Feb 1, 2011}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+  \item Let
+\[ S_{i,j} = \text{max} \left\{
+  \begin{array}{lr}
+    S_{i-1, j-1}+\sigma(a_i, b_j) & \\
+    S_{i-1, j-1-p}+\sigma(a_i, b_j-p) + w(p) & p = 1,2,...,j-1 \\
+    S_{i-1-q, j-1}+\sigma(a_i-q, b_j) + w(q) & p = 1,2,...,i-1
+  \end{array}
+  \right.
+\] Now imagine a score $S'_{i,j}$ for the same position that is greater than $S_{i,j}$. This means that one of
+\[
+  \begin{array}{l}
+    S_{i-1, j-1}+\sigma(a_i, b_j)     \\
+    S_{i-1, j-1-p}+\sigma(a_i, b_j-p) \\
+    S_{i-1-q, j-1}+\sigma(a_i-q, b_j)
+  \end{array}
+\] is greater than $S_{i,j}$, which is a contradiction because $S_{i,j}$ is defined as their maximum.
+
+  \begin{enumerate}[(i)]
+    \item For the recursive definition to work, we should initialize the following values. \[ S_{0,0}=0 \]\[ S_{i,0}=w(i) \]\[ S_{0,j}=w(j) \]
+    \item In this case, we should initialize the following values. \[ S_{0,0} = S_{i,0} = S_{0,j} = 0 \] We then identify the cell in the $M^{\text{th}}$ row or $N^{\text{th}}$ column that has the greatest score and perform the traceback as normal, stopping when the $0^{\text{th}}$ row or column is reached.
+    \item We fill out a matrix $N$ where $N_{i,j}$ is calculated by summing all possible one-step extensions of shorter alignments. We begin by initializing the following values. \[ S_{0,0} = S_{i,0} = S_{0,j} = 1 \] Then $N_{i,j}$ is calculated at each cell with the following recurrence. \[ N_{i,j} = N_{i-1,j-1} + \sum_{k=0}^{j-2}N_{i-1, k} + \sum_{k=0}^{i-2}N_{k, j-1} \] When $N$ is completely filled out, $N_{MN}$ will contain the total number of possible alignments.
+  \end{enumerate}
+  \item In this case, we initialize the DP table as in a-i) but we use the following recurrence to calculate $S_{i,j}$.
+\[ S_{i,j} = \text{max} \left\{
+  \begin{array}{lr}
+    S_{i-1, j-1}+\sigma(a_i, b_j) \\
+    S_{i, j-p}+w(p)               \\
+    S_{i-q, j}+w(q)
+  \end{array}
+  \right.
+\]
+  \begin{enumerate}[(i)]
+    \item This algorithm takes $O(M \cdot N)$ runtime and space to execute.
+  \end{enumerate}
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+My solution to this problem can be found at \url{https://github.com/standage/Statistics-568/tree/master/sequence_spacer.} The \texttt{ss6568} script will generate the requested number of sequences (default number of sequences is 1000, default length for each sequence is 100) given a $k^{\text{th}}$-order Markov model. Model files can be written by hand (examples are included), but the \texttt{smt568} script (included for convenience) can also be used to generate a $k^{\text{th}}$-order model file (complete with initial state probabilities and transition probabilities) given a sequence or set of sequences.
+
+\end{document}

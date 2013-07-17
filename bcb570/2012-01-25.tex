@@ -1,0 +1,78 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 25 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+If we have $n$ molecular species and $M$ reactions, the master equation is \[ \frac{d}{dt}p(x,t) = \sum_j\left[ p(x-V_j, t)a_j - p(x,t)a_j \right] \]
+
+\[ a_j(x(t)) = c_k(\#A(t))(\#B(t)) \]
+\[ c_j = \frac{k_j}{N_A \cdot \text{volume}} \]
+\[ X(t) = [\#A(t) \#B(t) \#C(t)]^T \]
+
+\subsection*{Derivation of the Gillespie algorithm}
+Let $p_0(\tau | x, t)$ be the probability that no reaction occurs in the time interval $[t, t+\tau]$ given that the state of your system is currently $X(t) = x$.
+
+Prob [ no reaction occurs in $[t, t+\tau+\Delta\tau]$]
+
+Prob [ no reaction occurs in $[t, t+\tau]]$ $\times$ Prob[ no reaction in $[t+\tau, t+\tau+\Delta\tau]$] $= p_0(\tau | x,t)\left( 1 - \sum_{j=1}^{M}a_j\Delta \tau \right)$
+
+\[ p_0(\tau + \Delta \tau | x, t) = p_0(\tau | x, t)\left( 1 - \sum_{j=1}^{M}a_j\Delta\tau \right) \]
+\[ p_0(\tau + \Delta \tau | x, t) - p_0(\tau | x, t) = -\left( \sum a_j \Delta\tau \right)p_0(\tau | x,t) \]
+\[ \frac{d}{d\tau}p_0(\tau | x,t) = -\left( \sum a_j \Delta\tau \right)p_0(\tau | x,t) \]
+\[ \frac{d}{d\tau}p_0(\tau | x,t) = -a_{sum}p_0(\tau | x,t) \]
+The solution is \[ p(\tau | x,t) = exp(-a_{sum}\tau) \]
+
+Let $p(\tau,j | x,t)\Delta \tau$ be the probability (given that $X(t) = x$) that the next reaction
+\begin{menumerate}
+  \item will be the $j^{\text{th}}$ reaction
+  \item will occur in the time interval $[t+\tau,t+\tau+\Delta\tau]$
+\end{menumerate}
+
+\[ p(\tau,j|x,t) = p_0(\tau | x,t)a_j\Delta\tau = exp(-a_{sum}\tau)a_j \Delta\tau \]
+\[ p(\tau,j|x,t) = exp(-a_{sum}\tau)a_j  \]
+
+This formula is what we want.
+\[ p(\tau,j|x,t) = \frac{a_j}{a_{sum}}\cdot a_{sum}exp(-a_{sum}\tau) \]
+
+\subsection*{The Gillespie Algorithm (for real this time)}
+\begin{menumerate}
+  \item Evaluate $a_k(X(t))$ for all $k$
+  \item Draw two independent uniform random numbers $R_1$ and $R_2$ from (0, 1)
+  \item Set $j$ to be the smallest number such that $\sum_{k=1}^{j}a_k > R_1 a_{sum}$
+  \item forget about it...we'll cover it next time
+\end{menumerate}
+
+\end{document}

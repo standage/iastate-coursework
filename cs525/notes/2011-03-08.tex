@@ -1,0 +1,79 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Mar 8, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{MPI derived types}
+Purpose is to provide an easy way to send messages that contain data that are non-contiguous in memory
+
+\subsection*{Constructors}
+\begin{mitemize}
+  \item \texttt{mpi\_type\_dup(oldtype, newtype, ierror)}; returns a value of newtype = oldtype; can be useful with building an MPI support library to avoid type confusion
+  \item \texttt{mpi\_type\_contiguous(count, oldtype, newtype, ierror)}; creates newtype that consists of count copies of oldtype
+\begin{verbatim}
+integer, parameter :: n=1024, dp=...
+double precision :: A(n)
+integer :: newtype
+!...
+!...
+call mpi_type_contiguous(n, dp, newtype, ierror)
+call mpi_type_commit(newtype)
+!...
+!...
+call mpi_send(A(1), 1, newtype, dest, comm, ierror)
+call mpi_send(A(1), n, dp, dest, comm, ierror) ! same
+!...
+!...
+call mpi_type_free(newtype)
+\end{verbatim}
+  \item \texttt{mpi\_type\_vector(count, blocklength, stride, oldtype, newtype, ierror)}; creates newtype that consists of count copies of oldtype
+\begin{verbatim}
+integer, parameter :: m = ?, n = ?, dp = ?
+double precision :: A(n, m)
+integer :: newtype
+!...
+!...
+call mpi_type_vector(m, 1, n, dp, rowtype, ierror)
+! m = # blocks
+! 1 = # of elements in each block
+! n = stride
+call mpi_type_commit(rowtype, ierror)
+!...
+!...
+call mpi_bcast(A(2,1), 1, rowtype, root, comm, ierror)
+\end{verbatim}
+\end{mitemize}
+
+\end{document}

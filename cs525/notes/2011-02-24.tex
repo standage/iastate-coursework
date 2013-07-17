@@ -1,0 +1,97 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 24, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Non-blocking point-to-point routines}
+\begin{mitemize}
+  \item faster
+  \item help avoid deadlocks
+  \item possibility of overlapping communication with computation
+\end{mitemize}
+
+\subsection*{mpi\_wait}
+\texttt{mpi\_wait(request, status, ierror)}
+
+\subsection*{mpi\_test}
+\texttt{mpi\_test(req, flag, status, ierror)}
+
+The flag argument is a logical. If \texttt{flag == true}, then the operation identified by the request has completed, otherwise it has not. Here is an example.
+\begin{verbatim}
+      ...
+      ...
+      call mpi_isend(A(1), n, dp, dest, tag, comm, request, ierror)
+      ...
+      ...
+      10 call mpi_test(request, flag, status, ierror)
+      if(.not. flag) then
+        goto 10
+      else
+        ...
+        ...
+      endif
+\end{verbatim}
+
+\subsection*{Other routines}
+\begin{mitemize}
+   \item \texttt{mpi\_waitany}
+   \item \texttt{mpi\_testany}
+   \item \texttt{mpi\_waitsome}
+   \item \texttt{mpi\_testsome}
+   \item \texttt{mpi\_testall}
+\end{mitemize}
+
+\subsection*{mpi\_waitall}
+\texttt{mpi\_waitall(count, array\_of\_requests, array\_of\_statuses, ierror)}
+
+Here is an example of how it can be used.
+\begin{verbatim}
+      ! Instead of this...
+      !do i=1, p-1
+      !  call mpi\_wait(req(i), status, ierror)
+      !enddo
+      ! ...do this
+      !
+      integer, allocatable :: array\_of\_requests(:), array\_of\_requests(:, :)
+      ...
+      ...
+      call mpi\_comm\_size(comm, p, ierror)
+      allocate(array\_of\_requests(p-1), array\_ofstatuses(mpi\_status\_size, p-1))
+      ...
+      ...
+      call mpi\_waitall(p-1, array\_of\_requests, array\_of\_statuses, ierror)
+\end{verbatim}
+
+\end{document}

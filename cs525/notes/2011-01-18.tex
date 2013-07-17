@@ -1,0 +1,87 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: January 18, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section{Performance Evaluation}
+\begin{mitemize}
+  \item flops is a standard to measure of performance; number of floating-point operations per second (flops); megaflops = mflops = 1000 flops
+  \begin{mitemize}
+    \item gigaflops
+    \item teraflops
+    \item petaflops (range of current top 500 supercomputers)
+    \item exaflops
+    \item numbers reported are usually peak theoretical flops or tests on Linpack benchmark (good implementations achieve approx. 80\% peak theoretical)
+    \item gives no evaluation of interconnect performance; example NASA-Ames 1985, Intel processors for CFD (computational fluid dynamics) application, 80\% of the processors were idle waiting for data
+  \end{mitemize}
+  \item MIPS = millions of instructions per second (non-scientific computing, banking, business, etc)
+  \item Perfect club (1990s), University of Illinois Urbana-Champagne, I/O benchmark that failed around 1995
+  \item HPC challenge benchmarks
+  \item Intel Paragon
+  \item SPEC benchmarks; unfortunately the code is proprietary
+\end{mitemize}
+
+\subsection{Some numbers as of May 2010}
+\begin{mitemize}
+  \item Intel Westmere 6 core proc
+  \begin{mitemize}
+    \item 2.66 GHz - \$1200
+    \item 2.80 GHz - \$1500 (25\% increase cost, 2\% faster)
+    \item 2.93 GHz - \$1750 (46\% increase cost, 10\% faster)
+    \item 3.33 GHz - \$2000 (67\% increase cost, 25\% faster)
+  \end{mitemize}
+  \item AMD Opteron 6000 8 core proc
+  \begin{mitemize}
+    \item 2.3 GHz - \$600
+    \item 2.4 GHz - \$850 (42\% increase cost, 4\% faster)
+  \end{mitemize}
+  \item AMD Opteron 6000 12 core proc
+  \begin{mitemize}
+    \item 2.3 GHz - \$1150
+    \item 2.4 GHz - \$1600
+  \end{mitemize}
+  \item NVIDIA S2070 (GPU)
+  \begin{mitemize}
+    \item 2.3 GHz - \$3450 (programming model is not clear)
+  \end{mitemize}
+\end{mitemize}
+
+\subsection{Amdahl's Law}
+\begin{mitemize}
+  \item From 1970s: If 10\% of a program is serial, and the other 90\% can be perfectly parallelized, and the program runs in 100 seconds, then the runtime is \[ \text{Time} = 10 + \frac{90}{p} \] So no matter how much we increase $p$, the best runtime is still 10 seconds.
+  \item From 1980s: For most applications, the percentage of time spent in serial portion $T_S \rightarrow 0$ as the problem size increases. 
+\end{mitemize}
+
+\end{document}

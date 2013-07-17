@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw01.aux
+rm hw01.log
+rm hw01.out
+rm hw01.synctex.gz

@@ -1,0 +1,63 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 20 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Gillespie Method}
+
+\subsection*{Nearest neighbor: random walk on a lattice}
+We assume that the transition probability from site $i$ to site $j$ is given by the Poisson process  \[  W_{ij}\Delta t\]
+
+Master equation: We are interested in the probability $p(x, t)$ of the particle being at site $x$ at time $t$.
+
+\[ p(x, t + \Delta t) = p(x, t)(1 - W_{x,(x+1)}\Delta t - W_{x,(x-1)} \Delta t) + P(x-1, t)w_{x-1,x}\Delta t + P(x+1, x)W_{x+1,x}\Delta t \]
+\[ P(x, t+\Delta t) - P(x,t) = -P(x,t)W_{x,x+1}\Delta t - P(x,t)W_{x,x-1}\Delta t + P(x+1, t)W_{x+1, x}\Delta t + P(x-1, t)W_{x-1,x}\Delta t \]
+\[ \frac{P(x, t+\Delta t)-P(x,t)}{\Delta t} = -\sum_{k}P(x,t)W_{x,k} + \sum_{k}P(k,t)W_{k,x} \]
+
+If we let $\Delta t \rightarrow 0$, we have 
+\[ \frac{d}{dt}P(x,t) = \sum_{k}(P(k,x)W_{k,x} - P(x,t)W_{x,k}) \]
+This is what is referred to as the Master equation.
+
+\subsection*{Stochastic chemical kinetics}
+In deterministic chemical kinetics we represent the state of te system by the concentrations of the various molecular species involved.
+In stochastic chemical kinetics, the state of the system is represented by a vector \[ X(t) = [x_1(t) x_2(t) ... x_3(t)]^T \]
+
+\[ A + B \rightarrow C + D \]
+\[ X(t) = [A(t) B(t) C(t) D(t)]^T \]
+\[ [11 20 0 0]^T \rightarrow [10 19 1 1]^T \rightarrow [9 18 2 2]^T \]
+
+
+\end{document}

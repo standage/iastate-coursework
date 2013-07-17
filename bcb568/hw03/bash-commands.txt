@@ -1,0 +1,8 @@
+# 1.
+../sequence_spacer/ss568 --n 5000 uniform.model > random_sequences.fasta
+./waiting_time < random_sequences.fasta ATG > waiting_times_atg.txt
+
+# 2.
+./nucleotides_to_yr < random_sequences.fasta > random_sequences_yr.fasta
+./waiting_time < random_sequences_yr.fasta YRYR > waiting_times_yryr.txt
+./waiting_time < random_sequences_yr.fasta RYRR > waiting_times_ryrr.txt

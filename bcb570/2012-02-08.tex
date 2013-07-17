@@ -1,0 +1,60 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 8 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Applications of elementary flux modes, extreme pathways}
+\begin{menumerate}
+  \item engineer a network; e.g., optimize the production of a compound
+  \item ``attack" a network
+\end{menumerate}
+
+Equilibrium fluxes can be expressed as \[ v = c_1 v_1 + c_2 v_2 + ... + c_r v_r \] where $S v_k = 0$ (we'll call this Eqn 1).
+
+We start with the equation $S v = 0$. We decompose $v$ as \[ \begin{bmatrix} v_{rev} \\ v_{irr} \end{bmatrix} \] where the two subvectors correspond to the reversible and irreversible reactions in the network. We are interested in solutions to Eqn 1 that satisfy \[ v_{irr} \geq 0 \] That is, we constrain solutions so that coefficients associated with irreversible reactions are positive. Furthermore, we focus on solutions of Eqn 1 of the form \[ v = \sum_{k \in rev} c_k v_k + \sum_{k \in irr} \lambda_k v_k \] where $\lambda_k \geq 0$ and $c_k \in \mathbb{R}$.
+
+A \emph{flux mode} is all vectors of the form \[ \lambda v^* \] where $v^*$ satisfies the 3 conditions just described.
+\begin{menumerate}
+  \item $S v^* = 0$
+  \item $v^*_{irr} \geq 0$
+  \item $\lambda > 0$
+\end{menumerate}
+
+An \emph{elementary flux mode} is a flux mode that cannot be further decomposed as a sum of other flux modes (not a proper basis since they are not necessarily linearly independent).
+
+An \emph{extreme pathway} is an elementary flux mode where all reversible reactions are decomposed to two irreversible reactions, increasing the dimensionality of the solution space and constraining it to the non-negative space.
+
+\end{document}

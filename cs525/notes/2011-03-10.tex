@@ -1,0 +1,62 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Mar 10, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{MPI Derived Data Types}
+Sending data not contiguous in memory
+
+\subsection*{Constructors}
+\begin{mitemize}
+  \item \texttt{mpi\_type\_dup}
+  \item \texttt{mpi\_type\_contiguous(count, oldtype, newtype, ierror)}
+  \item \texttt{mpi\_type\_vector(count, blocklength, stride, oldtype, newtype, ierror)}; using blocklength=2 does not send two rows
+  \item \texttt{mpi\_type\_hvector}; deprecated, don't use
+  \item \texttt{mpi\_type\_create\_hvector}; probably will never use
+  \item \texttt{mpi\_type\_indexed}(count, arrayOfBlockLengths, arrayOfDisplacements, oldtype, newtype, ierror)
+  \item \texttt{mpi\_type\_indexed\_block}
+  \item \texttt{mpi\_type\_hindexed}
+  \item \texttt{mpi\_type\_create\_struct(count, arrayOfBlockLengths, arrayOfDisplacements, arrayOfTypes, newtype, oldtype, ierror)}
+\end{mitemize}
+
+\section*{Schedule}
+Week before finals...
+\begin{menumerate}
+  \item Tuesday: written final exam
+  \item Thursday: start semester project presentations (20 minutes each)
+\end{menumerate}
+We will have more presentations Friday and maybe Monday of finals week. The written portion is due Wednesday at 5pm in 217 Durham.
+
+\end{document}

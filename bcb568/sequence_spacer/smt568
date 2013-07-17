@@ -1,0 +1,162 @@
+#!/usr/bin/env perl
+
+# Pragmas
+use strict;
+use warnings;
+
+# Libraries
+use Bio::SeqIO;
+use Getopt::Long;
+use List::Util qw(sum);
+
+# Command line usage
+my $usage = "
+[SpaceModelTrainer568 Usage]: ./smt568 [options] training_seq_file1 (file2 ...)
+  --help               Print this usage statement and exit
+  --order=INT          Order of the Markov model to train (default=0)
+  --outfile=STRING     Print output to specified model file; Output prints to 
+                       terminal (STDOUT) when no output file specified
+
+Note: You can specify as many training sequence files (in Fasta format) as you
+      would like following the option settings.
+
+";
+
+# Specify option defaults
+my $help    = '';
+my $order   = 0;
+my $outfile = '';
+
+# Parse options from command line
+GetOptions
+(
+  'help'      => \$help,
+  'order=i'   => \$order,
+  'outfile=s' => \$outfile,
+);
+if($help)
+{
+  printf(STDERR $usage);
+  exit();
+}
+if($outfile)
+{
+  close(STDOUT);
+  open(STDOUT, ">", $outfile) or die("[SpaceModelTrainer568] Error: cannot open output file '$outfile' $!");
+}
+if($order < 0)
+{
+  printf(STDERR "[SpaceModelTrainer568] Error: must provide a non-negative Markov order %s", $usage);
+  die();
+}
+if(scalar(@ARGV) ==0)
+{
+  printf(STDERR "[SpaceModelTrainer568] Error: must provide at least one Fasta file with training sequence(s)\n %s", $usage);
+  die();
+}
+
+# Initialize the counts to 0
+my $initial_state_counts = {};
+my $transition_counts    = {};
+my $valid_sequences = 0;
+my $total_nucleotides = 0;
+my $ignored_sequences = 0;
+if($order > 0)
+{
+  foreach my $k_initial_nucleotides( c( $order, qw(A C G T) ) )
+  {
+    $initial_state_counts->{ $k_initial_nucleotides }     = 0;
+    $transition_counts->{ $k_initial_nucleotides }->{ A } = 0;
+    $transition_counts->{ $k_initial_nucleotides }->{ C } = 0;
+    $transition_counts->{ $k_initial_nucleotides }->{ G } = 0;
+    $transition_counts->{ $k_initial_nucleotides }->{ T } = 0;
+  }
+}
+
+# Count the initial states and state transitions
+while( my $infile = shift(@ARGV) )
+{
+  my $input_stream = Bio::SeqIO->new( -file => $infile, -format => 'Fasta' );
+  while( my $sequence = $input_stream->next_seq )
+  {
+    my $seqstr = uc($sequence->seq);
+    if($seqstr =~ m/[^ACGT]/)
+    {
+      $ignored_sequences++;
+      next;
+    }
+    $total_nucleotides += $sequence->length;
+    # If it's a 0-order model, just grab nucleotide counts
+    if($order == 0)
+    {
+      $transition_counts->{ '' }->{ A } += $seqstr =~ tr/A//;
+      $transition_counts->{ '' }->{ C } += $seqstr =~ tr/C//;
+      $transition_counts->{ '' }->{ G } += $seqstr =~ tr/G//;
+      $transition_counts->{ '' }->{ T } += $seqstr =~ tr/T//;
+    }
+    # Otherwise, walk along the sequence and count initial state and transitions
+    else
+    {
+      my $previous = substr($seqstr, 0, $order);
+      $initial_state_counts->{ $previous } += 1;
+      $seqstr = substr($seqstr, $order);
+      while(length($seqstr) > 0)
+      {
+        my $next_nucleotide = substr($seqstr, 0, 1);
+        $transition_counts->{ $previous }->{ $next_nucleotide } += 1;
+        $previous = substr($previous, 1) . $next_nucleotide;
+        $seqstr = substr($seqstr, 1);
+      }
+    }
+    $valid_sequences++;
+  }
+}
+printf(STDERR "[SpaceModelTrainer568] Processed %d sequences\n", $valid_sequences);
+if($ignored_sequences > 0)
+{
+  printf(STDERR "[SpaceModelTrainer568] Warning: ignored %d sequences containing invalid characters\n", $ignored_sequences);
+}
+
+if($valid_sequences == 0)
+{
+  printf(STDERR "[SpaceModelTrainer568] Error: no valid sequences were provided for training\n");
+  die();
+}
+
+# Begin output--specify Markov order
+printf("##markov_order=%d\n", $order);
+
+# Print out initial state probabilities
+printf("\n#Initial state probabilities\n");
+foreach my $initial_state( sort(keys(%$initial_state_counts)) )
+{
+  my $count = $initial_state_counts->{ $initial_state };
+  my $initial_state_probability = $count / $valid_sequences;
+  printf("%s\t%.10f\n", $initial_state, $initial_state_probability);
+  if($count == 0)
+  {
+    printf(STDERR "[SpaceModelTrainer568] Warning: initial state '%s' was not found in training sequence(s)\n", $initial_state);
+  }
+}
+
+# Print out state transition probabilities
+printf("\n#State transition probabilities\n");
+foreach my $previous_k_nucleotides( sort(keys(%$transition_counts)) )
+{
+  my $norm = sum( values( %{$transition_counts->{ $previous_k_nucleotides }} ) );
+  foreach my $nucleotide( qw(A C G T) )
+  {
+    my $n_count = $transition_counts->{ $previous_k_nucleotides }->{ $nucleotide };
+    my $n_prob = $n_count / $norm;
+    printf("%s\t%s\t%.10f\n", $previous_k_nucleotides, $nucleotide, $n_prob);
+    if($n_count == 0)
+    {
+      printf(STDERR "[SpaceModelTrainer568] Warning: transition from '%s' to '%s' was not found in training sequence(s)\n", $previous_k_nucleotides, $nucleotide);
+    }
+  }
+}
+
+# Code golf example at http://www.perlmonks.org/?node_id=75261
+# See explanation on the following thread
+# http://stackoverflow.com/questions/4736626/generate-all-ordered-combinations-of-length-k-in-perl
+sub c{my$n=-1+shift;$n?map{my$c=$_;map$c.$_,c($n,@_)}@_:@_}

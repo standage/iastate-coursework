@@ -1,0 +1,184 @@
+choose(2,1)
+choose(2,2)
+choose(1,2)
+choose(3,2)
+choose(4,2)
+choose(5,2)
+choose(6,2)
+quit()
+exon_counts <- scan("hg61-numexons.txt", integer)
+exon_counts <- scan("hg61-numexons.txt", integer(0))
+hist(exon_counts)
+exon_counts[<100]
+exon_counts[exon_counts < 100]
+hist(exon_counts[exon_counts < 100])
+hist(exon_counts[exon_counts > 100])
+hist(exon_counts[exon_counts < 100])
+length(exon_counts)
+?hist
+hist(exon_counts[exon_counts < 100], border="red")
+length(exon_counts[exon_counts >= 100])
+length(exon_counts[exon_counts >= 256])
+hist(exon_counts[exon_counts < 100], border="red", main="# Exons per Gene", xlab="# Exons", ylab="# Genes")
+hist(exon_counts[exon_counts < 100], border="red", col="blue", main="# Exons per Gene", xlab="# Exons", ylab="# Genes")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene", xlab="# Exons", ylab="# Genes")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene", xlab="# Exons", ylab="Frequency")
+png("hg61-numexons.png")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene", xlab="# Exons", ylab="Frequency")
+dev.off()
+exon_counts <- scan("hg62-numexons.txt", integer)
+exon_counts <- scan("hg62-numexons.txt", integer(0))
+png("hg62-numexons.png")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene", xlab="# Exons", ylab="Frequency")
+dev.off()
+png("hg62-numexons.png")
+hist(exon_counts[exon_counts < 100], border="blue", col="#eeeeff", main="# Exons per Gene (GRCh37.62)", xlab="# Exons", ylab="Frequency")
+dev.off()
+exon_counts <- scan("hg61-numexons.txt", integer(0))
+png("hg61-numexons.png")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene (GRCh37.61)", xlab="# Exons", ylab="Frequency")
+dev.off()
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene (GRCh37.61)", xlab="# Exons", ylab="Frequency")
+mean <- mean(exon_counts)
+variance <- var(exon_counts)
+size.param <- (mean^2)/(variance - mean)
+x <- seq(from=0, to=100, by=1)
+y <- dnbinom(x, mu=mean, size=size.param)
+n <- length(exon_counts[exon_counts < 100])
+y <- dnbinom(x, mu=mean, size=size.param)*n
+lines(x, y, col="blue")
+hist(exon_counts[exon_counts < 100], border="red", col="#ffeeee", main="# Exons per Gene (GRCh37.61)", xlab="# Exons", ylab="Frequency")
+y <- dpois(x, lambda=mean)*n
+lines(x, y, col="blue")
+exon_counts <- scan("hg62-numexons.txt", integer)
+exon_counts <- scan("hg62-numexons.txt", integer(0))
+length(exon_counts[exon_counts > 256])
+exon_counts <- scan("hg61-numexons.txt", integer(0))
+length(exon_counts[exon_counts > 256])
+length(exon_counts[exon_counts > 100])
+exon_counts <- scan("hg62-numexons.txt", integer(0))
+length(exon_counts[exon_counts > 100])
+quantile(exon_counts)
+exon_counts <- scan("hg61-numexons.txt", integer(0))
+quantile(exon_counts)
+rm(list=ls())
+counts.61 <- scan("hg61-numexons.txt", integer(0))#
+length(counts.61)#
+length(counts.61[count.61 > 100])#
+length(counts.61[count.61 > 256])#
+quantile(counts.61)#
+#
+#
+counts.62 <- scan("hg62-numexons.txt", integer(0))#
+length(counts.62)#
+length(counts.62[counts.62 > 100])#
+length(counts.62[counts.62 > 256])#
+quantile(counts.62)
+rm(list=ls())
+counts.61 <- scan("hg61-numexons.txt", integer(0))#
+length(counts.61)#
+length(counts.61[counts.61 > 100])#
+length(counts.61[counts.61 > 256])#
+quantile(counts.61)#
+#
+#
+counts.62 <- scan("hg62-numexons.txt", integer(0))#
+length(counts.62)#
+length(counts.62[counts.62 > 100])#
+length(counts.62[counts.62 > 256])#
+quantile(counts.62)
+median(counts.61)
+rm(list=ls())
+counts.61 <- scan("hg61-numexons.txt", integer(0))#
+length(counts.61)#
+length(counts.61[counts.61 > 100])#
+length(counts.61[counts.61 > 256])#
+mean(counts.61)#
+median(counts.61)#
+var(counts.61)#
+quantile(counts.61)#
+#
+#
+counts.62 <- scan("hg62-numexons.txt", integer(0))#
+length(counts.62)#
+length(counts.62[counts.62 > 100])#
+length(counts.62[counts.62 > 256])#
+mean(counts.62)#
+median(counts.62)#
+var(counts.62)#
+quantile(counts.62)
+png("hg61-numexons.png")#
+hist(counts.61[counts.61 < 100], border="red", col="#ffeeee", main="# Exons per Gene (GRCh37.61)", xlab="# Exons", ylab="Frequency")#
+dev.off()#
+png("hg62-numexons.png")#
+hist(counts.62[counts.62 < 100], border="blue", col="#eeeeff", main="# Exons per Gene (GRCh37.62)", xlab="# Exons", ylab="Frequency")#
+dev.off()
+q()
+times <- read.table("~Desktop/times.txt")
+times <- read.table("~/Desktop/times.txt")
+points3d(times)
+points3d?
+;
+?points3d
+??points3d
+head(times$1)
+head(times)
+head(times$V1)
+scatterplot3d(times$V1, times$V2, times$V3)
+library(scatterplot3d)
+install.packages(scatterplot3d)
+install.packages("scatterplot3d")
+library(scatterplot3d)
+scatterplot3d(times$V1, times$V2, times$V3)
+times <- read.table("~/Desktop/times.txt")
+scatterplot3d(times)
+head(times)
+times <- read.table("~/Desktop/times.txt", header=T)
+head(times)
+scatterplot3d(times$Length, times$Pairs, times$Time)
+library(MASS)
+glm(Time ~ Length * Pairs, data=times)
+max(times$Pairs)
+lengths <- read.table("Desktop/big-gene-lengths.txt")
+head(lengths)
+head(lengthsV1)
+head(lengths$V1)
+hist(lengths$V1)
+length(lengths$V1)
+sum(lengths$V1 > 500000)
+sum(lengths$V1 > 1000000)
+maize <- read.table("Desktop/big-gene-lengths-maize.txt")
+hist(maize$V1)
+sum(maize$V1 > 1000000)
+sum(maize$V1 > 100000)
+sum(maize$V1 > 500000)
+q()
+kmer.hist.12 <- read.table("Desktop/reptile-kmer-hist/kmer.hist.12")
+kmer.hist.12 <- read.table("Desktop/reptile-kmer-hist/12")
+head(kmer.hist.12)
+plot(kmer.hist.12$V1, kmer.hist.12$V2)
+kmer.hist.24 <- read.table("Desktop/reptile-kmer-hist/24")
+plot(kmer.hist.24$V1, kmer.hist.24$V2)
+setwd("bcb569/homework/hw02/")
+source("sample-x.txt")
+source("sample-x.txt")
+source("sample-y.txt")
+source("sample-z.txt")
+points3d(x = sampled_points.x, y = sampled_points.y, z = sampled_points.z)
+library(basic)
+library(R.basic)
+plot3d(x = sampled_points.x, y = sampled_points.y, z = sampled_points.z)
+library(R.utils)
+install.packages("R.utils")
+library("R.utils")
+plot3d(x = sampled_points.x, y = sampled_points.y, z = sampled_points.z)
+install.packages("R.basic")
+package("basic")
+library("basic")
+library("Basic")
+library("R.basic")
+install.packages("R.basic")
+install.packages(c("R.basic"), contriburl="http://www.braju.com/R/repos/")
+install.packages("scatterplot3d")
+library("scatterplot3d")
+scatterplot3d(x = sampled_points.x, y = sampled_points.y, z = sampled_points.z)

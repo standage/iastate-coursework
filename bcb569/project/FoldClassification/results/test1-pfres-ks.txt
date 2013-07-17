@@ -1,0 +1,131 @@
+=== Run information ===
+
+Scheme:weka.classifiers.lazy.KStar -B 96 -M a
+Relation:     ProteinFoldsPFRESFeatSelect
+Instances:    311
+Attributes:   37
+              pcvA
+              pcvR
+              pcvN
+              pcvD
+              pcvC
+              pcvQ
+              pcvE
+              pcvG
+              pcvH
+              pcvI
+              pcvL
+              pcvK
+              pcvM
+              pcvF
+              pcvP
+              pcvS
+              pcvT
+              pcvW
+              pcvY
+              pcvV
+              sscC
+              sscE
+              sscH
+              dssE
+              dssH
+              adssCEE
+              adssCHH
+              adssECE
+              adssECH
+              adssEEC
+              adssEEE
+              adssEHE
+              adssHCE
+              adssHCH
+              adssHEC
+              length
+              class
+Test mode:user supplied test set: size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+KStar Beta Verion (0.1b).
+Copyright (c) 1995-97 by Len Trigg (trigg@cs.waikato.ac.nz).
+Java port to Weka by Abdelaziz Mahoui (am14@cs.waikato.ac.nz).
+
+KStar options : -B 96 -M a  
+
+Time taken to build model: 0 seconds
+
+=== Evaluation on test set ===
+=== Summary ===
+
+Correctly Classified Instances         242               63.1854 %
+Incorrectly Classified Instances       141               36.8146 %
+Kappa statistic                          0.6071
+Mean absolute error                      0.0456
+Root mean squared error                  0.1426
+Relative absolute error                 64.7366 %
+Root relative squared error             76.1432 %
+Total Number of Instances              383     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 1         0.027      0.375     1         0.545      1        a
+                 1         0          1         1         1          1        b
+                 0.55      0.006      0.846     0.55      0.667      0.96     c
+                 0.875     0          1         0.875     0.933      0.997    d
+                 0.889     0.013      0.615     0.889     0.727      0.998    e
+                 0.556     0          1         0.556     0.714      0.889    f
+                 0.864     0.065      0.633     0.864     0.731      0.971    g
+                 0.25      0          1         0.25      0.4        0.951    h
+                 0.923     0.016      0.667     0.923     0.774      0.989    i
+                 0.333     0.003      0.667     0.333     0.444      0.997    j
+                 0.625     0.024      0.357     0.625     0.455      0.895    k
+                 0.579     0.016      0.647     0.579     0.611      0.939    l
+                 1         0          1         1         1          1        m
+                 0.5       0          1         0.5       0.667      0.975    n
+                 1         0.008      0.7       1         0.824      1        o
+                 0.625     0.069      0.566     0.625     0.594      0.835    p
+                 0.917     0.022      0.579     0.917     0.71       0.934    q
+                 0.231     0.003      0.75      0.231     0.353      0.888    r
+                 0.741     0.051      0.526     0.741     0.615      0.942    s
+                 0.25      0.011      0.429     0.25      0.316      0.882    t
+                 0.5       0.011      0.5       0.5       0.5        0.936    u
+                 0.5       0.022      0.429     0.5       0.462      0.916    v
+                 0.571     0.011      0.5       0.571     0.533      0.952    w
+                 0.25      0.005      0.333     0.25      0.286      0.965    x
+                 0.25      0          1         0.25      0.4        0.837    y
+                 0.333     0.014      0.643     0.333     0.439      0.856    z
+                 0.704     0          1         0.704     0.826      0.983    -
+Weighted Avg.    0.632     0.026      0.681     0.632     0.619      0.93 
+
+=== Confusion Matrix ===
+
+  a  b  c  d  e  f  g  h  i  j  k  l  m  n  o  p  q  r  s  t  u  v  w  x  y  z aa   <-- classified as
+  6  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  a = a
+  0  9  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  b = b
+  0  0 11  0  1  0  0  0  0  0  0  0  0  0  0  0  0  0  3  0  4  0  0  0  0  1  0 |  c = c
+  0  0  0  7  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  d = d
+  1  0  0  0  8  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  e = e
+  0  0  0  0  2  5  0  0  1  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0 |  f = f
+  0  0  0  0  0  0 38  0  0  0  0  0  0  0  0  3  0  0  0  0  0  1  1  1  0  0  0 |  g = g
+  1  0  0  0  0  0  4  3  2  0  1  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0 |  h = h
+  0  0  0  0  0  0  0  0 12  0  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0 |  i = i
+  0  0  0  0  0  0  2  0  2  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  j = j
+  0  0  0  0  0  0  1  0  0  0  5  1  0  0  0  0  0  0  0  0  0  1  0  0  0  0  0 |  k = k
+  1  0  0  0  0  0  3  0  0  0  0 11  0  0  1  1  1  0  0  0  0  1  0  0  0  0  0 |  l = l
+  0  0  0  0  0  0  0  0  0  0  0  0  4  0  0  0  0  0  0  0  0  0  0  0  0  0  0 |  m = m
+  0  0  0  0  0  0  0  0  1  1  0  0  0  2  0  0  0  0  0  0  0  0  0  0  0  0  0 |  n = n
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  7  0  0  0  0  0  0  0  0  0  0  0  0 |  o = o
+  1  0  0  0  0  0  6  0  0  0  0  1  0  0  1 30  2  0  3  1  0  0  1  0  0  2  0 |  p = p
+  0  0  0  0  1  0  0  0  0  0  0  0  0  0  0  0 11  0  0  0  0  0  0  0  0  0  0 |  q = q
+  0  0  1  0  0  0  0  0  0  0  0  0  0  0  0  2  0  3  6  0  0  1  0  0  0  0  0 |  r = r
+  1  0  0  0  0  0  0  0  0  0  0  0  0  0  0  3  1  1 20  1  0  0  0  0  0  0  0 |  s = s
+  2  0  0  0  0  0  1  0  0  0  0  0  0  0  0  4  0  0  0  3  0  1  0  0  0  1  0 |  t = t
+  2  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  1  1  4  0  0  0  0  0  0 |  u = u
+  0  0  1  0  0  0  1  0  0  0  1  0  0  0  0  1  0  0  1  0  0  6  1  0  0  0  0 |  v = v
+  0  0  0  0  0  0  1  0  0  0  0  0  0  0  0  2  0  0  0  0  0  0  4  0  0  0  0 |  w = w
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  2  0  0  0  1  0  0  0  1  0  0  0 |  x = x
+  0  0  0  0  0  0  1  0  0  0  0  2  0  0  0  2  0  0  0  0  0  0  0  0  2  1  0 |  y = y
+  1  0  0  0  0  0  1  0  0  0  1  2  0  0  0  2  4  0  4  0  0  2  0  1  0  9  0 |  z = z
+  0  0  0  0  0  0  1  0  0  0  6  0  0  0  0  0  0  0  0  0  0  0  1  0  0  0 19 | aa = -
+
+

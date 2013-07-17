@@ -1,0 +1,53 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: 20 Sep, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Protein structure determination}
+
+Three things can happen depending on the relationship between the size of the object you're observing and the wavelength $\lambda$ of the radiation you're using to observe it.
+\begin{mitemize}
+  \item if $\lambda$ is significantly smaller than the size of the object, you get reflection, imaging
+  \item if $\lambda$ is significantly larger than the size of the object, you get no resolution
+  \item if $\lambda$ is close to the size of the object, you get diffraction
+\end{mitemize}
+
+The take-away message about X-ray diffraction vs NMR is this.
+\begin{mitemize}
+  \item X-rays are the cheapest, easiest way to get \AA-resolution radiation in the lab. Also, X-ray crystallography can handle very large proteins. However, you have to first crystalize your protein, and this may take a very long time---if you can even do it at all.
+  \item NMR requires quite a bit of work, but you're pretty much guaranteed to get the data you want when all is said and done. However, there is a size limitation to the proteins you can analyze with NMR.
+\end{mitemize}
+
+\end{document}

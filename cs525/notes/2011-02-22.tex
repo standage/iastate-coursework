@@ -1,0 +1,48 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Feb 22, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\subsection*{Observations}
+If an operation executes in parallel, then doubling the number of processors (while maintaining the same message size) should take about the same amount of time.
+
+\subsection*{Review}
+\begin{menumerate}
+  \item blocking point-to-point routines, use two procs (mpi\_send, mpi\_recv, mpi\_sendrecv, mpi\_sendrecv\_replace)
+  \item collective routines, use all procs (mpi\_barrier, mpi\_bcast, mpi\_reduce, mpi\_gather, mpi\_scatter, mpi\_alltoall)
+  \item non-blocking point-to-point, avoid deadlocks and allow communication/computation occur concurrently
+\end{menumerate}
+
+\end{document}

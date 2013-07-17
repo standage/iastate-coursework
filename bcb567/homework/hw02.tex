@@ -1,0 +1,130 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}		% skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+\usepackage{algorithm}
+\usepackage{algorithmic}
+ 
+\usepackage{fancyhdr} 
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 567}
+\newcommand{\instructor}{Oliver Eulenstein}
+\newcommand{\assignment}{HW 2}
+\newcommand{\duedate}{Oct ??, 2010}
+\newcommand{\unit}{4.}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\unit\arabic{prob_num})\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newcommand{\blk}{\hspace{24pt}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{itemize}
+\item \textbf{\textsc{Input}}: A set $X$ of integers representing a sequence of DNA of length $n$, where $X_0 = 0$ and $X_{k} = n$ are the ends of the sequence and $X_1, X_2, ..., X_{k-1}$ represent $k-1$ restriction enzyme cleavage sites.
+\item \textbf{\textsc{Find}}: The multiset $\Delta X$ of integers representing fragment lengths resulting from a partial restriction digest of the DNA sequence represented by $X$.
+\end{itemize}
+
+\vspace{12pt}
+
+\noindent \underline{DoPartialDigest(Set $X$)}
+\begin{menumerate}
+\item $\Delta X \leftarrow \emptyset$
+\item for $i \leftarrow $ 1 \textbf{to} $|X|$
+\item \blk for $j \leftarrow i + 1$ \textbf{to} $|X|$
+\item \blk \blk Add $X_j - X_i$ to $\Delta X$
+\item return $\Delta X$
+\end{menumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{prob_num}{5}
+\problem
+
+Using the definitions of $\oplus$ and $\ominus$, we can obtain the following equation demonstrating that the sets $U \oplus V$and $U \ominus V$ are homometric.
+\begin{eqnarray}
+\Delta(U \oplus V) &=& \{ (u+v)_i - (u+v)_j : \forall (u_v)_{i,j} \in U \oplus V \}  \nonumber \\
+                   &=& \{ (u-v)_i - (u-v)_j : \forall (u-v)_{i,j} \in U \ominus V \} \nonumber \\
+                   &=& \Delta(U \ominus V)                                           \nonumber
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{prob_num}{8}
+\problem
+
+If the set $X$ contains $n$ elements, then the multiset $\Delta X$ will contain $n \choose 2$ elements. We can therefore safely ignore sets with 1 element since ${1 \choose 2} = 0$. Also, if sets $X_1$ and $X_2$ each contain 2 elements and generate the same $\Delta X$, then $X_2$ is simply a shift of $X_1$. We can therefore safely ignore sets with 2 elements. Therefore the smallest $\Delta X$ that satisfied the required criteria will contain at least ${3 \choose 2} = 3$ elements.
+
+\noindent Consider the multiset $\Delta X = \{ 1,2,3 \}$ and the sets $X_1 = \{ 0,1,3 \}, X_2 = \{ 0,2,3 \}$. Performing a partial digest on $X_1$ and $X_2$ will generate the same multiset $\Delta X$. Since $X_1$ and $X_2$ are not related by shift or reflection, and since we know $\Delta X$ cannot contain less than 3 elements, the given sets satisfy the given criteria.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+We first define the function ``Map" that is used by the ``BruteForceDDP" algorithm. Given a multiset of fragment lengths, the ``Map" function creates the physical map that would result from concatenating the fragments in the given order.
+
+\vspace{30pt}
+
+\noindent \underline{Map(Multiset $Y$, Integer $n$)}
+\begin{menumerate}
+\item $Y' \leftarrow \{ 0, Y_1, Y_2, ... , Y_n \} $
+\item $X = \emptyset$
+\item \textbf{for} $i \leftarrow 2 $ to $n+1$
+\item \blk $y \leftarrow Y'_i - Y'_{i-1}$
+\item \blk Add $y$ to $X$
+\item \textbf{return} $X$
+\end{menumerate}
+
+\vspace{12pt}
+
+The ``BruteForceDDP" algorithm then considers each possible order of fragments lengths from the two single digests, builds maps from those ordered fragments, combines the maps, and determines whether the digestion of the combined map matches the double digest.
+
+\noindent \underline{BruteForceDDP(Multiset $L_a$, Multiset $L_b$, Multiset $L_{ab}$)}
+\begin{menumerate}
+\item \textbf{for} each possible ordered permutation $A$ of $L_a$
+\item \blk $A' \leftarrow$ Map $(A, |A|)$
+\item \blk \textbf{for} each possible ordered permutation $B$ of $L_b$
+\item \blk \blk $B' \leftarrow$ Map $(B, |B|)$
+\item \blk \blk \textbf{if} $\Delta(A' \cup B') = L_{ab}$
+\item \blk \blk \blk \textbf{return} $A' \cup B'$
+\item \textbf{output} ``No solution"
+\end{menumerate}
+
+\end{document}

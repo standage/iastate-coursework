@@ -1,0 +1,57 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 23 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Temporal control of transcription in phage infection}
+\begin{mitemize}
+  \item early genes recognized by intrinsic $\sigma$ factor (-10 and -35 elements)
+  \item early genes are transcription factors for middle genes, which in turn are TFs for late genes
+\end{mitemize}
+
+\subsection*{T7 phage}
+\begin{itemize}
+  \item host polymerase transcribes class I genes
+  \item one of the class I genes is the phage polymerase, which synthesized class II and III genes
+\end{itemize}
+
+\subsection*{$\lambda$ phage infection}
+\begin{itemize}
+  \item 2 competing phases: lytic and lysogenic
+  \item cI gene encodes a $\lambda$ repressor, induces lysogenic phase
+  \item cro gene induces lytic phase
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,125 @@
+=== Run information ===
+
+Evaluator:    weka.attributeSelection.InfoGainAttributeEval 
+Search:weka.attributeSelection.Ranker -T -1.7976931348623157E308 -N -1
+Relation:     ProteinFoldsPFRES
+Instances:    311
+Attributes:   55
+              pcvA
+              pcvR
+              pcvN
+              pcvD
+              pcvC
+              pcvQ
+              pcvE
+              pcvG
+              pcvH
+              pcvI
+              pcvL
+              pcvK
+              pcvM
+              pcvF
+              pcvP
+              pcvS
+              pcvT
+              pcvW
+              pcvY
+              pcvV
+              sscC
+              sscE
+              sscH
+              dssC
+              dssE
+              dssH
+              adssCCC
+              adssCCE
+              adssCCH
+              adssCEC
+              adssCEE
+              adssCEH
+              adssCHC
+              adssCHE
+              adssCHH
+              adssECC
+              adssECE
+              adssECH
+              adssEEC
+              adssEEE
+              adssEEH
+              adssEHC
+              adssEHE
+              adssEHH
+              adssHCC
+              adssHCE
+              adssHCH
+              adssHEC
+              adssHEE
+              adssHEH
+              adssHHC
+              adssHHE
+              adssHHH
+              length
+              class
+Evaluation mode:10-fold cross-validation
+
+
+
+=== Attribute selection 10 fold cross-validation (stratified), seed: 1 ===
+
+average merit      average rank  attribute
+ 1.304 +- 0.068       1.1 +- 0.3      23 sscH
+ 1.104 +- 0.036       2.9 +- 0.7      54 length
+ 1.096 +- 0.091       3.2 +- 1.17     22 sscE
+ 1.1   +- 0.109       3.4 +- 1.11     26 dssH
+ 1.009 +- 0.064       4.4 +- 1.02     25 dssE
+ 0.586 +- 0.018       6.1 +- 0.3      47 adssHCH
+ 0.515 +- 0.075       6.9 +- 0.3      37 adssECE
+ 0.443 +- 0.009       8.4 +- 0.66     39 adssEEC
+ 0.433 +- 0.013       9.4 +- 1.11     38 adssECH
+ 0.409 +- 0.011      11.5 +- 1.2      31 adssCEE
+ 0.408 +- 0.016      11.7 +- 1.49     35 adssCHH
+ 0.403 +- 0.013      12.4 +- 1.11     17 pcvT
+ 0.372 +- 0.125      12.6 +- 4.72      5 pcvC
+ 0.312 +- 0.016      15.3 +- 1        40 adssEEE
+ 0.044 +- 0.132      18.1 +- 3.48      1 pcvA
+ 0     +- 0          19.6 +- 2.5      19 pcvY
+ 0     +- 0          20   +- 3.03     18 pcvW
+ 0     +- 0          20.5 +- 2.54      2 pcvR
+ 0     +- 0          20.6 +- 1.91      3 pcvN
+ 0     +- 0          22.5 +- 4.67      4 pcvD
+ 0     +- 0          24.1 +- 5.45     16 pcvS
+ 0     +- 0          25   +-11.18     20 pcvV
+ 0.179 +- 0.179      25.4 +-14.55     21 sscC
+ 0     +- 0          25.7 +- 3.1       9 pcvH
+ 0     +- 0          25.9 +- 2.02     10 pcvI
+ 0     +- 0          26.7 +- 1.9       8 pcvG
+ 0     +- 0          27.3 +- 3.49     11 pcvL
+ 0     +- 0          27.5 +- 3.5       7 pcvE
+ 0     +- 0          28.7 +- 5.16      6 pcvQ
+ 0     +- 0          29.5 +- 3.96     15 pcvP
+ 0     +- 0          30.2 +- 1.99     14 pcvF
+ 0     +- 0          30.2 +- 3.57     12 pcvK
+ 0     +- 0          31.3 +- 2.1      13 pcvM
+ 0.038 +- 0.113      34   +- 6.65     48 adssHEC
+ 0     +- 0          35.3 +- 2.33     46 adssHCE
+ 0     +- 0          36.8 +- 0.98     43 adssEHE
+ 0     +- 0          37   +- 0.89     45 adssHCC
+ 0.056 +- 0.113      37.9 +-10.97     50 adssHEH
+ 0     +- 0          38   +- 1.1      44 adssEHH
+ 0     +- 0          39.5 +- 0.5      52 adssHHE
+ 0.078 +- 0.155      40.3 +-12.92     24 dssC
+ 0     +- 0          40.5 +- 0.5      53 adssHHH
+ 0.117 +- 0.179      41.4 +-18.17     34 adssCHE
+ 0     +- 0          41.9 +- 1.14     49 adssHEE
+ 0     +- 0          42.5 +- 0.5      51 adssHHC
+ 0.089 +- 0.178      44.5 +-17.79     33 adssCHC
+ 0     +- 0          45.3 +- 2.28     29 adssCCH
+ 0     +- 0          47   +- 1.18     28 adssCCE
+ 0     +- 0          47   +- 3.07     30 adssCEC
+ 0     +- 0          47.9 +- 4.99     42 adssEHC
+ 0     +- 0          48   +- 1.18     27 adssCCC
+ 0     +- 0          49.3 +- 4.12     41 adssEEH
+ 0     +- 0          50.5 +- 1.75     36 adssECC
+ 0     +- 0          52.3 +- 0.64     32 adssCEH
+
+

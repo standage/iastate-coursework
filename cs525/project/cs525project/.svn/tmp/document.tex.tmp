@@ -1,0 +1,84 @@
+\documentclass{bioinfo}
+\copyrightyear{2010}
+\pubyear{2010}
+\raggedend
+
+\begin{document}
+\firstpage{1}
+
+\title[Distribution of Introns]{Distribution of introns in the coding regions of 10 model plant species}
+\author[Kirkpatrick, Mathur, and Standage]{Jessica Kirkpatrick\,$^{1}$, Divita Mathur\,$^{2}$ and Daniel Standage\,$^{2}$}
+\address{$^{1}$BCBio Undergraduate Program\\
+$^{2}$Bioinformatics and Computational Biology Graduate Program}
+
+\history{Submitted on November 15, 2010}
+
+\maketitle
+
+%\begin{abstract}
+%
+%\section{Motivation:}
+%Text Text Text  Text Text Text Text Text Text Text Text
+%Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text.
+%
+%\section{Results:}
+%Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text
+%
+%\section{Availability:}
+%Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text Text Text Text Text Text Text Text Text  Text
+%
+%\section{Contact:} \href{name@bio.com}{name@bio.com}
+%\end{abstract}
+
+\section{Introduction}
+The discovery of introns over 30 years ago is crucial to our current understanding of many biological processes. There is a significant amount of literature detailing different types of introns and the molecular mechanisms by which they are spliced out of transcribed RNA to form mature translation substrates. However, little is understood about how introns are distributed at the genome level. Improved understanding of intron distribution has the potential to benefit many areas of research within the life sciences, including (but not limited to) gene structure prediction and annotation, statistical simulation and analysis, comparative genomics, and gene/genome evolution.
+
+We present an analysis of the distribution of introns in the coding regions of a small set of model organisms. Using all available annotated gene structures for 10 selected plant species found at http://plantgdb.org/, we calculated the number of introns for each of the 384,190 coding sequences annotated in these 10 plant genomes.  We then investigated the number of introns per coding sequence (NICS) and how this value behaves when coding sequences are grouped according to genome, length, or molecular function.
+
+Because the NICS is discrete and non-negative, we felt it reasonable to model this unknown value as a random variable with the distribution
+\[ X \sim \textsc{Poisson}(\lambda) \]
+where $\lambda$ is the expected NICS for a particular grouping of genes. We hypothesized that if we partition genes according to genome, function, length, or some other attribute, that the distribution of introns per gene would be heterogeneous across these partitions. In other words, if we partition our sample into $k$ sub-samples \[ X = (X_1,...,X_k) \] with \[ X_i \sim \textsc{Poisson}(\lambda_i) \] for $1 \leq i \leq k$, we hypothesized that the parameter $\lambda_i$ of each sub-sample would be different.
+
+We used a combination of standard goodness-of-fit tests and Poisson regression techniques to characterize the distribution of introns in the genomes of 10 model plant species. \textit{We will provide a brief summary here when we actually have something to show!}
+
+\begin{verbatim}
+http://gremlin4.gdcb.iastate.edu/~standage/stat430project/combined.intron.counts.txt
+\end{verbatim}
+
+%\begin{methods}
+%\section{Methods}
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+%
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+%\end{methods}
+
+%\section{Results}
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+%
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+%
+%\section{Discussion}
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+
+
+%\begin{thebibliography}{}
+%\bibitem[Bofelli {\it et~al}., 2000]{Boffelli03} Bofelli,F., Name2, Name3 (2003) Article title, {\it Journal Name}, {\bf 199}, 133-154.%
+%
+%\bibitem[Bag {\it et~al}., 2001]{Bag01} Bag,M., Name2, Name3 (2001) Article title, {\it Journal Name}, {\bf 99}, 33-54.
+%
+%\bibitem[Yoo \textit{et~al}., 2003]{Yoo03}
+%Yoo,M.S. \textit{et~al}. (2003) Oxidative stress regulated genes
+%in nigral dopaminergic neurnol cell: correlation with the known
+%pathology in Parkinson's disease. \textit{Brain Res. Mol. Brain
+%Res.}, \textbf{110}(Suppl. 1), 76--84.
+%\end{thebibliography}
+
+\end{document}

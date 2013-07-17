@@ -1,0 +1,21 @@
+# Daniel S. Standage
+# 1 Feb 2012
+# BCB 570: HW 1
+
+#----- Notation legend -----#
+# x := [ES]
+# y := [SES]
+# i := [I] for all other molecular species
+
+#----- Parameters -----#
+parameter k1p=0.1, k1m=0.1, k2=0.1, k3p=0.1, k3m=0.1, k4=0.1
+
+#----- Initialize data -----#
+init e=10, s=10
+
+#----- System of equations -----#
+de/dt = (k1m*x) + (k2*x) + (k4*y) - (k1p*e*s)
+ds/dt = (k1m*x) + (k3m*y) + (k4*y) - (k1p*e*s) - (k3p*x*s)
+dx/dt = (k1p*e*s) + (k3m*y) - (k1m*x) - (k2*x) - (k3p*x*s)
+dy/dy = (k3p*x*s) - (k3m*y) - (k4*y)
+dp/dt = (k2*x) + (k4*y) 

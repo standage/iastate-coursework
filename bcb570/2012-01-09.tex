@@ -1,0 +1,104 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 9 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{BCB 570}
+\subsection*{Class info}
+\begin{mitemize}
+  \item Tasos (Anastasios) Matzavinos: tasos@iastate.edu
+  \item Formal office hours after class, 4-5pm MWF (informally by appointment)
+  \item Grading scheme: 40\% homeworks, 60\% class projects
+\end{mitemize}
+
+\subsection*{Class organization}
+
+\subsubsection{Kinetic modeling of metabolic networks}
+\begin{mitemize}
+  \item deterministic and stochastic models
+  \item structural analysis of networks
+  \item extreme pathways
+  \item flux cones
+  \item XPP software
+\end{mitemize}
+
+\subsubsection{Analysis of high-throughput (genomic) data}
+\begin{mitemize}
+  \item clustering
+  \item kernelized SVMs
+\end{mitemize}
+
+\subsubsection{Transcription networks}
+\begin{mitemize}
+  \item motifs
+  \item random graphs
+  \item scale-free networks
+  \item regulatory networks
+\end{mitemize}
+
+
+\section*{Kinetic modeling: the dynamics of simple decay}
+Consider the reaction \[ M \rightarrow \emptyset \] in which molecules of substance $M$ degrade into some substance we are not interested in tracking.
+Let the function $M(t)$ represent the number of molecules of $M$ at time $t$.
+Now, assume that every minute, 2 out of every 100 molecules of $M$ degrade.
+Thus, the \textit{probability} $p_1$ of a molecule degrading within the time span of a minute is $\frac{2}{100} = \frac{1}{50} = 0.02 = p_1$.
+The \textit{rate} $k_1$ of the reaction is the probability per unit time: in this case, $k_1 = \frac{1}{50}$ molecules per minute.
+
+Let $p_n$ be the probability of degredation within $n$ minutes.
+\[ p_2 = \frac{2}{100} + \frac{2}{100} = \frac{4}{100} = \frac{1}{25} \]
+\[ k_2 = \frac{p_2}{2} = \frac{\frac{1}{25}}{2} = \frac{1}{50} = k_1 \]
+Therefore, while the probability of degredation depends on time, the reaction rate does not.
+We can write this reaction as a \textit{discrete time model}.
+\[ M(t + \Delta t) = M(t) - p_{\Delta t}M(t) \]
+\[ M(t + \Delta t) - M(t) = -p_{\Delta t}M(t) \]
+\[ \frac{M(t + \Delta t) - M(t)}{\Delta t} = \frac{-p_{\Delta t}}{\Delta t}M(t) = -kM(t) \]
+If we let $\Delta t \rightarrow 0$, we have the differential equation \[ \frac{d}{dt}M(t) = -kM(t) \] with solution \[ M(t) = M(0)e^{-kt} \]
+
+\subsection*{Law of mass action}
+This law is only applicable when molecular species are present in an abundance.
+It is also only applicable to \textit{elementary reactions} (to be defined).
+
+Consider a reaction \[ A + B \xrightarrow{k} C \] in which the rate $k$ refers to the accumulation of molecule $C$. We are interested in calculating the concentration of $C$ $[C]$. The Law of Mass Action identifies $\frac{d}{dt}[C]$ with the (mathematical) product $k[A][B]$.
+
+Now consider the reversible extension of this reaction.
+\[ \ce{A + B <=>[k^{+}][k^{-}] C} \]
+If we want to measure $[A]$, we have the following differential equation.
+\[ \frac{d}{dt}[A] = k^{-}[C] -\frac{d}{dt}[C] \]
+\[ \frac{d}{dt}[A] = k^{-}[C] -k^{+}[A][B] \]
+
+We will cover the Law of Mass Action in more detail during the next lecture.
+
+\end{document}

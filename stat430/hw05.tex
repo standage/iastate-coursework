@@ -1,0 +1,200 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}		% skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+ 
+\usepackage{fancyhdr} 
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{Stat 430}
+\newcommand{\instructor}{Karin Dorman}
+\newcommand{\assignment}{HW 5}
+\newcommand{\duedate}{October 28, 2010}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item Several of the samples seem to be slightly skewed. This will only be a problem if we are concerned about heteroscedasticity. However, there does seem to be a pretty stark difference in variance between samples, most especially between the smallest (80-81) and the largest (80-94D).
+
+\begin{center}
+  \includegraphics[scale=0.4]{R1_boxplot.png}
+\end{center}
+
+\begin{verbatim}
+> # 1.a Boxplot
+> rev <- read.table("RevMutant.Rtxt", header=T)
+> R1 <- subset(rev, Mutant == "R1")
+> png(filename="R1_boxplot.png")
+> boxplot(pg ~ Experiment, data=R1)
+> dev.off()
+null device 
+          1
+\end{verbatim}
+
+\item Bartlett's test relies on normality assumptions, so Levene's test will be more appropriate here. However, since the computation is cheap, I ran both tests. Neither of the tests were able to detect a significant difference in variance between the samples ($\alpha = .05$), so I feel comfortable proceeding under the ANOVA assumption of homoscedasticity.
+
+\begin{verbatim}
+> # 1.b Test homoscedasticity
+> bartlett.test(x=R1$pg, g=R1$Experiment)
+
+	Bartlett test of homogeneity of variances
+
+data:  R1$pg and R1$Experiment 
+Bartlett's K-squared = 7.5681, df = 6, p-value = 0.2715
+
+> library("car")
+Loading required package: MASS
+Loading required package: nnet
+Loading required package: survival
+Loading required package: splines
+> leveneTest(y=R1$pg, group=R1$Experiment)
+Levene's Test for Homogeneity of Variance (center = median)
+      Df F value Pr(>F)
+group  6  0.6933 0.6592
+      14
+\end{verbatim}
+
+\item We proceed with the classic null (reduced) and alternative hypotheses: that is,
+\[ H_0: \mu_i = \mu, \forall i \in 1,..,k \]
+\[ H_A: \mu_1, \mu_2, ..., \mu_k \]
+with the assumption that $\sigma^2_i = \sigma^2, \forall i \in 1,...,k$. The ANOVA results indicate that there is not enough evidence to reject the reduced model. The same result is obtained when running the corresponding non-parametric (Kruskal-Wallis) test, giving us greater confidence in our results.
+
+\begin{verbatim}
+> # 1.c Perform ANOVA
+> R1.anova <- aov(pg ~ Experiment, data=R1)
+> summary(R1.anova)
+            Df Sum Sq Mean Sq F value Pr(>F)
+Experiment   6 580.51  96.751  2.2193 0.1028
+Residuals   14 610.35  43.596               
+> kruskal.test(R1$pg, g=R1$Experiment)
+
+	Kruskal-Wallis rank sum test
+
+data:  R1$pg and R1$Experiment 
+Kruskal-Wallis chi-squared = 11.2497, df = 6, p-value = 0.08096
+\end{verbatim}
+
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item I used the \texttt{tapply} function to take the mean activity of all activity measurements in each of the 10 samples.
+
+\begin{verbatim}
+> # 2.a Estimate mean activity
+> rev <- read.table("RevMutant.Rtxt", header=T)
+> mean.pg <- as.vector(tapply(rev$pg, rev$Mutant, mean))
+> mean.pg
+ [1]  72.77333  35.91833  97.60571 101.15000  49.50095  44.63667  53.39444
+ [8]  69.60333  73.73000  47.73889
+\end{verbatim}
+
+\item We are 95\% confident that all true means fall within the given confidence intervals.
+
+\begin{verbatim}
+> # 2.b Compute CIs with Tukey method
+> # Grab df, Sp from ANOVA table
+> anova <- aov(pg ~ Mutant, data=rev)
+> summary(anova)
+            Df Sum Sq Mean Sq F value    Pr(>F)    
+Mutant       9  31668  3518.6  22.143 < 2.2e-16 ***
+Residuals   77  12235   158.9                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+> # Do Tukey CIs
+> names <- sort(as.vector(unique(rev$Mutant)))
+> n.pg <- as.vector(tapply(rev$pg, rev$Mutant, length))
+> df <- 77
+> k <- 10
+> s.pool <- sqrt(158.9)
+> alpha <- 0.05
+> results <- matrix(ncol=6, nrow=45)
+> row = 1
+> for(i in 1:(k-1))
++ {
++   for(j in (i+1):k)
++   {
++     results[row, 1] <- names[i]
++     results[row, 2] <- names[j]
++     results[row, 3] <- round((mean.pg[i] - mean.pg[j]) -
++         qtukey(1-alpha, nmeans=k, df=df)*s.pool*sqrt((1/n.pg[i])+(1/n.pg[j]))
++         /sqrt(2), 4)
++     results[row, 4] <- round((mean.pg[i] - mean.pg[j]) +
++         qtukey(1-alpha, nmeans=k, df=df)*s.pool*sqrt((1/n.pg[i])+(1/n.pg[j]))
++         /sqrt(2), 4)
++     t.confint <- t.test(rev$pg[rev$Mutant == names[i]],
++         rev$pg[rev$Mutant == names[j]])$conf.int
++     results[row, 5] <- round(t.confint[1], 4)
++     results[row, 6] <- round(t.confint[2], 4)
++     row <- row+1
++   }
++ }
+> head(results)
+     [,1]    [,2]    [,3]       [,4]      [,5]       [,6]      
+[1,] "D105G" "G104D" "15.2083"  "58.5017" "27.7457"  "45.9643" 
+[2,] "D105G" "G80D"  "-45.5306" "-4.1341" "-49.0253" "-0.6394" 
+[3,] "D105G" "Q108R" "-50.0234" "-6.7299" "-38.5986" "-18.1547"
+[4,] "D105G" "R1"    "6.909"    "39.6358" "15.057"   "31.4878" 
+[5,] "D105G" "R113H" "0.7555"   "55.5179" "18.6047"  "37.6687" 
+[6,] "D105G" "R97K"  "0.0175"   "38.7403" "9.9902"   "28.7675"\
+\end{verbatim}
+
+\item For each boostrap, I would resample a new bootstrap sample for each mutant. Then for each pairwise contrast, I would calculate and store the pivot $SR$. At the end, we will have $B$ pivots for each pairwise contrast. The confidence interval would then be \[ [q_{\frac{\alpha}{2}}, q_{1-\frac{\alpha}{2}}] \] where $q$ represents the empirical quantiles of the pivots.
+
+\item The G104D strain and the R113H strain show significantly different activity from the reference strain R1.
+
+\begin{verbatim}
+> # 2.d
+> names
+ [1] "D105G" "G104D" "G80D"  "Q108R" "R1"    "R113H" "R97K"  "S25L"  "S25P" 
+[10] "V75A" 
+> R1.index <- 5
+> signif <- qtukey(1-alpha, nmeans=k, df=df)
+> sig <- round(signif, 2)
+> m.R1 <- round(mean.pg[R1.index],2)
+> for(i in 1:k)
++ {
++   meandiff <- mean.pg[R1.index] - mean.pg[i]
++   if(meandiff > signif)
++   {
++     m.i <- round(mean.pg[i],2)
++     m.diff <- round(meandiff, 2)
++     cat(names[i]," (", m.R1, "-", m.i, "=", m.diff, " > ", sig, ")\n")
++   }
++ }
+G104D  ( 49.5 - 35.92 = 13.58  >  4.61 )
+R113H  ( 49.5 - 44.64 = 4.86  >  4.61 )
+\end{verbatim}
+
+\end{enumerate}
+
+\end{document}

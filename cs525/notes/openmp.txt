@@ -1,0 +1,60 @@
+======OpenMP======
+
+=====Background=====
+  - shared memory parallelization
+  - p-threads existed before OpenMP
+  - current processor trends
+    - little or no increase in clock speed
+    - increase performance by adding cores
+  - hybrid programming
+    - MPI + OpenMP
+    _ MPI + GPU/CUDA
+
+=====Parallelizing loops=====
+!$omp do
+  do i = 1,n
+    A(i) = B(i) + C(i)
+  enddo
+
+! Incorrect
+!$omp do
+  do i = 2,n
+    A(i) = A(i-1) + B(i)
+  enddo
+  
+!???
+!omp parallel shared(nt, ...) private(...)
+  x = nt + omp_get_thread_num()
+
+!omp end parallel
+
+! Fix race condition
+!$omp do
+  sloc = 0d0
+  do i=1,n
+    sloc = sloc + A(i)
+  enddo
+  $!omp critical
+    s = s+sloc
+  $!omp end critical
+
+! Better fix
+$!omp do reduction(+:s)
+  do i=1,n
+    s=s+A(i)
+  enddo
+$!omp enddo
+
+
+! this shortcut has more overhead, do not use unless it's the only loop in the program
+$!omp parallel do
+
+
+$!omp master (executed by thread 0)
+$!omp single (executed by first thread to reach that point)
+$!omp enddo nowait (thread 0 continues as soon as possible; otherwise, implied barrier)
+
+====Schedule clause====
+  - static: divides equally
+  - dynamic: auto load balancing
+  - guided: adjusts the chunk size dynamically to improve load balancing; typically starts with a large chunk size, decreases after each iteration

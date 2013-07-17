@@ -1,0 +1,123 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 1 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Stoichiometric matrix}
+
+The stoichiometric matrix corresponds to adjacency matrix (graph theory). All kinetic laws can be expressed as \[ \frac{dx}{dt} = Sv \]
+We have: $m$ reactions and $n$ molecular species
+
+\[ x = (x_1 x_2 ... x_n)^T \in R^n \]
+\[ v = (v_1 v_2 ... v_n)^T \in R^m \]
+
+typical example: $A + B \rightarrow C, C \rightarrow A + B$
+
+\[ \frac{d}{dt}[A] = k_2[C] - k_1[A][B] \]
+\[ \frac{d}{dt}[B] = k_2[C] - k_1[A][B] \]
+\[ \frac{d}{dt}[C] = k_1[A][B] - k_2[C] \]
+
+
+\section*{Singular value decomposition}
+Let $A$ be an mxn matrix.
+Then, there exist orthogonal matrices $U$ and $V$ and a matrix $\Sigma$ such that $A = U \Sigma V^T$
+
+\section*{Steady states}
+A steady state is a state $x$ of the syste for which \[ \frac{dx}{dt} = S v = 0 \]
+Solving for $v = (V_1 V_2 ... V_m)^T$ will give us the possible reaction rates at equilibrium
+
+\section*{Matlab code}
+\begin{verbatim}
+% Solving linear systems in Matlab
+A = [1 2, 0 1]
+Y = [1, 2]
+
+% If we want to solve the equation Ax = y, we do...
+x=A\y
+
+S = [-1 1 -1, 1 -1 0, 0 0 1]
+v = S\zeros(3,1) % uh oh...singular matrix
+null(S)
+\end{verbatim}
+
+We want to describe all possible solutions of $S v = 0$ (equation *). It turns out that ever solution $v$ of * can be written as \[ v = c_1 v_1 + c_2 v_2 + ... + c_k v_k \]
+where $v_1 ... v_k$ are some special solutions of *.
+
+\begin{verbatim}
+S = [-1 1 0 0 -1 1, 0 -1 1 0 0 0, 0 0 -1 1 -1 1]
+A = S'
+null(A)
+\end{verbatim}
+
+
+\section*{Conservation relations}
+\[ \frac{dx}{dt} = S v \] S is nxm
+
+Consider a vector $x$ such that $x^T S = 0$
+
+\[ y^T \frac{dx}{dt} = y^T(S v) \rightarrow \frac{dy^T x}{dt} = y^T S_v = 0 \rightarrow \frac{d}{dt}y^T x = 0 \]
+This implies that $y^T x$ is constant. $y^T x = [y_1 ... y_n] [x_1 ... x_n]^T = y_1 x_1 + y_2 x_2 + ... + y_n x_n = $ constant
+
+\subsection*{Example}
+\begin{verbatim}
+glucose --(ATP -> ADP)--> gluc_6P  <----> fruc_6P --(ATP -> ADP)--> fruc-1,6P
+
+            S_1                      S_2            S_3                         S_4
+                    S_5     S_6
+                        V_1                   V_2                V_3
+
+
+S = |  -1  0  0  |
+    |   1 -1  0  |
+    |   0  1 -1  |
+    |   0  0  1  |
+    |  -1  0 -1  |
+    |   1  0  1  |
+    
+Matlab code starts here
+----------------------------
+
+A = [-1 1 0 0 -1 1, 0 -1 1 0 0 0, 0 0 -1 1 -1 1]
+null(A)
+% if you scale, you get this vector
+[ 2 1 1 0 0 1, 0 0 0 0 1 1, 1 1 1 1 0 0 ]
+
+% first column y_1, second y_2, third y_3
+% additional conservation relation
+% -y_1 + 3*y_2 + 2*y_3 = [0 1 1 2 3 2]^T
+\end{verbatim}
+
+\end{document}

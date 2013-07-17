@@ -1,0 +1,125 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage{minted}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 570}
+\newcommand{\instructor}{Matzavinos}
+\newcommand{\assignment}{Homework 4}
+\newcommand{\duedate}{Apr 13, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+Cast as a classification problem, the $k$-means clustering algorithm achieves a sensitivity of 0.613, a specificity of 0.997, and an F1 score of 0.758. The confusion matrix is as follows.
+\begin{verbatim}
+
+     -------------------------- Diagnosis --------------------------
+     |
+     |          tp = 130                     fp = 1
+ Prediction
+  (cluster)
+     |          fn = 82                      tn = 356
+     |
+     ---------------------------------------------------------------
+
+\end{verbatim}
+Essentially, $k$-means does an excellent job not classifying benign patients as malignant, but it fails to classify many of the malignant patients as such.
+
+\section*{Appendix}
+The following Matlab script performs the k-means clustering.
+
+\bigskip
+\textbf{\texttt{run-kmeans.m}}
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{matlab}
+  x = dlmread('wdbc-values.data', ',');
+  c = kmeans(x, 2);
+  dlmwrite('wdbc-clusters.data', c);
+  exit
+\end{minted}
+\bigskip
+
+The following shell script can be used to download the data, process it, run the Matlab script, and compare the clustering results with actual diagnoses.
+
+\bigskip
+\textbf{\texttt{run-all.sh}}
+\begin{minted}[mathescape,
+               linenos,
+               numbersep=5pt,
+               gobble=2,
+               frame=lines,
+               framesep=2mm]{bash}
+  #!/bin/bash
+  DATASERVER=http://archive.ics.uci.edu
+  DATAPATH=ml/machine-learning-databases/breast-cancer-wisconsin
+  curl -o wdbc.data $DATASERVER/$DATAPATH/wdbc.data
+  perl -ne '@f = split/,/; print(join(",", @f[2..31]))' < wdbc.data > wdbc-values.data
+  perl -ne '@f = split/,/; printf("%s\n", $f[1])' < wdbc.data > wdbc-diagnoses.data
+  /Applications/MATLAB_R2011b.app/bin/matlab -nodisplay < run-kmeans.m
+  echo -e "\n\n\n======Results======"
+  paste -d: wdbc-clusters.data wdbc-diagnoses.data | sort | uniq -c
+\end{minted}
+\bigskip
+
+Running the shell script on my desktop gives the following terminal output.
+
+\bigskip
+\begin{verbatim}
+dhrasmus:hw04 standage$ bash run-all.sh 
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  121k  100  121k    0     0   131k      0 --:--:-- --:--:-- --:--:--  253k
+
+                            < M A T L A B (R) >
+                  Copyright 1984-2011 The MathWorks, Inc.
+                    R2011b (7.13.0.564) 64-bit (maci64)
+                              August 13, 2011
+
+ 
+To get started, type one of these: helpwin, helpdesk, or demo.
+For product information, visit www.mathworks.com.
+ 
+>> >> >> >> 
+
+
+======Results======
+   1 1:B
+ 130 1:M
+ 356 2:B
+  82 2:M
+\end{verbatim}
+\bigskip
+
+\end{document}

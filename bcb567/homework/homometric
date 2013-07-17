@@ -1,0 +1,27 @@
+#!/usr/bin/perl
+use strict;
+
+#my $u = (6,7,9);
+#my $v = (-6,2,6);
+my @u = split(/,/, $ARGV[0]);
+my @v = split(/,/, $ARGV[1]);
+
+my @u_plus_v = ();
+my @u_minus_v = ();
+foreach my $u_i(@u)
+{
+  foreach my $v_i(@v)
+  {
+    push(@u_plus_v, ($u_i + $v_i));
+    push(@u_minus_v, ($u_i - $v_i));
+  }
+}
+
+my $plus_str = join(",", sort{$a<=>$b}(@u_plus_v));
+my $minus_str = join(",", sort{$a<=>$b}(@u_minus_v));
+printf("U (+) V: %s\n", $plus_str);
+printf("U (-) V: %s\n", $minus_str);
+print("Delta(U (+) V): ");
+system("./digest $plus_str");
+print("Delta(U (-) V): ");
+system("./digest $minus_str");

@@ -1,0 +1,59 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{GDCB 511}
+\newcommand{\instructor}{Yin/Yang}
+\newcommand{\assignment}{Problem Set 5}
+\newcommand{\duedate}{Apr 16, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+T4 phage DNA was incubated with labeled nucleotides for short periods of time, after which the size newly synthesized DNA fragments was measured using ultracentrifugation. For short incubation times, a single band of labeled DNA appeared near the top of the gradient. As incubation time increased, another band of labeled DNA appeared closer to the bottom of the gradient. This was supposedly the result of smaller fragments being ligated together.
+
+The experiment was repeated using a mutant with a defective ligase gene. In the resulting gradient, a second band a longer labeled DNA did not appear. Initially this appears to support the hypothesis that DNA is synthesized discontinuously on both strands, but the explanation seems to be that fragments are still created by the DNA error checking and repair mechanism, even when DNA is synthesized continuously. The conclusion is that DNA is synthesized semidiscontinuously, that is continuously on one strand, and discontinuously on the complementary strand.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Bacteria containing mutants of the \textit{polA} gene encoding DNA Pol I are still viable. Mutations to the \textit{dnaE} gene encoding Pol III have been linked to temperature sensitivity, reduced Pol III activity, and disrupted DNA replication activity. Finally, bacteria containing mutants of Pol II are still viable as well. All of these lines of evidence suggest that DNA Pol III is the enzyme responsible for DNA replication.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+I would incubate a long segment of genomic DNA with a short, labeled complementary fragment. I would then electrophorese the extract on a gel, comparing to other lanes containing just the long DNA, just the short DNA fragment, and both together. If the protein of interest has helicase activity, we would expect to see increased mobility of the short fragment in comparison to the bound form, as a result of its being freed from the longer genomic DNA.
+
+\end{document}

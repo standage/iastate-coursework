@@ -1,0 +1,5 @@
+#!/bin/sh
+rm hw05.aux
+rm hw05.log
+rm hw05.out
+rm hw05.synctex.gz

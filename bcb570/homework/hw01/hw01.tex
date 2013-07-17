@@ -1,0 +1,88 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{BCB 570}
+\newcommand{\instructor}{Matzavinos}
+\newcommand{\assignment}{Homework 1}
+\newcommand{\duedate}{Feb 3, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+The kinetics of the substrate inhibition can be modeled using the following system of equations.
+
+\begin{eqnarray}
+  \frac{d}{dt}[E]   &=& k_1^-[ES] + k_2[ES] + k_4[SES] - k_1^+[E][S]                   \nonumber \\
+  \frac{d}{dt}[S]   &=& k_1^-[ES] + k_3^-[SES] + k_4[SES] - k_1^+[E][S] - k_3^+[ES][S] \nonumber \\
+  \frac{d}{dt}[ES]  &=& k_1^+[E][S] + k_3^-[SES] - k_1^-[ES] - k_2[ES] - k_3^+[ES][S]  \nonumber \\
+  \frac{d}{dt}[SES] &=& k_3^+[ES][S] - k_3^-[SES] - k_4[SES]                           \nonumber \\
+  \frac{d}{dt}[P]   &=& k_2[ES] + k_4[SES]                                             \nonumber
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+I set all rates $k_i = 0.1$, the initial concentrations of enzyme and substrate to 10, and all other initial concentrations to 0. I used \texttt{xppaut} to numerically approximate the trajectories of the species. The substrate shows a monotonic decrease in concentration, while the product shows a very steady monotonic increase. The enzyme concentration almost immediately drops to 0, but then slowly accumulates again--this agrees with the assumption that enzyme will bind any available substrate. The complexes showed complementary behavior to that of the enzyme, immediately shooting up in concentration, and then steadily decreasing as the reaction progresses.
+
+My \texttt{xppaut} script is shown below.
+
+\begin{verbatim}
+# Daniel S. Standage
+# 3 Feb 2012
+# BCB 570: HW 1
+
+#----- Notation legend -----#
+# x := [ES]
+# y := [SES]
+# i := [I] for all other molecular species
+
+#----- Parameters -----#
+parameter k1p=0.1,k1m=0.1,k2=0.1,k3p=0.1,k3m=0.1,k4=0.1
+
+#----- Initialize data -----#
+init e=10,s=10
+
+#----- System of equations -----#
+de/dt=(k1m*x)+(k2*x)+(k4*y)-(k1p*e*s)
+ds/dt=(k1m*x)+(k3m*y)+(k4*y)-(k1p*e*s)-(k3p*x*s)
+dx/dt=(k1p*e*s)+(k3m*y)-(k1m*x)-(k2*x)-(k3p*x*s)
+dy/dy=(k3p*x*s)-(k3m*y)-(k4*y)
+dp/dt=(k2*x)+(k4*y)
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{prob_num}{4}
+\problem
+As the rate of product accumulation from ternary complex is increased, the initial dip in substrate concentration and the initial jump in product concentration becomes more severe.
+
+\end{document}

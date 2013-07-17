@@ -1,0 +1,64 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{CS 525, 11:00am T/Th}
+\rhead{Lecture Notes: Mar 24, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\begin{verbatim}
+Revised homework 6.
+
+right shift; (mpi_send and mpi_recv)
+              how can we get the most efficient right shift using non-blocking routines?
+              It may use blocking routines
+\end{verbatim}
+
+\section*{Illustrate domain decomposition}
+\begin{verbatim}
+do iter = 1, niter
+  do j = 1,n
+    do i = 1, n
+      B(i,j) = 0.25d0 [A(i-1,j) + A(i+1, j) + A(1, j-1)+ A(1, j+1)]
+    enddo
+  enddo
+  do j=1,n
+    do i = i,n
+      A(i,j) = B(i,j) ! stride 1
+    enddo
+  enddo
+enddo
+\end{verbatim}
+
+\subsection*{Parallelization: column blocks}
+
+\end{document}

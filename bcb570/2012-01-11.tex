@@ -1,0 +1,114 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\usepackage{mhchem}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 570, 3:10pm MWF}
+\rhead{Lecture Notes: 11 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Law of Mass Action}
+The Law of Mass Action states that the rate of product accumulation is proportional to the concentration of the reactants.
+Consider again the following reaction. \[ A + B \xrightarrow{k} C \]
+The LOMA the provides the following equation. \[ \frac{d}{dt}[C] = k[A][B] \]
+
+\section*{Steady-state analysis}
+Steady-state analysis is helpful only for small systems.
+However, discussing the related theory will be helpful for analyses later on.
+
+Recall the following two-way reaction. \[ \ce{A + B <=>[k^{+}][k^{-}] C} \]
+At equilibrium, the concentration of reactants and products do not change.
+In mathematical terms, the derivatives (velocity) of the concentrations is 0. \[ \frac{d}{dt}[A] = 0 \] %\begin{equation} \end{equation}
+Hence, at equilibrium we can solve for $[C]$ as follows.
+\begin{align*}
+       \frac{d}{dt}[A] &= 0                         \\
+k^{-}[C] - k^{+}[A][B] &= 0                         \\
+              k^{-}[C] &= k^{+}[A][B]               \\
+                   [C] &= \frac{k^{+}}{k^{-}}[A][B]
+\end{align*}
+
+If we assume that the reaction is the only reaction in the system, we have
+\begin{align*}
+                      [A] + [C] &= A_0 = [A]\mid_{t=0}               \\
+                            [C] &= \frac{k^{+}}{k^{-}}(A_0 - [C])[B] \\
+[C] + \frac{k^{+}}{k^{-}}[C][B] &= \frac{k^{+}}{k^{-}}A_0[B]         \\
+[C](1 + \frac{k^{+}}{k^{-}}[B]) &= \frac{k^{+}}{k^{-}}A_0[B]         \\
+                            [C] &= \frac{\frac{k^{+}}{k^{-}}A_0[B]}{1+\frac{k^{+}}{k^{-}}[B]} = \frac{A_0[B]}{\frac{k^{-}}{k^{+}} + [B]}
+\end{align*}
+
+\subsection*{Remark}
+The quantity $\frac{k^{-}}{k^{+}} = K_0$ is called the dissociation constant, and its inverse $\frac{k^{+}}{k^{-}}$ is called the equilibrium constant.
+
+
+\section*{Enzyme kinetics}
+How do we model enzymatic reactions? This section will use the following abbreviations: $S$ for substrate, $E$ for enzyme, $P$ for product, $V$ for velocity of reaction, and $C$ for complex (substrate + enzyme).
+
+\subsection*{First attempt}
+\[ S + E \xrightarrow{k} P + E \] with the solution \[ \frac{d}{dt}[P] = k[S][E] \]
+The problem with this approach is that according to the Law of Mass Action, $V$ should be linear in terms of $[S]$, whereas empirical evidence showed a logarithmic relationship.
+
+\subsection*{Second attempt: Michaelis-Menton}
+Michaelis and Menton added an additional step in the reaction with a chemical intermediate: a complex of the substrate and enzyme. \[ \ce{E + S <=>[\ce{k_1^{+}}][k_1^{-}] C \xrightarrow{k_2} P + E} \]
+Let $x = [X]$ for all of the symbols defined in this section.
+
+\begin{align*}
+\frac{ds}{dt} &= k_1^{-}c - k_1^{+}es \\
+\frac{de}{dt} &= k_1^{-}c + k_2c - k_1^{+}es = c(k_1^{-} + k_2)-k_1^{+}es \\
+\frac{dc}{dt} &= k_1^{+}es - k_1^{-}c - k_2c = k_1{+}es - c(k_1^{-} + k_2)
+\end{align*}
+
+We see that $\frac{de}{dt}$ and $\frac{dc}{dt}$ have opposite and equal values, so $\frac{de}{dt} + \frac{dc}{dt} = 0$.
+This makes chemical sense, since in a closed system, there is a constant amount of enzyme, and that enzyme is either bound or in complex with the substrate.
+
+From this, we have $\frac{d}{dt}(e+c)=0$, which implies that the quantity $e+c$ is a constant value (derivative of a constant is 0).
+Let $e+c=e_0$.
+From this relationship, we have $e = e_0 - c$, which allows us to remove a term from our system of equations.
+This concept will be very helpful in the future as we work with very large interaction networks.
+
+We are interested in computing $V = \frac{dp}{dt} = k_2c$ in terms of $s$.
+Michaelis and Menton introduced the equilibrium approximation when saturated with substrate: $\frac{ds}{dt} \approx 0$. From this we derive the following.
+\begin{align*}
+0 = \frac{ds}{dt} &= k_1^{-}c - k_1^{+}es \\
+        k_1^{+}es &= k_1^{-}c \\
+                c &= \frac{k_1^{+}}{k_1^{-}}es
+\end{align*}
+
+We know that $e + c = e_0 \rightarrow e = e_0 + c$, so we derive the following.
+\begin{align*}
+c &= \frac{k_1^{+}}{k_1^{-}}es \\
+c &= \frac{k_1^{+}}{k_1^{-}}(e_0 - c)s \\
+c &= \frac{e_0s}{K_0 + s}
+\end{align*}
+
+Therefore, we have \[ V = \frac{dp}{dt} = k_2c = \frac{k_2e_0s}{K_0 + s} = \frac{V_{max} \cdot s}{K_0 + s} \] which fits empirical data very well.
+
+\end{document}

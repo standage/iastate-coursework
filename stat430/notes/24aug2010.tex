@@ -1,0 +1,121 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{Stat 430, 9:30am T/Th}
+\rhead{Lecture Notes: August 24, 2010}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Administrata}
+The course syllabus is available at http://thirteen-01.stat.iastate.edu/wiki/Stat430. You must use the username \textbf{Stat430} and the password \textbf{2010group}.
+
+The course will use the following grading scheme.
+\begin{mitemize}
+\item \textbf{Project}: 20\%
+\item \textbf{Homework}: 40\%
+\item \textbf{Midterm}: 15\%
+\item \textbf{Final}: 25\%
+\end{mitemize}
+
+\section*{Review of Statistical Methodology}
+The following iterative methodology highlights the fundamentals of statistics.
+\begin{menumerate}
+\item Pose a question, identify the population of interest
+\item State your hypothesis
+\item Design and experiment, collect data
+\item Analyze the data
+\end{menumerate}
+
+\subsection*{Example}
+Here is an example about potential Stat 430 students. We will not cover the last step today, just the first 3.
+\begin{menumerate}
+\item Within each class, is there a difference in knowledge of the prerequisite material? Does this change from semester to semester?
+\item I hypothesize that there are differences in each class, but that it does not change significantly from semester to semester.
+\item Take a sample of the population and administer the survey. The sample is today's class attendees, and the survey consists of two questions--does the student know conditional probability and does the student know Bayes' rule. The survey is administered by raising hands and counts are taken.
+\end{menumerate}
+
+We make several assumptions with our hypothesis and these should be listed.
+\begin{mitemize}
+\item The sample is a random sample of the population (maybe, maybe not, but it's probably the best we can do in this case).
+\item Individuals answer independently (definitely not in this case--we would want to administer the test differently for this).
+\item The process by which each student answers yes or no is identical (probably not).
+\end{mitemize}
+
+Now let's try to be a bit more mathematically rigorous with our hypothesis.
+\begin{menumerate}
+\item[2.] Let $p_{1c}, p_{2c}$ be the probabilities that a student from last year's class and this year's class (respectively) knows conditional probability. Let $p_{1b}, p_{2b}$ be the probabilities that a student from last year's class and this year's class (respectively) knows Bayes' rule. My hypothesis is can thus be written as follows: $p_{2b} \neq p_{2c} \land p_{1b} = p_{2b} \land p_{1c} = p_{2c}$.
+\end{menumerate}
+
+\section*{Review of Probability}
+Review of some definitions.
+\begin{mitemize}
+\item A random experiment is a sequence of happenings where all possible outcomes are known
+\item The sample space of an experiment is the set of all possible outcomes, usually denoted as $\Omega$
+\item An outcome is an element of the sample space, in other words, some $\omega \in \Omega$
+\item An even is a collection of outcomes, usually denoted using upper-case letters.
+\end{mitemize}
+
+\subsection*{Important Definition: Probability Measure}
+For some event $E$ in sample space $\Omega$, a probability measure is a function $P \colon E \rightarrow [0,1]$ such that the following are true.
+\begin{menumerate}
+\item $P(\Omega) = 1$
+\item $P(E) \geq 0$ for all $E \in \Omega$
+\item For disjoint events $E, F \in \Omega, P(E \cup F) = P(E) + P(F)$ 
+\end{menumerate}
+
+There are some immediate implications from these properties.
+\begin{mitemize}
+\item $P(\overline{E}) = 1 - P(E)$
+\item $P(\emptyset) = 0$
+\item $A \subset B \Rightarrow P(A) \leq P(B)$
+\item Addition law: $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+\end{mitemize}
+
+\subsection*{Counting Method}
+How do we assign a probability to an event? The counting method works in cases where there are a finite number of outcomes in the sample space and when they are all equally likely. Using this method, the probability of an event $E$ with a sample space size $N$ is as follows.
+\[ P(E) = \sum_{\omega \in E}P(\omega) = \sum_{\omega \in E}\frac{1}{N} = \frac{1}{N}\sum_{\omega \in E} = \frac{1}{N}|E| \]
+
+\subsection*{Conditional Probability}
+The following equation summarized conditional probability. Essentially, we want to know the probability of $A$ given $B$, or in other words, the probability of $A$ occurring given that we know $B$ has or will occur. If we consider a visual diagram, then $A$ and $B$ are areas in the sample space and $A \cap B$ is the overlap (what we are looking for). The denominator of the equation simply re-normalizes the probability since now our sample space is restricted to $B$ (because we know $B$ has or will occur).
+\[ P(A|B) = \frac{P(A \cap B)}{P(B)} \]
+
+\subsection*{Multiplication Rule}
+These are the first two examples of the multiplication rule that can be repeated \textit{ad nauseum}.
+\[ P(A \cap B) = P(A|B)P(B) \]
+\[ P(A \cap B \cap C) = P(A|BC)P(B|C)P(C) \]
+
+\subsection*{Law of Total Probability}
+\[ P(A) = \sum_{i=1}^{|B|}P(A|B_i)P(B_i) \]
+
+\subsection*{Bayes' Rule}
+\[ P(B_i|A) = \frac{P(A|B_i)P(B_i)}{\sum_{i=1}^{|B|}P(A|B_i)P(B_i)} = \frac{P(A|B_i)P(B_i)}{P(A)} \]
+
+\end{document}

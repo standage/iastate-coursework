@@ -1,0 +1,20 @@
+! n, niter, and p =         4096          50           4
+! time for niter iterations =    14.3591160774231       seconds
+! average time per iteration =   0.287182722091675       seconds
+! prevent dead code elimination, A(2,2) =   0.452413635350912     
+!
+! n, niter, and p =         4096          50           8
+! time for niter iterations =    7.18668198585510       seconds
+! average time per iteration =   0.143733639717102       seconds
+! prevent dead code elimination, A(2,2) =   0.452413635350912     
+!
+! n, niter, and p =         4096          50          16
+! time for niter iterations =    3.63717508316040       seconds
+! average time per iteration =   7.274350166320800E-002  seconds
+! prevent dead code elimination, A(2,2) =   0.452413635350912     
+!
+! n, niter, and p =         4096          50          32
+! time for niter iterations =    1.84469008445740       seconds
+! average time per iteration =   3.689380168914795E-002  seconds
+! prevent dead code elimination, A(2,2) =   0.452413635350912     
+!

@@ -1,0 +1,76 @@
+\documentclass{bioinfo}
+\copyrightyear{2010}
+\pubyear{2010}
+\raggedend
+\usepackage{hyperref}
+
+\begin{document}
+\firstpage{1}
+
+\title[Distribution of Introns]{Distribution of introns in the coding regions of 8 model plant species}
+\author[Kirkpatrick, Mathur, and Standage]{Jessica Kirkpatrick\,$^{1}$, Divita Mathur\,$^{2}$ and Daniel Standage\,$^{2}$}
+\address{$^{1}$BCBio Undergraduate Program\\
+$^{2}$Bioinformatics and Computational Biology Graduate Program}
+
+\history{Submitted on December 16, 2010}
+
+\maketitle
+
+\begin{abstract}
+Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+
+\end{abstract}
+
+\section{Introduction}
+The discovery of introns over 30 years ago (Gilbert, 1978) has had an immeasurable impact on our current understanding of biological processes. Characterization of introns, the mechanisms by which they are spliced from transcribed RNA to form mature translation substrate, and the conserved traits that enable their prediction from primary sequence data, is still an active and fruitful area of research.
+
+There is a significant amount of literature detailing the evolutionary conservation of introns in certain genes or gene families. Research in this area has identified ancient conserved introns, suggesting that introns are not merely inserted or deleted randomly over evolutionary time (Federov \textit{et al}, 2002; Rogozin \textit{et al}, 2003; Roy and Gilbert, 2005). Studies have also shown a relationship between intron distribution and other gene characteristics, such as non-homologous end joining and homologous recombination (Farlow \textit{et al}, 2010), specific base pair sequence (Federov \textit{et al}, 2001), and the position of conserved regions in a gene (Wang \textit{et al}, 2003). These discoveries all suggest that the distribution of introns is non-random, and yet a comprehensive picture of intron distribution remains elusive.
+
+As we progress deeper into the era of genomic science, an understanding of intron distribution at the genome level is becoming increasingly important. Improved understanding of intron distribution and the factors that influence it has the potential to benefit many areas of research within the life sciences, including (but not limited to) gene structure prediction and annotation, statistical simulation and analysis, biochemical characterization of intron splicing mechanisms, comparative genomics, and the study of gene and genome evolution.
+
+We present a comprehensive analysis of the distribution of introns in the coding regions of a small set of model organisms. Using all available annotated gene structures for 8 well-characterized plant species found at PlantGDB (Dong \textit{et al}, 2004), we calculated the number of introns in each of the 294,304 coding sequences annotated in these 8 plant genomes. We then gathered additional data for each gene detailing its environment along the chromosome. Our study compares two common multiple regression techniques and their ability to explain the effect of gene characteristics on the number of introns in the coding sequences of the 8 selected plant genomes. This approach is easily reproducible with other sets of organisms for with similar data are available.
+
+\begin{methods}
+\section{Methods}
+
+\subsection{Data Collection}
+
+We collected annotated gene structures for 8 model plant genomes using the PlantGDB resource for plant comparative genomics (Dong \textit{et al}, 2004). Using these gene structures, we calculated the number of introns in each of the 294,304 annotated coding sequences. We then combined this information with chromosome locus information to calculate several other features for each coding sequence, including length, distance from telomere, distance from centromere, and chromosome length (all in base pairs). Our selection of genomes was influenced by the availability of chromosome locus information.
+
+These data and the scripts used to combine them are available for download at \url{http://gremlin4.gdcb.iastate.edu/~standage/stat430project/}.
+
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+%
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+\end{methods}
+
+%\section{Results}
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+%
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+%
+%\section{Discussion}
+%Aenean sed leo a turpis faucibus accumsan. In mollis sagittis massa, sit amet accumsan elit faucibus nec. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Aenean malesuada est eu leo venenatis non hendrerit augue sagittis. Nam congue, dolor at interdum dignissim, orci nibh porta felis, vel iaculis leo nulla nec lacus. Nam vehicula nisi a quam egestas ornare pharetra lacus pulvinar. Suspendisse potenti. In hac habitasse platea dictumst. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nam vitae diam quis augue placerat sollicitudin ac in nunc. Curabitur vel sapien in eros consectetur pharetra.
+%
+%Mauris sodales, nisi sed mollis luctus, odio magna posuere justo, non eleifend risus enim eu odio. Proin sed tortor mauris, id lobortis tellus. Etiam placerat metus et nunc euismod tempor. Vestibulum vitae dolor eget massa venenatis lobortis. Nunc accumsan dignissim suscipit. Morbi suscipit viverra eros, vitae tincidunt odio pretium vitae. Vestibulum tincidunt, ligula nec consequat volutpat, erat justo dapibus purus, id condimentum tortor justo id est.
+
+%Suspendisse at arcu arcu. Vestibulum semper, sem quis ornare accumsan, tortor turpis dignissim ipsum, sit amet imperdiet sapien ligula quis est. Vivamus ut aliquet ligula. Fusce mauris dolor, dignissim non dapibus vel, fringilla at est. Fusce pretium, quam eu tincidunt sodales, neque nisi malesuada purus, sed semper justo ligula eget nunc. Pellentesque iaculis mollis justo, at volutpat nulla feugiat a. Quisque risus dui, dapibus nec adipiscing at, dictum ut urna. Quisque id dolor nulla. Vestibulum auctor, metus nec cursus eleifend, purus tellus interdum arcu, a interdum erat eros quis urna. Ut et vestibulum lectus. In blandit erat ac lectus congue et vulputate metus scelerisque.
+
+
+%\begin{thebibliography}{}
+%\bibitem[Bofelli {\it et~al}., 2000]{Boffelli03} Bofelli,F., Name2, Name3 (2003) Article title, {\it Journal Name}, {\bf 199}, 133-154.%
+%
+%\bibitem[Bag {\it et~al}., 2001]{Bag01} Bag,M., Name2, Name3 (2001) Article title, {\it Journal Name}, {\bf 99}, 33-54.
+%
+%\bibitem[Yoo \textit{et~al}., 2003]{Yoo03}
+%Yoo,M.S. \textit{et~al}. (2003) Oxidative stress regulated genes
+%in nigral dopaminergic neurnol cell: correlation with the known
+%pathology in Parkinson's disease. \textit{Brain Res. Mol. Brain
+%Res.}, \textbf{110}(Suppl. 1), 76--84.
+%\end{thebibliography}
+
+\end{document}

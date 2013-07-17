@@ -1,0 +1,66 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{Stat 430, 9:30am T/Th}
+\rhead{Lecture Notes: August 31, 2010}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+Next Tuesday, class will be held in Snedecor 3121. It will be a crash course in R.
+
+\section*{Normal Random Variable}
+We use the notation $X \sim N(\mu, \sigma^2)$. The PDF is defined as follows.
+\[ f(x) = \frac{1}{\sqrt{2\pi}\sigma}exp\left\{ -\frac{(x-\mu)^2}{2\sigma^2} \right\} \]
+The CDF cannot be evaluated analytically, but can be estimated with a computer. The distribution $N(0,1)$ is called the standard normal distribution.
+
+\section*{Change of Variable}
+Let $y$ be a random variable that is defined by a function $g(x)$. For example, we could say that $y = g(x) = ax+b$. If we have the CDF $F_y$ for the variable $y$, we can compute the PDF using the chain rule.
+\[ \frac{d}{dy}F_y(y) = f_y(y) = f_x\left(\frac{y-b}{a}\right)\frac{1}{a} \]
+
+\subsection*{Examples}
+\begin{itemize}
+\item Suppose $X \sim N(\mu, \sigma^2)$. We have the following. \[ f_y(y) = \frac{1}{\sqrt{2\pi}\sigma}exp\left\{ -\frac{\left(\frac{y-b}{a}-\mu \right)^2}{2\sigma^2} \right\} \cdot \frac{1}{1} \] This implies that $Y \sim N(a \mu + b, a^2\sigma^2)$. Generally, when we apply a linear combination to a normal distribution, we get another normal distribution with a different mean and variance.
+\item Suppose $y = z^2$ where $z \sim N(0,1)$. What is $F_y(y)$?
+\[ F_y(y) = P(Y \leq y) = P(z^2 \leq y) = P(-y^{.5} \leq z \leq y^{.5}) = P_Z(z \leq \sqrt{y}) - P_Z(z \leq -\sqrt{y}) = \Phi(\sqrt{y}) - \Phi(-\sqrt{y}) \]
+The PDF is given as follows.
+\[ f_Y(y) = \frac{1}{2}\sqrt{y}\Phi(\sqrt{y}) +  \frac{1}{2}\sqrt{y}\Phi(-\sqrt{y}) = \sqrt{y}\Phi(\sqrt{y}) = \frac{\sqrt{y}}{\sqrt{2\pi}}exp\left\{ -\frac{y}{2} \right\} \]
+This is the Chi-square distribution, which you get when you square a standard normal. Note that $\frac{1}{\Gamma\left(\frac{1}{2}\right)\sqrt{2}} = \frac{1}{2\pi}$.
+\end{itemize}
+
+\subsection*{Theorem: Change of Variable}
+\[  f_Y(y) = f_X(y^{-1}(y))\left| \frac{d}{dy}g^{-1}(y) \right|  \]
+
+\subsection*{Theorem}
+Let $Z = F(x)$, then $Z \sim$ \textsc{Uniform}$(0,1)$ for any random variable $X$.
+
+
+\end{document}

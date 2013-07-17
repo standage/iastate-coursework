@@ -1,0 +1,166 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}    % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}              % Wide paper
+\usepackage[parfill]{parskip}		% skip a line instead of indenting new paragraphs
+\usepackage{graphicx}   % For eps figures
+\usepackage{epsfig}     % Alternative package
+ 
+\usepackage{fancyhdr} 
+\fancyhead[L]{\assignment }
+\fancyhead[R]{\class \;- \instructor }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{Stat 430}
+\newcommand{\instructor}{Karin Dorman}
+\newcommand{\assignment}{HW 1: Sep 2, 2010}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}\author & \class\;- \instructor\\ \today & \assignment\end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+ 
+\begin{enumerate}[(a)]
+  \item The sample space is defined as
+            \[ \Omega = \{ 000, 010, 001, 011, 100, 110, 101, 111 \} \]
+            where each element $\omega \in \Omega$ corresponds to the 3 bits received.
+  \item The event that 1 was transmitted and received correctly is $C = \{ 011, 110, 101, 111 \}$.
+  \item The set $A = \{ A_1 = \{ 111 \}, A_2 = \{ 101, 110, 011 \}, A_3 = \{ 010, 001, 100 \}, A_4 = \{ 000 \} \}$ partitions
+            the sample space $\Omega$ based on the number of mistransmitted bits.
+  \item The number of mistransmitted bits follows a binomial distribution.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+\problem
+ 
+\begin{enumerate}[(a)]
+  \item $P = \frac{7}{18} \cdot \frac{6}{17} + \frac{8}{18} \cdot \frac{7}{17} + \frac{9}{18} \cdot \frac{8}{17} =
+            \frac{(7 \cdot 6) + (8 \cdot 7) + (9 \cdot 8)}{18 \cdot 17} = \frac{42 + 56 + 72}{306} = \frac{170}{306} = 0.5555556$.
+  \item There field is $120 \cdot 53.3 = 6396$ square yards in size. Each 20x20 yard square contains 400 square yards,
+            so there are $6396 / 400 = 15.99$ squares in the field. Since there are 18 boxes, we would expect to see
+            $18 / 15.99 = 1.125704$ boxes in each 20x20 square of the field.
+  \item It is reasonable to expect that the number $X$ of boxes in a 20x20 square follows a Poisson distribution with
+            $\lambda = 1.126$. The following simulation in R supports this choice.
+            \begin{verbatim}> rpois(16, 1.126)
+[1] 2 0 0 0 2 1 1 3 1 2 1 1 2 1 1 1\end{verbatim}
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Define the following events.
+\begin{itemize}
+  \item $C$: The probability that a claim is submitted
+  \item $H$: The probability that a client is high risk
+  \item $M$: The probability that a client is medium risk
+  \item $L$: The probability that a client is low risk
+\end{itemize}
+
+\noindent We are given the following probabilities.
+\begin{itemize}
+  \item $P(H) = 0.1$
+  \item $P(M) = 0.2$
+  \item $P(L) = 0.7$
+  \item $P(C|H) = 0.02$
+  \item $P(C|M) = 0.01$
+  \item $P(C|L) = 0.00125$
+\end{itemize}
+
+\noindent We are asked to find $P(H|C)$. Using Bayes' rule, we have
+\begin{eqnarray}
+ P(H|C) &=& \frac{P(C|H)P(H)}{P(C|H)P(H)+P(C|M)P(M)+P(C|L)P(L)}      \nonumber \\
+              &=& \frac{(.02)(.1)}{(.02)(.1)+(.01)(.2)+(.00125)(.7)} \nonumber \\
+              &=& \frac{0.002}{0.002+ 0.002 + 0.00875}  \nonumber \\
+              &=& 0.4102564 \nonumber
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item If events $A$ and $B$ are disjoint when $P(A) > 0$ and $P(B) > 0$, then $A$ and $B$ are independent.
+\item The events $A$ and $B$ are not independent when $A \subset B$.
+\item If $P(A \cup B) = P(A)P(B^C)+P(B)$, then events $A$ and $B$ are independent.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Let the random variable $X$ be defined as the probability that team A will win a ``Best of n" tournament. $X$ follows a binomial distribution. When $n=5$, $X$ is computed as follows.
+\[ X = {n \choose k}p^k(1-p)^{n-k} = {5 \choose 3}(.4)^3(.6)^2 = 0.2304 \]
+When $n=7$, $X$ is computed as follows.
+\[ X = {n \choose k}p^k(1-p)^{n-k} = {7 \choose 4}(.4)^4(.6)^3 = 0.193536 \]
+Therefore, team A would do well to elect a ``Best of 5" tournament.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+To show that $F(x)$ is a CDF, we must demonstrate the following properties.
+\begin{itemize}
+\item The left limit of $F$ is 0, or in other words, $\lim_{x \rightarrow 0}F(x) = 0$. Observe the following. \[ \lim_{x \rightarrow 0}1 - exp\left\{ -\alpha x^\beta \right\} = 1 - e^0 = 1 - 1 = 0 \]
+\item The right limit of $F$ is 1, or in other words, $\lim_{x \rightarrow \infty}F(x) = 1$. Observe the following. \[ \lim_{x \rightarrow \infty}1 - exp\left\{ -\alpha x^\beta \right\} = 1 - \frac{1}{e^{\infty}} = 1 - 0 = 1 \]
+\item The function is increasing monotonically. Observe the following. \[ \frac{d}{dx}\left[1 - exp \left\{-\alpha x^{\beta}\right\}\right] = 0 - \left[ exp\left\{-\alpha x^{\beta} \right\} \cdot \left(-\alpha \beta x^{\beta - 1}\right) \right] = \alpha \beta x^{\beta - 1} exp\left\{-\alpha x^{\beta}\right\} \] This function, representing the slope of the $F$, is always positive. Therefore $F$ is strictly monotonically increasing.
+\item The function is right continuous, or in other words, $\lim_{x->x_o^+}F(x)=F(x_o)$. Because $F$ is defined within the specified domain and is (infinitely) differentiable within the specified domain, it is also continuous.
+\end{itemize}
+
+The density, as derived above, is as follows.
+\[ \frac{d}{dx}F(x) = f(x) = \alpha \beta x^{\beta - 1} exp\left\{-\alpha x^{\beta}\right\} \]
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+The exponential distribution has a PDF defined as follows.
+\[ f(x) = \lambda e^{-\lambda x}, x \geq 0 \]
+The corresponding CDF is defined as follows.
+\[ F(x) = \int_0^x \lambda e^{- \lambda u} du = -e^{-\lambda x} \]
+
+\noindent The upper quartile is the value $q_{.75}$ such that $F(q_{.75}) = .75$. We can determine this value by finding the inverse $F^{-1}(\cdot)$ of $F(\cdot)$ and plugging in .75. The inverse of the CDF is \[ F^{-1}(p) = \frac{-ln(1-p)}{\lambda} \] so the upper quartile is \[ q_{.75} = F^{-1}(.75) = \frac{-ln(.25)}{\lambda} = \frac{1}{\lambda} \cdot 1.386294 \]
+ 
+ %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Observe the following.
+\begin{eqnarray}
+P(|X- \mu| \leq 0.675\sigma) = 0.5 &\Leftrightarrow& P(-0.675\sigma \leq X- \mu \leq 0.675\sigma) = 0.5       \nonumber \\
+             & \Leftrightarrow& P\left(-0.675 \leq \frac{X- \mu}{\sigma} \leq 0.675\right) = 0.5  \nonumber
+\end{eqnarray}
+The central term in the last equation follows a standard normal distribution, so we can calculate the probability as follows.
+\begin{eqnarray}
+P\left(-0.675 \leq \frac{X- \mu}{\sigma} \leq 0.675\right) &=& P\left(\frac{X- \mu}{\sigma} \leq 0.675\right) - P\left(\frac{X- \mu}{\sigma} \leq -0.675\right)       \nonumber \\
+             &=& (0.75016) - (0.24984)  \nonumber \\
+             &=& 0.50032 \nonumber
+\end{eqnarray}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Recall that the normal distribution is defined as follows.
+\[ f(y) = \frac{1}{\sqrt{2\pi}\sigma}exp\left\{-\frac{(y-\mu)^2}{2\sigma^2}\right\} \]
+Now consider that  $y(z) = e^z \Rightarrow z = y^{-1}(y) = ln y$. Applying this change of variable we have
+\begin{eqnarray}
+ f_Y(y) &=& f_Z(y^{-1}(y)) \cdot \frac{d}{dy}y^{-1}(y)       \nonumber \\
+             &=& \frac{1}{\sqrt{2\pi}\sigma}exp\left\{-\frac{(ln y-\mu)^2}{2\sigma^2}\right\} \cdot \frac{d}{dy}ln y \nonumber \\
+             &=& \frac{1}{y\sqrt{2\pi}\sigma}exp\left\{-\frac{(ln y-\mu)^2}{2\sigma^2}\right\}  \nonumber
+\end{eqnarray}
+which is the log-normal density.
+ 
+\end{document}

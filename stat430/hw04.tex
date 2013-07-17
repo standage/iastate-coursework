@@ -1,0 +1,305 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[latin1]{inputenc}          % Accept european-encoded (latin1) characters.
+\usepackage{a4wide}                    % Wide paper
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{graphicx}                  % For eps figures
+\usepackage{epsfig}                    % Alternative package
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{Stat 430}
+\newcommand{\instructor}{Karin Dorman}
+\newcommand{\assignment}{HW 4}
+\newcommand{\duedate}{October 14, 2010}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+% begin document
+\begin{document}
+ 
+\head
+ 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item The distributions of samples from both clinics have long tails as indicated by the distal departure from linearity on the normal probability plots. (Note: the code below is pasted from the terminal. For code that can be run as-is, without the leading $>$ characters and printouts, please see the attached code).
+
+\begin{center}
+  \includegraphics[scale=0.4]{qqplot-c1-Y.png}
+  \includegraphics[scale=0.4]{qqplot-c2-Y.png}
+\end{center}
+
+{\scriptsize \begin{verbatim}
+> # 1. Load the data
+> hiv <- read.table(file("hiv_status_data.Rtxt"))
+> c1 <- subset(hiv, Clinic.ID == 1)
+> c2 <- subset(hiv, Clinic.ID == 2)
+> c1.Y <- sort(c1$Y)
+> c2.Y <- sort(c2$Y)
+> c1.n <- length(c1.Y)
+> c2.n <- length(c2.Y)
+> 
+> # 1.a - Assess normality of data
+> #       Create normal probability plots manually
+> c1.seq <- seq(from=1, to=c1.n, by=1)/(c1.n+1)
+> c2.seq <- seq(from=1, to=c2.n, by=1)/(c2.n+1)
+> c1.q <- qnorm(c1.seq)
+> c2.q <- qnorm(c2.seq)
+> plot(c1.q, c1.Y)
+> plot(c2.q, c2.Y)
+> 
+> #       Create plots with built-in functions
+> png(file="qqplot-c1-Y.png")
+> qqnorm(c1.Y, main="QQ-Plot of Y Values (Clinic 1)")
+> qqline(c1.Y, col="red")
+> dev.off()
+X11cairo 
+       2 
+> png(file="qqplot-c2-Y.png")
+> qqnorm(c2.Y, main="QQ-Plot of Y Values (Clinic 2)")
+> qqline(c2.Y, col="red")
+> dev.off()
+X11cairo 
+       2
+\end{verbatim} }
+
+\item Since we do not have a theoretical distribution for $X$ and $Y$, we cannot derive an analytical relationship between $X$ and $\textsc{Var}(X)$. However, we can empirically demonstrate the relationship by partitioning the sample set by the absolute value of the treatment response and show that the variance of set with smaller samples is less than the variance of the set with larger samples. Following this procedure, the variance of the set with smaller samples is $5.92 \cdot 10^{-7}$, while the variance of the set with larger samples is $7.96\cdot 10^{-4}$, which indeed demonstrates that the variance increases as the absolute value of the response increases.
+
+{\scriptsize \begin{verbatim}
+> #       1.b - Demonstrate relationship between X and Var(X)
+> lower <- quantile(hiv$Y, probs=.25, names=FALSE)
+> higher <- quantile(hiv$Y, probs=.75, names=FALSE)
+> Y.small <- hiv$Y[hiv$Y > lower & hiv$Y < higher]
+> Y.big <- hiv$Y[hiv$Y <= lower | hiv$Y >= higher]
+> length(Y.small)
+[1] 1249
+> length(Y.big)
+[1] 1252
+> var(Y.small)
+[1] 5.918958e-07
+> var(Y.big)
+[1] 0.0007962794
+\end{verbatim} }
+
+\item I did a simple log transformation and plotted the original values against the transformed values. Since the plots are not monotonic, this transformation is not order-preserving, which makes it difficult to interpret test results or perform non-parametric tests.
+
+\begin{center}
+  \includegraphics[scale=0.4]{c1Y-vs-c1Ytransformed.png}
+  \includegraphics[scale=0.4]{c2Y-vs-c2Ytransformed.png}
+\end{center}
+
+{\scriptsize \begin{verbatim}
+> #       1.c - Perform log transformation
+> c1.Y.transformed <- log(abs(c1.Y))
+> png(file="c1Y-vs-c1Ytransformed.png")
+> plot(c1.Y, c1.Y.transformed, main="Clinic 1 Response Values", xlab="Y", ylab="log(Y)")
+> dev.off()
+X11cairo 
+       2 
+> c2.Y.transformed <- log(abs(c2.Y))
+> png(file="c2Y-vs-c2Ytransformed.png")
+> plot(c2.Y, c2.Y.transformed, main="Clinic 2 Response Values", xlab="Y", ylab="log(Y)")
+> dev.off()
+X11cairo 
+       2
+\end{verbatim} }
+
+\item A $t$-test on the transformed response values from clinics 1 and 2 gives an extremely small $p$-value. However, since the transformation is not order-preserving, it is difficult to interpret the meaning of this $p$-value. Furthermore, an $F$-test suggests that the variances for $X$ and $Y$ are significantly different, an assumption violation to which the $t$-test is not robust. I am therefore no more or less convinced than last time.
+{\scriptsize \begin{verbatim}
+> #       1.d - Test if clinic impacts response (transformed data)
+> t.test(c1.Y.transformed, c2.Y.transformed)
+
+	Welch Two Sample t-test
+
+data:  c1.Y.transformed and c2.Y.transformed 
+t = 7.4756, df = 2448.725, p-value = 1.064e-13
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ 0.3424687 0.5860211 
+sample estimates:
+mean of x mean of y 
+-6.238473 -6.702718
+> var.test(c1.Y.transformed, c2.Y.transformed)
+
+	F test to compare two variances
+
+data:  c1.Y.transformed and c2.Y.transformed 
+F = 1.1746, num df = 1210, denom df = 1289, p-value = 0.004455
+alternative hypothesis: true ratio of variances is not equal to 1 
+95 percent confidence interval:
+ 1.051315 1.312644 
+sample estimates:
+ratio of variances 
+          1.174619
+\end{verbatim} }
+
+\item The non-parametric test (with $p$-value pf 0.644) suggests that there not enough evidence to reject the null hypothesis.
+{\scriptsize \begin{verbatim}
+> #       1.e - Non-parametric test of clinic impact on response (non-transformed data)
+> wilcox.test(c1.Y, c2.Y, paired=F)
+
+	Wilcoxon rank sum test with continuity correction
+
+data:  c1.Y and c2.Y 
+W = 789435, p-value = 0.644
+alternative hypothesis: true location shift is not equal to 0
+\end{verbatim} }
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+\begin{enumerate}[(a)]
+\item The power (0.75 as calculated below) is indeed invalid for data transformations or non-parametric tests. These tests change the nature of the values we're looking at and may not meet normality assumptions.
+{\scriptsize \begin{verbatim}
+> # 2. Load the data
+> hiv <- read.table(file("hiv_status_data.Rtxt"))
+> c1 <- subset(hiv, Clinic.ID == 1)
+> c2 <- subset(hiv, Clinic.ID == 2)
+> c1.trimmed <- subset(c1, Z != 0 & !is.na(Z))
+> c1.trimmed.n <- length(c1.trimmed$Z)
+> c2.trimmed <- subset(c2, Z != 0 & !is.na(Z))
+> c2.trimmed.n <- length(c2.trimmed$Z)
+> 
+> #       2.a - Power calculation
+> n <- c1.trimmed.n + c2.trimmed.n
+> delta <- 0.0003
+> sigma <- 0.003
+> alpha <- 0.05
+> 1 - pnorm( qnorm(1-(alpha/2)) - delta/(sigma*sqrt(2/n)) ) +
++ pnorm( -qnorm(1-(alpha/2)) - delta/(sigma*sqrt(2/n)) )
+[1] 0.7508846
+\end{verbatim} }
+
+\item A normal probability plot of the raw $Z$ values indicates a one-tailed departure from normality (see the QQ-plots below), so I applied a log transform to the data. The transformed data had a slightly better fit to a normal distribution (long tails rather than skew). I then used a $t$-test to test whether the log transforms of the adherence values from clinic 1 follow the same distribution as those from clinic 2. The $p$-value of this test was extremely small, suggesting that we can reject the null hypothesis. While an $F$-test shows that the variances are not significantly different, there is a substantial difference between the sample sizes and a slight departure from normality in the two samples. We should therefore be careful about how we interpret the results of this test.
+
+\begin{center}
+  \includegraphics[scale=0.4]{qqplot-c1-Z.png}
+  \includegraphics[scale=0.4]{qqplot-c1-Z-log.png}
+\end{center}
+
+{\scriptsize \begin{verbatim}
+> #       2.b - Test clinic effect on adherence
+> #             Test normality of adherence (Z) values
+> c1.trimmed.data <- sort(c1.trimmed$Z)
+> c2.trimmed.data <- sort(c2.trimmed$Z)
+> png(file="qqplot-c1-Z.png")
+> qqnorm(c1.trimmed.data, main="QQ-Plot of Z Values (Clinic 1)")
+> qqline(c1.trimmed.data, col="red")
+> dev.off()
+null device 
+          1 
+> png(file="qqplot-c2-Z.png")
+> qqnorm(c2.trimmed.data, main="QQ-Plot of Z Values (Clinic 2)")
+> qqline(c2.trimmed.data, col="red")
+> dev.off()
+null device 
+          1 
+> 
+> #             Test normality of log(Z) values
+> c1.trimmed.data.log <- log(c1.trimmed.data)
+> c2.trimmed.data.log <- log(c2.trimmed.data)
+> png(file="qqplot-c1-Z-log.png")
+> qqnorm(c1.trimmed.data.log, main="QQ-Plot of Log-Z Values (Clinic 1)")
+> qqline(c1.trimmed.data.log, col="red")
+> dev.off()
+null device 
+          1 
+> png(file="qqplot-c2-Z-log.png")
+> qqnorm(c2.trimmed.data.log, main="QQ-Plot of Log-Z Values (Clinic 2)")
+> qqline(c2.trimmed.data.log, col="red")
+> dev.off()
+null device 
+          1 
+> 
+> #             Test clinic effect on log(Z) values
+> t.test(c1.trimmed.data.log, c2.trimmed.data.log)
+
+	Welch Two Sample t-test
+
+data:  c1.trimmed.data.log and c2.trimmed.data.log 
+t = 9.2196, df = 1362.344, p-value < 2.2e-16
+alternative hypothesis: true difference in means is not equal to 0 
+95 percent confidence interval:
+ 0.920251 1.417713 
+sample estimates:
+mean of x mean of y 
+-10.56080 -11.72978
+
+> var.test(c1.trimmed.data.log, c2.trimmed.data.log)
+
+	F test to compare two variances
+
+data:  c1.trimmed.data.log and c2.trimmed.data.log 
+F = 1.1495, num df = 670, denom df = 719, p-value = 0.06643
+alternative hypothesis: true ratio of variances is not equal to 1 
+95 percent confidence interval:
+ 0.9905957 1.3343860 
+sample estimates:
+ratio of variances 
+          1.149484
+\end{verbatim} }
+
+\item The $p$-value of a permutation test with 100,000 permutations suggests that we can safely reject the null hypothesis that the sampling distributions for $X$ and $Y$ are the same. Although we arrived at the same conclusion for the $t$-test for the log-transformed Z values, it is much easier and safer to interpret the results of this non-parametric test than the results of the corresponding $t$-test.
+
+{\scriptsize \begin{verbatim}
+> perm <- function(B=1000) {
++   T <- c()
++   for(i in 1:B) {
++     pseudo.c1.positions <- sample(1:length(data.combined), size=length(c1.trimmed.data))
++     pseudo.c1.data <- data.combined[pseudo.c1.positions]
++     pseudo.c2.data <- data.combined[-pseudo.c1.positions]
++     T[i] <- mean(pseudo.c1.data) - mean(pseudo.c2.data)
++   }
++   p.value <- sum(abs(T) > abs(T.hat))/B
++   return(p.value)
++ }
+> perm(100000)
+[1] 0.03968
+\end{verbatim} }
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+I first determined the $\delta$ that gives the worst (highest) $p$-value when performing a Wilcoxon rank sum test on $X + \delta$ and $Y$. I used this value to partition the distribution of $p$-values and then searched each partition for the boundaries of the 95\% confidence interval. With this method, I calculated the 95\% confidence to be $(-2.67\cdot10^{-4}, 1.65\cdot10^{-4})$.
+
+{ \scriptsize \begin{verbatim}
+> # 3 - Find confidence interval for difference in location
+> hiv <- read.table(file("hiv_status_data.Rtxt"))
+> c1 <- subset(hiv, Clinic.ID == 1)
+> c2 <- subset(hiv, Clinic.ID == 2)
+> c1.Y <- sort(c1$Y)
+> c2.Y <- sort(c2$Y)
+> central.delta <- optimize(function(d) wilcox.test(c1.Y+d, c2.Y)$p.value, c(-.0005, .0005), maximum=T)$maximum
+> uniroot(function(d) wilcox.test(c1.Y+d, c2.Y)$p.value - 0.05, c(-.5, central.delta), tol=0.00000001)$root
+[1] -0.0002673277
+> uniroot(function(d) wilcox.test(c1.Y+d, c2.Y)$p.value - 0.05, c(central.delta, .5), tol=0.00000001)$root
+[1] 0.0001650574
+\end{verbatim} }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Asdf.
+
+\end{document}

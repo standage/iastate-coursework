@@ -1,0 +1,64 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 8 Feb, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+\newcommand{\textsup}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\textsub}[1]{\ensuremath{_{\textrm{#1}}}}
+
+
+\begin{document}
+
+\section*{Function of activators}
+
+\subsection*{DNA binding domains}
+\begin{mitemize}
+  \item there are many different DNA binding domains, use different structures to contact DNA
+  \item typically recognize specific DNA sequences
+\end{mitemize}
+
+\subsection*{Recruitment of TFIID or holoenzyme}
+\begin{mitemize}
+  \item some activators bind directly with TAFs
+  \item some activators recruit holoenzyme
+\end{mitemize}
+
+\subsection*{Mediators}
+\begin{mitemize}
+  \item many GTFs interact with transcription machinery through mediators
+  \item different mediator complexes, some have common components
+  \item different GTFs interact with different componenets of mediator complex
+  \item some transcriptional activators contact a coactivator (CBP / p300) to activate transcription
+  \item coactivators integrate signals from different pathways
+\end{mitemize}
+
+\end{document}

@@ -1,0 +1,59 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 569, 2:10pm T/Th}
+\rhead{Lecture Notes: 6 Sep, 2011}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Lab 1: Molecular visualization}
+
+\subsection*{Viewers}
+\begin{mitemize}
+  \item PyMOL: general use and scripting
+  \item VMD: molecular dynamics
+  \item Chimera: volume/density maps
+\end{mitemize}
+
+\subsection*{Plugins and other stuff}
+\begin{mitemize}
+  \item APBS: electrostatics
+  \item Caver: holes, tunnels
+  \item PocketPicker: pockets
+  \item Audodock
+  \item eMovie: making movies
+  \item wiki tutorials
+\end{mitemize}
+
+
+
+\end{document}

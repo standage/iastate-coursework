@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+use strict;
+
+my $usage = "generate_random_integers [from=1] [to=9]";
+my $from = shift();
+$from = 1 unless($from);
+my $to = shift();
+$to = 9 unless($to);
+my @list = ($from..$to);
+
+# Shamelessly copied from http://www.dummies.com/how-to/content/tuning-into-ten-short-useful-perl-programs.html#ixzz12lMj0qrL
+my @TempList = ();
+while(@list)
+{
+  push(@TempList, splice(@list, rand(@list), 1));
+}
+@list = @TempList;
+unshift(@list, 0);
+push(@list, ($to + 1));
+
+printf("SyntenyBlock pi[] = { %s };\nint length = %d;\n", join(",", @list), ($to+2));

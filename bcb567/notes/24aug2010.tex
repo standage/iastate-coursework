@@ -1,0 +1,62 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{BCB 567, 11:00am T/Th}
+\rhead{Lecture Notes: August 24, 2010}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Algorithms}
+Why do we need algorithms? We will look at an example.
+
+\subsection*{Rock Game}
+The following is a description of the rock game.
+\begin{mitemize}
+\item There are two players, Alice and Bob
+\item There are two piles of rocks, each with ten rocks
+\item Rules are as follows
+  \begin{mitemize}
+  \item In a turn you may either take a rock from one of the piles or a rock from each of the piles
+  \item The player who takes the last stone(s) wins
+  \end{mitemize}
+\end{mitemize}
+
+Given this setup, is there a winning strategy for Alice or Bob? This \textbf{winning strategy} may also be the key to understanding more complex, less trivial problems. For example, the winning strategy to this game can easily be applied to the alignment of two sequences.
+
+\subsection*{What is an algorithm?}
+\begin{mitemize}
+\item A well-defined computational procedure that takes some value(s) as INPUT and produces some value(s) as OUTPUT
+\item In mathematical terms, an algorithm is a function that maps every element in some input space to an element in some output space
+\end{mitemize}
+
+One example of an algorithm is the sorting problem. The input to this algorithm is a sequence of integers $A = (a_1, a_2, ..., a_n)$. The output is some permutation $A'$ of $A$ such that $a_1' \leq a_2' \leq ... \leq a_n'$.
+
+\end{document}

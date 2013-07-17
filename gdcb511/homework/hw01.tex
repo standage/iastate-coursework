@@ -1,0 +1,114 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{GDCB 511}
+\newcommand{\instructor}{Yin/Yang}
+\newcommand{\assignment}{Problem Set 1}
+\newcommand{\duedate}{Jan 27, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+In media containing both glucose and lactose, \textit{E. coli} cells exhibit diauxic growth.
+\vspace{175px}
+
+In the presence of lactose, the \emph{lacI} product (inhibitor) is derepressed, allowing transcription of the polycistronic mRNA encoding the \emph{lacZ}, \emph{lacY}, and \emph{lacA} protein products.
+In the absence of glucose, the concentraion of cAMP rises and induces (accelerates) transcription of the operon.
+\vspace{175px}
+
+Mutants can be distinguished by observing the accumulation of galactoside in the presence and absence of the inducer, and by observing changes to this accumulation when transformed with plasmids carrying wild type alleles.
+The $I^S$ mutant can be easily distinguished, as it is the only mutation for which galactoside will never accumulate, regardless of the presence of inducer or wild type alleles.
+The $I^-$ mutant can be distinguished from the $O^c$ and $I^{-d}$ mutants by the change in galactoside accumulation when wild type alleles are present.
+The $O^{c}$ and $I^{-d}$ mutants have the same behavior, and can only be distinguished by observing galactoside accumulation in the presence of an additional mutation in the $\beta-$galactosidase gene.
+See the table below.
+\newline
+
+\begin{center}
+\mbox{
+  \begin{tabular}{|l|c|c|} \hline
+                               & -IPTG & +IPTG \\ \hline
+    $I^+O^+Z^+$                &   -   &   +   \\
+    $I^-O^+Z^+$                &   +   &   +   \\
+    $I^-O^+Z^+$/$I^+O^+Z^+$    &   -   &   +   \\
+    $I^+O^cZ^+$                &   +   &   +   \\
+    $I^+O^cZ^+$/$I^+O^+Z^+$    &   +   &   +   \\
+    $I^{-d}O^+Z^+$             &   +   &   +   \\
+    $I^{-d}O^+Z^+$/$I^+O^+Z^+$ &   +   &   +   \\
+    $I^sO^+Z^+$                &   -   &   -   \\
+    $I^sO^+Z^+$/$I^+O^+Z^+$    &   -   &   -   \\ 
+    $I^{-d}O^+Z^-$/$I^+O^+Z^+$ &   +   &   +   \\ 
+    $I^+O^cZ^-$/$I^+O^+Z^+$    &   -   &   +   \\ \hline
+  \end{tabular}
+}
+\end{center}
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Bacteria use two complementary mechanisms to regulate tryptophan biosynthesis.
+The first is based on \emph{negative control} and is similar to regulation of the \emph{lacZ} operon.
+The difference is that the repression machinery (aporepressor) is inactive by default, and only becomes active when bound to a corepressor (tryptophan in this case) to form the functional repressor complex.
+\vspace{200px}
+
+The second control mechanism is \emph{attenuation}, which takes advantage of RNA structure to prematurely terminate translation when tryptophan is abundant.
+The attenuation mechanism relies on a sequence upstream of the operon which includes a \emph{leader} and an \emph{attenuator} (with a termination signal).
+When tryptophan is abundant, a double hairpin loop structure forms which contains the termination signal.
+When tryptophan is scarce, the translation machinery stalls at two tryptophan codons upstream of the loop structure, causing an alternative single hairpin loop to form which does not contain the termination signal, overriding the attenuator.
+\vspace{200px}
+
+If I were to use the riboswitch model to design a control mechanism for tryptophan synthesis, I can think of two possible approaches I might take.
+Both approaches would involve designing an aptamer which would bind tryptophan.
+For the first approach, the idea would be to have aptamer binding induce a conformational change in the ribosome binding site so that translation of the transcript would not even initiate.
+The idea of the second approach would be to use the same single/double hairpin loop mechanism as is used in attenuation, but to have aptamer binding determine which hairpin structure forms, rather than ribosome stalling.
+
+
+\clearpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\setcounter{prob_num}{4}
+\problem
+
+\begin{enumerate}[a)]
+  \item $T_{-12}$ has extensive van der Waals interactions with $W256$ of the $\sigma$ factor.
+        Mutations in this nucleotide have a significant effect on promoter binding and activity, but are not fatal to the $\sigma$ factor's function.
+        The $A_{-11}$ base is the most highly conserved in the motif.
+        This base is flipped out of the stack and buried in a hydrophobic protein pocket in the $\sigma$ factor that would poorly accomodate any nucleotide other than an $A$. 
+        The $T_{-7}$ base is also highly conserved, and is likewise flipped out of the stack.
+        Like $A_{-11}$, $T_{-7}$ is buried in a protein pocket in the $\sigma$ factor. 
+        This pocket is quite spacious compared to the size of the $T$ base, although its chemical arrangement makes it suitable for binding only $T$.
+        The nucleotides $T_{-10}A_{-9}A_{-8}$ are much less conserved, primarily due to the fact that their interactions with the $\sigma$ factor involve almost exclusively the DNA backbone atoms, which are identical for all nucleotides.
+  \item Perhaps the most substantial finding of the paper is that the process of promoter recognition and the process of DNA melting are tightly coupled. Essentially, they are two related manifestations of the same biochemical process.
+\end{enumerate}
+
+\end{document}

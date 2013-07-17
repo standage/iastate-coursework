@@ -1,0 +1,10 @@
+SequenceSpacer568
+Daniel S. Standage
+January 19, 2011
+
+One way to test the probability of any given feature of a genomic sequence
+is to determine how often that feature occurs in sequences randomly sampled
+from some given "sequence space." The purpose of this software is to simulate
+"sequence spaces" that preserve a specified nucleotide composition.
+
+

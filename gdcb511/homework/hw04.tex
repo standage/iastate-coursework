@@ -1,0 +1,81 @@
+\documentclass[a4paper, 10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[parfill]{parskip}          % skip a line instead of indenting new paragraphs
+\usepackage{hyperref}
+\hypersetup
+{
+  colorlinks=false,
+  pdfborder={0,0,0},
+}
+ 
+\usepackage{fancyhdr}
+\fancyhead[L]{\class \;- \assignment  \;- \duedate }
+\fancyhead[R]{\author }
+\renewcommand{\footrulewidth}{0.5pt} % Insert a line above the footer
+\pagestyle{fancy}
+\usepackage[hang,small,bf]{caption}
+\usepackage{palatino}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+ 
+% convenience commands
+\renewcommand{\author}{Daniel Standage}
+\newcommand{\class}{GDCB 511}
+\newcommand{\instructor}{Yin/Yang}
+\newcommand{\assignment}{Problem Set 4}
+\newcommand{\duedate}{Mar 23, 2012}
+ 
+\newcounter{prob_num}
+\setcounter{prob_num}{1}
+% usage: \problem
+\newcommand{\problem}{\vspace{20pt}\arabic{prob_num}.\stepcounter{prob_num}\par}
+% usage: \head{name}{class}{assignment}
+\newcommand{\head}{\begin{center}\begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r} & \class \;- \assignment \\ & \duedate \end{tabular*}\end{center} \hfill }
+% usage: \eqn{equation}{label}
+\newcommand{\eqn}[2]{\begin{equation}#1\label{#2}\end{equation}}
+ 
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Genetic tests in yeast have demonstrated that the U2 snRNA and the conserved branchpoint sequence are complementary. The experimental subject was a mutated yeast strain grown on a histidinol media. The yeast could only survive if the actin-HIS4 mRNA was spliced properly so that HIS4 product could metabolize the histidinol.
+
+Mutating the branchpoint sequence of HIS4 caused lethality in the yeast, suggesting that the actin-HIS4 mRNA was not spliced properly. Subsequent transformation of the yeast with a plasmid containing a U2 mutant complementary to the mutated branchpoint sequence enabled the yeast to survive, suggesting that base pairing had been restored and splicing had resumed normally.
+
+It was necessary to provide an additional copy of U2 because if the original U2 had been mutated, all other splicing activity in the cell would be effected and would likely lead to lethality whether actin-HIS4 was spliced correctly or not.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+In a previous experiment, yeast nuclear extract was added to a column containing yeast pre-mRNA. The temperature, binding time, and ATP levels were varied in the experiment. After binding, the unbound extract was washed away and the bound RNA was eluted and run on a Northern blot. The bands on the plot clearly demonstrate that U1 is the first snRNP to bind to the pre-mRNA. When the nuclear extract was washed away after 2 minutes, U1 was the only snRNP that was eluted above background levels. If the nuclear extract was given addition binding time before washing, other snRNPs were observed to bind to the probe.
+
+An additional experiment confirmed this finding. The cell extracts were incubated with different DNA oligos that were complimentary to the snRNPs and treated with RNase H, which degrades RNA bound to DNA. When U1-complementary DNA oligos were added, all snRNP binding was shut down, whereas when U2-complementary oligos were added, U1 binding remained unaffected.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+Biochemical and genetic tests have demonstrated that the Slu7 factor is required for proper 3' AG di-nucleotide selection. A column with anti-Slu7 probes was used to remove the Slu7 from a cell extract. A control was prepared by running another cell extract through the column containing no antibodies. These two extracts were then tested for their ability to splice various labeled pre-mRNAs. The pre-mRNAs were incubated in the extracts, after which the products where separated by gel electrophoresis.
+
+The first labeled pre-mRNA contained a single AG dinucleotide. The lane containing the control cell extract had an intense band for the mature mRNA and weak bands for the first exon and the lariat exon. The lane containing the cell extract treated for Slu7 removal had little to no band for mature mRNA but very intense bands for the first exon and the lariat exon. This confirms that Slu7 is needed to identify the 3' splice site and complete the splicing process.
+
+The second labeled pre-mRNA contained two AG dinucleotides. The lane containing the control cell extract had fairly intense bands for the mature mRNA and the spliced intron. The lane containing the cell extract treated for Slu7 removal had bands of similar intensity for the mature mRNA and intron, but were shifted: the mRNA was longer and the intron was shorter. This confirms that in the presence of multiple AGs, Slu7 is needed to discriminate and identify the correct splice site.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+The immunoglobin $\mu$ heavy-chain gene has two spliceoforms derived from 8 exons. The two isoforms are identical for the majority of the transcript, but differ at the 3' end. The isoform intended for secretion contains only the first 6 exons, the last of which has a small coding region necessary for secretion and a small UTR. The isoform intended for membrane binding includes all 8 exons, with the small 3' CDS and UTR removed from the 6th exon. The 7th exon is a small coding region necessary for membrane binding, and the 8th exon is a small UTR. Thus, a single gene encodes for 2 similar protein products: one that is secreted from the cell, and another that binds to the cell membrane.
+
+\vspace{200px}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\problem
+
+If the point mutation occurs at the branch site sequence, then U1 and all subsequence splice factors will fail to bind and the intron will remain unspliced. This can lead to a variety of issues. If the mRNA has a premature stop codon as a result of this extra intron, then the translated peptide will be truncated and non-functional. If the intron causes a frame shift, the protein will be completely different. Even if the intron does not cause a frame shift, if the extra amino acids from the included intron fall within a functionally important domain (binding domain, for example), the protein's function will be disrupted. Whichever issue occurs, the resulting peptide will differ significantly in structure and function to the original $\beta$-globin protein.
+
+\end{document}

@@ -1,0 +1,137 @@
+=== Run information ===
+
+Scheme:weka.classifiers.trees.RandomForest -I 250 -K 0 -S 1
+Relation:     ProteinFoldsEukaryotesFeatSelect
+Instances:    311
+Attributes:   44
+              pcvA
+              pcvR
+              pcvN
+              pcvD
+              pcvC
+              pcvQ
+              pcvE
+              pcvG
+              pcvH
+              pcvI
+              pcvL
+              pcvK
+              pcvM
+              pcvF
+              pcvP
+              pcvS
+              pcvT
+              pcvW
+              pcvY
+              pcvV
+              sscC
+              sscE
+              sscH
+              dssC
+              dssE
+              dssH
+              adssCCC
+              adssCCE
+              adssCCH
+              adssCEE
+              adssCHH
+              adssECE
+              adssECH
+              adssEEC
+              adssEEE
+              adssHCH
+              phyCparvum
+              phyDrerio
+              phyDmelanogaster
+              phyPfalciparum
+              phyScerevisiae
+              phyZmays
+              length
+              class
+Test mode:user supplied test set: size unknown (reading incrementally)
+
+=== Classifier model (full training set) ===
+
+Random forest of 250 trees, each constructed while considering 6 random features.
+Out of bag error: 0.3762
+
+
+
+Time taken to build model: 1.84 seconds
+
+=== Evaluation on test set ===
+=== Summary ===
+
+Correctly Classified Instances         587               64.6476 %
+Incorrectly Classified Instances       321               35.3524 %
+Kappa statistic                          0.6154
+Mean absolute error                      0.0508
+Root mean squared error                  0.1469
+Relative absolute error                 72.208  %
+Root relative squared error             78.556  %
+Total Number of Instances              908     
+
+=== Detailed Accuracy By Class ===
+
+               TP Rate   FP Rate   Precision   Recall  F-Measure   ROC Area  Class
+                 0.75      0.01       0.5       0.75      0.6        0.986    a
+                 0.9       0          1         0.9       0.947      1        b
+                 0.78      0.011      0.836     0.78      0.807      0.991    c
+                 0.423     0.007      0.647     0.423     0.512      0.985    d
+                 1         0.011      0.333     1         0.5        1        e
+                 0.778     0.003      0.824     0.778     0.8        0.997    f
+                 0.9       0.042      0.766     0.9       0.828      0.98     g
+                 0.429     0.003      0.75      0.429     0.545      0.961    h
+                 0.833     0.009      0.556     0.833     0.667      0.878    i
+                 0.45      0.001      0.9       0.45      0.6        0.993    j
+                 0.44      0.005      0.733     0.44      0.55       0.934    k
+                 0.475     0.017      0.559     0.475     0.514      0.96     l
+                 0.667     0.004      0.75      0.667     0.706      0.99     m
+                 0.375     0.002      0.6       0.375     0.462      0.924    n
+                 0.8       0.007      0.4       0.8       0.533      0.992    o
+                 0.956     0.117      0.591     0.956     0.73       0.973    p
+                 0.4       0.016      0.417     0.4       0.408      0.916    q
+                 0.487     0.014      0.613     0.487     0.543      0.92     r
+                 0.392     0.014      0.625     0.392     0.482      0.948    s
+                 0.25      0.004      0.813     0.25      0.382      0.903    t
+                 0.545     0.022      0.486     0.545     0.514      0.955    u
+                 0.071     0.008      0.125     0.071     0.091      0.811    v
+                 0.44      0.008      0.611     0.44      0.512      0.985    w
+                 1         0.002      0.5       1         0.667      1        x
+                 0.4       0.009      0.5       0.4       0.444      0.977    y
+                 0.435     0.038      0.458     0.435     0.446      0.923    z
+                 0.98      0.002      0.961     0.98      0.97       1        -
+Weighted Avg.    0.646     0.031      0.662     0.646     0.629      0.96 
+
+=== Confusion Matrix ===
+
+   a   b   c   d   e   f   g   h   i   j   k   l   m   n   o   p   q   r   s   t   u   v   w   x   y   z  aa   <-- classified as
+   9   0   0   2   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   a = a
+   1   9   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   b = b
+   3   0  46   2   4   0   0   0   0   0   0   0   0   0   0   0   0   2   0   0   1   0   0   0   0   1   0 |   c = c
+   5   0   5  11   3   2   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   d = d
+   0   0   0   0   5   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   e = e
+   0   0   0   1   3  14   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   f = f
+   0   0   0   0   0   0 108   3   1   1   1   0   1   0   2   0   0   0   0   0   0   0   0   0   2   1   0 |   g = g
+   0   0   0   0   0   0   9   9   1   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0 |   h = h
+   0   0   0   0   0   0   2   0  10   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   i = i
+   0   0   0   0   0   0   6   0   2   9   0   0   3   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   j = j
+   0   0   0   1   0   0   1   0   0   0  11   4   0   1   0   0   0   0   0   0   0   0   0   0   1   6   0 |   k = k
+   0   0   0   0   0   0   8   0   0   0   2  19   0   1   3   0   0   0   0   0   1   0   0   0   2   4   0 |   l = l
+   0   0   0   0   0   0   5   0   1   0   0   0  12   0   0   0   0   0   0   0   0   0   0   0   0   0   0 |   m = m
+   0   0   0   0   0   0   1   0   3   0   0   0   0   3   0   0   0   0   0   0   0   0   1   0   0   0   0 |   n = n
+   0   0   0   0   0   0   0   0   0   0   0   1   0   0   4   0   0   0   0   0   0   0   0   0   0   0   0 |   o = o
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 130   0   0   2   1   0   0   2   1   0   0   0 |   p = p
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   7  10   0   3   0   0   0   4   0   1   0   0 |   q = q
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  10   4  19   3   0   1   1   0   1   0   0   0 |   r = r
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  25   1   4  20   1   0   0   0   0   0   0   0 |   s = s
+   0   0   2   0   0   0   0   0   0   0   0   1   0   0   0  24   1   2   4  13   0   5   0   0   0   0   0 |   t = t
+   0   0   0   0   0   0   0   0   0   0   0   4   0   0   0   2   1   0   0   0  18   0   0   0   0   8   0 |   u = u
+   0   0   0   0   0   0   0   0   0   0   0   1   0   0   0   5   2   2   0   1   1   1   0   0   0   1   0 |   v = v
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  14   0   0   0   0   0   0  11   0   0   0   0 |   w = w
+   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   2   0   0   0 |   x = x
+   0   0   0   0   0   0   1   0   0   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   8  10   0 |   y = y
+   0   0   1   0   0   0   0   0   0   0   1   2   0   0   1   3   5   2   0   0  15   1   0   0   2  27   2 |   z = z
+   0   0   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  49 |  aa = -
+
+

@@ -1,0 +1,66 @@
+\documentclass[10pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage[shortlabels]{enumitem}
+%\setcounter{secnumdepth}{0}
+\usepackage{amssymb,amsmath,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{fancyhdr, lastpage}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Daniel Standage}
+\chead{GDCB 511, 9:00am MWF}
+\rhead{Lecture Notes: 18-20 Jan, 2012}
+%\cfoot{Page \thepage{} of \protect\pageref*{LastPage}}
+\usepackage{varioref}
+\labelformat{equation}{(#1)}
+\usepackage[colorlinks,linkcolor=blue]{hyperref}
+
+\newenvironment{mitemize}
+{
+  \begin{itemize}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{itemize}
+}
+
+\newenvironment{menumerate}
+{
+  \begin{enumerate}
+  \setlength{\itemsep}{1pt}
+  \setlength{\parskip}{0pt}
+  \setlength{\parsep}{0pt}}{\end{enumerate}
+}
+
+
+\begin{document}
+
+\section*{Operons: fine control of prokaryotic transcription}
+
+\subsection*{lacZ operon}
+\begin{mitemize}
+  \item 3 genes
+  \item entire operon on a single transcript
+\end{mitemize}
+
+\mbox{
+  \begin{tabular}{|l|c|c|} \hline
+                               & -IPTG & +IPTG \\ \hline
+    $I^+O^+Z^+$                &   -   &   +   \\
+    $I^-O^+Z^+$                &   +   &   +   \\
+    $I^-O^+Z^+$/$I^+O^+Z^+$    &   -   &   +   \\
+    $I^+O^cZ^+$                &   +   &   +   \\
+    $I^+O^cZ^+$/$I^+O^+Z^+$    &   +   &   +   \\
+    $I^{-d}O^+Z^+$             &   +   &   +   \\
+    $I^{-d}O^+Z^+$/$I^+O^+Z^+$ &   +   &   +   \\
+    $I^sO^+Z^+$                &   -   &   -   \\
+    $I^sO^+Z^+$/$I^+O^+Z^+$    &   -   &   -   \\ 
+    $I^{-d}O^+Z^-$/$I^+O^+Z^+$ &   +   &   +   \\ 
+    $I^+O^cZ^-$/$I^+O^+Z^+$    &   -   &   +   \\ \hline
+  \end{tabular}
+}
+\newline
+
+Remember, cAMP only acts in the absence of glucose.
+
+\end{document}

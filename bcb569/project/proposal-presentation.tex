@@ -1,0 +1,107 @@
+\documentclass{beamer}
+
+\setbeamertemplate{navigation symbols}{}
+\setbeamertemplate{footline}[15]
+\setbeamercolor{title}{fg=white,bg=darkred!80!black}
+\usetheme{CambridgeUS}
+
+\title[Secondary structure prediction]{Protein secondary structure prediction with machine learning methods}
+\author{Daniel S. Standage}
+\date{\today}
+\institute[BCB 569]{BCB 569}
+
+\begin{document}
+ 
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\section{Background}
+\subsection{Project focus}
+\begin{frame}
+  \frametitle{Project focus}
+  {\LARGE Problem}
+  \vspace{1px}
+  \hrule
+  \vspace{5px}
+  Protein secondary structure prediction
+  
+  \vspace{30px}
+  
+  {\LARGE Approach}
+  \hrule
+  \vspace{5px}
+  Machine learning methods
+\end{frame}
+
+\subsection{Secondary structure}
+\begin{frame}
+  \frametitle{Secondary structure}
+  \begin{center}
+    \includegraphics[width=125px]{secondary_structure.jpg}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Secondary structure}
+  \begin{center}
+    \includegraphics[width=225px]{sequence-structure.png}
+  \end{center}
+\end{frame}
+
+\section{Common approaches}
+\subsection{Statistical methods}
+\begin{frame}
+  \frametitle{Statistical methods}
+  \begin{itemize}
+    \item Chou-Fasman
+    \item Garnier, Osguthorpe, Robson (GOR)
+    \item Consensus data mining (CDM)
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Statistical methods}
+  \begin{center}
+    \includegraphics[width=200px]{windows.png}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Consensus data mining}
+  \begin{center}
+    \includegraphics[width=250px]{cdm.png}
+  \end{center}
+\end{frame}
+
+\subsection{Machine learning methods}
+\begin{frame}
+  \frametitle{Machine learning methods}
+  \begin{itemize}
+    \item Neural network
+    \item Support vector machine (SVM)
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \frametitle{Neural network}
+  \begin{center}
+    \includegraphics[width=200px]{neural-network.jpg}
+  \end{center}
+\end{frame}
+\begin{frame}
+  \frametitle{Support vector machine}
+  \begin{center}
+    \includegraphics[width=200px]{svm.png}
+  \end{center}
+\end{frame}
+
+\section{Proposed project}
+\subsection{Proposal}
+\begin{frame}
+  \frametitle{Proposed project}
+  \begin{itemize}
+    \item Explore additional machine learning approaches (Bayesian networks, naive Bayes, etc)
+    \item Explore a consensus approach (combine multiple machine learning methods)
+    \item Explore additional features to improve structure prediction
+  \end{itemize}
+\end{frame}
+
+\end{document}
